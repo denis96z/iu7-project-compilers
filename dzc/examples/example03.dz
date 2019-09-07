@@ -1,0 +1,13 @@
+pkg main;
+
+func my_func1(a: @i8_t): u8_t {}
+
+func my_func2(a: [i8_t:10]): u8_t {}
+
+type byte_t = u8_t;
+
+type byte_ref_t = @byte_t;
+
+type byte_arr10_t = [byte_t:10];
+
+type byte_ref2_t = @byte_t;

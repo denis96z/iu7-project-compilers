@@ -1,0 +1,47 @@
+pkg main;
+
+const CONST_1: u8_t = 10;
+const CONST_2: u8_t = CONST_3;
+
+const SIZE: size_t = 15;
+
+const CONST_3: u8_t = CONST_1;
+
+const CONST_4: bool_t = true;
+const CONST_5: bool_t = false;
+
+type type10_t = @type8_t;
+
+type type11_t = [type10_t:SIZE];
+
+type type3_t = type1_t;
+
+type type1_t = u8_t;
+type type2_t = type1_t;
+
+type type4_t = @u8_t;
+type type5_t = @ u8_t;
+
+type type6_t = @type4_t;
+
+type type7_t = [u8_t:10];
+
+type type8_t = [type7_t:10];
+
+type type9_t = [u8_t:SIZE];
+
+func sum(a: u8_t, b: u8_t): u8_t {}
+
+func foo(): size_t {}
+
+proc print(x: u8_t) {}
+
+proc sum(a: size_t, b: size_t) {}
+
+enum enum1_t {
+    OPTION_1, OPTION_2,
+}
+
+struct struct1_t {
+    attr1: u8_t;
+}

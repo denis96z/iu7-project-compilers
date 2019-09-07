@@ -1,0 +1,7 @@
+### IDE ###
+.idea
+.vscode
+
+### out ###
+*.c
+*.json

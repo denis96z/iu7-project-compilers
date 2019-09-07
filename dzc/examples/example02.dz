@@ -1,0 +1,27 @@
+pkg main;
+
+const ARRAY_SIZE: size_t = 10;
+
+type byte_t = u8_t;
+type byte_ref_t = @byte_t;
+type byte_ref_arr_t = [byte_ref_t:ARRAY_SIZE];
+
+proc my_proc1() {
+    return;
+}
+
+proc my_proc2() {
+    loop {
+        loop {}
+    }
+}
+
+proc my_proc3(a: i8_t) {
+    return;
+}
+
+proc my_proc3(a: u8_t) {}
+
+func my_func1(a: i8_t): u8_t {}
+
+func my_func2(x: @byte_t): byte_t {}

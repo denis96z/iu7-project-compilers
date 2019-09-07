@@ -1,0 +1,25 @@
+pkg main;
+
+use std::print;
+
+const ARRAY_LEN: u8_t = 10;
+
+type my_arr = [struct1_st:MY_VAR];
+
+struct struct1_st {
+    attr1: u8_t;
+    attr2: u8_t;
+}
+
+func my_func(): i8_t {
+    let a: u8_t = 10;
+}
+
+func my_func2(a: u8_t, b: my_arr_st): u8_t {
+    return 10;
+}
+
+proc main {
+    mut a: u8_t = my_func2(4, 5);
+    print(a);
+}
