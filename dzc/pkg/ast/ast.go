@@ -2,13 +2,15 @@ package ast
 
 import (
 	"dzc/pkg/parser"
+	"strconv"
+	"strings"
 
 	"github.com/golang-collections/collections/stack"
 )
 
 type PkgInfo struct {
 	Pkg        *Pkg
-	Types      map[string]*Type
+	Types      map[string]Type
 	Procedures map[string]*Procedure
 	Functions  map[string]*Function
 }
@@ -17,9 +19,65 @@ type Pkg struct {
 	Name string //TODO add imports
 }
 
-type Type struct {
+type Type interface {
+	Text() string
+	Base() Type
+}
+
+type BasicType struct {
+	Name string
+}
+
+func (t BasicType) Text() string {
+	return t.Name
+}
+
+func (t BasicType) Base() Type {
+	return nil
+}
+
+type SimpleType struct {
 	Name     string
-	BaseType *Type
+	BaseType Type
+}
+
+func (t SimpleType) Text() string {
+	return t.Name
+}
+
+func (t SimpleType) Base() Type {
+	return t.BaseType
+}
+
+type RefType struct {
+	Name     string
+	BaseType Type
+}
+
+const (
+	RefSymbol = "@"
+)
+
+func (t RefType) Text() string {
+	return t.Name
+}
+
+func (t RefType) Base() Type {
+	return t.BaseType
+}
+
+type ArrayType struct {
+	Name     string
+	Size     int
+	BaseType Type
+}
+
+func (t ArrayType) Text() string {
+	return t.Name
+}
+
+func (t ArrayType) Base() Type {
+	return t.BaseType
 }
 
 type Procedure struct {
@@ -30,12 +88,12 @@ type Procedure struct {
 type Function struct {
 	Name    string
 	Args    map[string]*Arg
-	RetType *Type
+	RetType Type
 }
 
 type Arg struct {
 	Name string
-	Type *Type
+	Type Type
 }
 
 type GlobalParser struct {
@@ -167,17 +225,65 @@ func (p *GlobalParser) peekState() *GlobalParserState {
 	return state.(*GlobalParserState)
 }
 
-func (p *GlobalParser) findOrMakeType(name string) *Type {
+func (p *GlobalParser) findOrMakeType(name string) Type {
 	name = fixTypeName(name)
 
 	t := p.PkgInfo.Types[name]
 	if t == nil {
-		return &Type{
-			Name: name,
+		if isSimpleType(name) {
+			return &SimpleType{
+				Name: name,
+			}
+		} else if isRefType(name) {
+			nameBase := name[1:] //XXX careful here
+
+			bt := p.PkgInfo.Types[nameBase]
+			t = &RefType{
+				Name:     name,
+				BaseType: bt,
+			}
+
+			if bt != nil {
+				p.PkgInfo.Types[name] = t
+			}
+		} else if isArrayType(name) {
+			nameBase := name[1:strings.Index(name, ":")] //XXX careful here
+
+			sizeStr := name[strings.Index(name, ":")+1 : len(name)-1]
+			size, err := strconv.Atoi(sizeStr)
+			if err != nil {
+				panic(err) //TODO handle constant
+			}
+
+			bt := p.PkgInfo.Types[nameBase]
+			t = &ArrayType{
+				Name:     name,
+				Size:     size,
+				BaseType: bt,
+			}
+
+			if bt != nil {
+				p.PkgInfo.Types[name] = t
+			}
+		} else {
+			panic("unknown type") //XXX should not happen
 		}
 	}
 
 	return t
+}
+
+func isSimpleType(name string) bool {
+	return !strings.HasPrefix(name, RefSymbol) && //TODO improve
+		!strings.HasPrefix(name, "[")
+}
+
+func isRefType(name string) bool {
+	return strings.HasPrefix(name, RefSymbol)
+}
+
+func isArrayType(name string) bool {
+	return strings.HasPrefix(name, "[")
 }
 
 func fixPkgName(name string) string {
@@ -188,8 +294,8 @@ func fixTypeName(name string) string {
 	return name //TODO ?
 }
 
-func makeTypes() map[string]*Type {
-	m := make(map[string]*Type)
+func makeTypes() map[string]Type {
+	m := make(map[string]Type)
 
 	types := []string{
 		"i8_t", "u8_t", "i16_t", "u16_t",
@@ -198,9 +304,9 @@ func makeTypes() map[string]*Type {
 	}
 
 	for _, t := range types {
-		m[t] = &Type{
-			Name:     t,
-			BaseType: nil,
+		name := fixTypeName(t)
+		m[name] = &BasicType{
+			Name: t,
 		}
 	}
 
