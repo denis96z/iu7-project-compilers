@@ -35,6 +35,12 @@ type DZListener interface {
 	// EnterFuncheader is called when entering the funcheader production.
 	EnterFuncheader(c *FuncheaderContext)
 
+	// EnterProcargs is called when entering the procargs production.
+	EnterProcargs(c *ProcargsContext)
+
+	// EnterFuncargs is called when entering the funcargs production.
+	EnterFuncargs(c *FuncargsContext)
+
 	// EnterArgs is called when entering the args production.
 	EnterArgs(c *ArgsContext)
 
@@ -43,6 +49,9 @@ type DZListener interface {
 
 	// EnterArgdecl is called when entering the argdecl production.
 	EnterArgdecl(c *ArgdeclContext)
+
+	// EnterFuncret is called when entering the funcret production.
+	EnterFuncret(c *FuncretContext)
 
 	// EnterComplexdecl is called when entering the complexdecl production.
 	EnterComplexdecl(c *ComplexdeclContext)
@@ -188,6 +197,12 @@ type DZListener interface {
 	// ExitFuncheader is called when exiting the funcheader production.
 	ExitFuncheader(c *FuncheaderContext)
 
+	// ExitProcargs is called when exiting the procargs production.
+	ExitProcargs(c *ProcargsContext)
+
+	// ExitFuncargs is called when exiting the funcargs production.
+	ExitFuncargs(c *FuncargsContext)
+
 	// ExitArgs is called when exiting the args production.
 	ExitArgs(c *ArgsContext)
 
@@ -196,6 +211,9 @@ type DZListener interface {
 
 	// ExitArgdecl is called when exiting the argdecl production.
 	ExitArgdecl(c *ArgdeclContext)
+
+	// ExitFuncret is called when exiting the funcret production.
+	ExitFuncret(c *FuncretContext)
 
 	// ExitComplexdecl is called when exiting the complexdecl production.
 	ExitComplexdecl(c *ComplexdeclContext)

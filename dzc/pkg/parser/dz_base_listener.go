@@ -75,6 +75,18 @@ func (s *BaseDZListener) EnterFuncheader(ctx *FuncheaderContext) {}
 // ExitFuncheader is called when production funcheader is exited.
 func (s *BaseDZListener) ExitFuncheader(ctx *FuncheaderContext) {}
 
+// EnterProcargs is called when production procargs is entered.
+func (s *BaseDZListener) EnterProcargs(ctx *ProcargsContext) {}
+
+// ExitProcargs is called when production procargs is exited.
+func (s *BaseDZListener) ExitProcargs(ctx *ProcargsContext) {}
+
+// EnterFuncargs is called when production funcargs is entered.
+func (s *BaseDZListener) EnterFuncargs(ctx *FuncargsContext) {}
+
+// ExitFuncargs is called when production funcargs is exited.
+func (s *BaseDZListener) ExitFuncargs(ctx *FuncargsContext) {}
+
 // EnterArgs is called when production args is entered.
 func (s *BaseDZListener) EnterArgs(ctx *ArgsContext) {}
 
@@ -92,6 +104,12 @@ func (s *BaseDZListener) EnterArgdecl(ctx *ArgdeclContext) {}
 
 // ExitArgdecl is called when production argdecl is exited.
 func (s *BaseDZListener) ExitArgdecl(ctx *ArgdeclContext) {}
+
+// EnterFuncret is called when production funcret is entered.
+func (s *BaseDZListener) EnterFuncret(ctx *FuncretContext) {}
+
+// ExitFuncret is called when production funcret is exited.
+func (s *BaseDZListener) ExitFuncret(ctx *FuncretContext) {}
 
 // EnterComplexdecl is called when production complexdecl is entered.
 func (s *BaseDZListener) EnterComplexdecl(ctx *ComplexdeclContext) {}

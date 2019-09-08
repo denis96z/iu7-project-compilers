@@ -94,15 +94,20 @@ decl  : subdecl | complexdecl | typedecl | constdecl;
 
 subdecl : procdecl | funcdecl;
 
-procdecl       : KW_PROC procheader block;
-funcdecl       : KW_FUNC funcheader block;
+procdecl : KW_PROC procheader block;
+funcdecl : KW_FUNC funcheader block;
 
-procheader : id=IDENTIFIER args;
-funcheader : id=IDENTIFIER args COLON typespec;
+procheader : id=IDENTIFIER procargs;
+funcheader : id=IDENTIFIER funcargs funcret;
+
+procargs : args;
+funcargs : args;
 
 args     : LEFT_PRT argdecls RIGHT_PRT;
 argdecls : (argdecl (COMMA argdecl)*)?;
 argdecl  : id=IDENTIFIER COLON t=typespec;
+
+funcret : COLON t=typespec;
 
 complexdecl : structdecl | enumdecl | uniondecl;
 
