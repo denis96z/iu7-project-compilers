@@ -131,7 +131,8 @@ typedecl : KW_TYPE id=TYPE ASGN typespec SEMICOLON;
 
 block : LEFT_BRC statements RIGHT_BRC;
 
-typespec       : basictypespec | simpletypespec | reftypespec | arraytypespec;
+typespec       : simpletypespec | reftypespec | arraytypespec;
+simpletypespec : basictypespec | namedtypespec;
 basictypespec  : id=(
                      I8_T   | U8_T    |
                      I16_T  | U16_T   |
@@ -140,9 +141,9 @@ basictypespec  : id=(
                      CHAR_T | BOOL_T  |
                      SIZE_T | SSIZE_T
                  );
-simpletypespec : id=TYPE;
-reftypespec    : REF id=TYPE;
-arraytypespec  : LEFT_BRK id=TYPE COLON size=sizespec RIGHT_BRK;
+namedtypespec  : id=TYPE;
+reftypespec    : REF id=simpletypespec;
+arraytypespec  : LEFT_BRK id=simpletypespec COLON size=sizespec RIGHT_BRK;
 sizespec       : INT_CONST | name=CONST;
 
 statements : statement*;

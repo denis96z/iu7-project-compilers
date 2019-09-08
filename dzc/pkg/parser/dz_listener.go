@@ -104,11 +104,14 @@ type DZListener interface {
 	// EnterTypespec is called when entering the typespec production.
 	EnterTypespec(c *TypespecContext)
 
+	// EnterSimpletypespec is called when entering the simpletypespec production.
+	EnterSimpletypespec(c *SimpletypespecContext)
+
 	// EnterBasictypespec is called when entering the basictypespec production.
 	EnterBasictypespec(c *BasictypespecContext)
 
-	// EnterSimpletypespec is called when entering the simpletypespec production.
-	EnterSimpletypespec(c *SimpletypespecContext)
+	// EnterNamedtypespec is called when entering the namedtypespec production.
+	EnterNamedtypespec(c *NamedtypespecContext)
 
 	// EnterReftypespec is called when entering the reftypespec production.
 	EnterReftypespec(c *ReftypespecContext)
@@ -260,11 +263,14 @@ type DZListener interface {
 	// ExitTypespec is called when exiting the typespec production.
 	ExitTypespec(c *TypespecContext)
 
+	// ExitSimpletypespec is called when exiting the simpletypespec production.
+	ExitSimpletypespec(c *SimpletypespecContext)
+
 	// ExitBasictypespec is called when exiting the basictypespec production.
 	ExitBasictypespec(c *BasictypespecContext)
 
-	// ExitSimpletypespec is called when exiting the simpletypespec production.
-	ExitSimpletypespec(c *SimpletypespecContext)
+	// ExitNamedtypespec is called when exiting the namedtypespec production.
+	ExitNamedtypespec(c *NamedtypespecContext)
 
 	// ExitReftypespec is called when exiting the reftypespec production.
 	ExitReftypespec(c *ReftypespecContext)

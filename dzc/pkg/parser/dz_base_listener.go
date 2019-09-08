@@ -213,17 +213,23 @@ func (s *BaseDZListener) EnterTypespec(ctx *TypespecContext) {}
 // ExitTypespec is called when production typespec is exited.
 func (s *BaseDZListener) ExitTypespec(ctx *TypespecContext) {}
 
+// EnterSimpletypespec is called when production simpletypespec is entered.
+func (s *BaseDZListener) EnterSimpletypespec(ctx *SimpletypespecContext) {}
+
+// ExitSimpletypespec is called when production simpletypespec is exited.
+func (s *BaseDZListener) ExitSimpletypespec(ctx *SimpletypespecContext) {}
+
 // EnterBasictypespec is called when production basictypespec is entered.
 func (s *BaseDZListener) EnterBasictypespec(ctx *BasictypespecContext) {}
 
 // ExitBasictypespec is called when production basictypespec is exited.
 func (s *BaseDZListener) ExitBasictypespec(ctx *BasictypespecContext) {}
 
-// EnterSimpletypespec is called when production simpletypespec is entered.
-func (s *BaseDZListener) EnterSimpletypespec(ctx *SimpletypespecContext) {}
+// EnterNamedtypespec is called when production namedtypespec is entered.
+func (s *BaseDZListener) EnterNamedtypespec(ctx *NamedtypespecContext) {}
 
-// ExitSimpletypespec is called when production simpletypespec is exited.
-func (s *BaseDZListener) ExitSimpletypespec(ctx *SimpletypespecContext) {}
+// ExitNamedtypespec is called when production namedtypespec is exited.
+func (s *BaseDZListener) ExitNamedtypespec(ctx *NamedtypespecContext) {}
 
 // EnterReftypespec is called when production reftypespec is entered.
 func (s *BaseDZListener) EnterReftypespec(ctx *ReftypespecContext) {}
