@@ -6,9 +6,14 @@ import (
 	"github.com/golang-collections/collections/stack"
 )
 
-type Declarations struct {
+type PkgInfo struct {
+	Pkg        *Pkg
 	Types      map[string]*TypeDecl
 	Procedures map[string]*ProcDecl
+}
+
+type Pkg struct {
+	Name string //TODO add imports
 }
 
 type TypeDecl struct {
@@ -31,7 +36,7 @@ type GlobalParser struct {
 
 	stateStack *stack.Stack
 
-	Declarations Declarations
+	PkgInfo PkgInfo
 }
 
 type GlobalParserState struct {
@@ -40,13 +45,15 @@ type GlobalParserState struct {
 }
 
 const (
-	GlobalParserStateProcDecl = iota
+	GlobalParserStatePkg = iota
+	GlobalParserStateProcDecl
 )
 
 func NewGlobalParser() *GlobalParser {
 	return &GlobalParser{
 		stateStack: stack.New(),
-		Declarations: Declarations{
+		PkgInfo: PkgInfo{
+			Pkg:        makePkg(),
 			Types:      makeTypes(),
 			Procedures: make(map[string]*ProcDecl),
 		},
@@ -77,7 +84,7 @@ func (p *GlobalParser) EnterArgdecl(ctx *parser.ArgdeclContext) {
 		name := ctx.GetId().GetText()
 		decl.Args[name] = &Arg{
 			Name: name,
-			Type: nil, //TODO
+			Type: p.findOrMakeType(ctx.GetT().GetText()),
 		}
 	}
 }
@@ -85,7 +92,7 @@ func (p *GlobalParser) EnterArgdecl(ctx *parser.ArgdeclContext) {
 func (p *GlobalParser) ExitProcheader(ctx *parser.ProcheaderContext) {
 	state := p.popState()
 	decl := state.Item.(*ProcDecl)
-	p.Declarations.Procedures[decl.Name] = decl
+	p.PkgInfo.Procedures[decl.Name] = decl
 }
 
 func (p *GlobalParser) popState() *GlobalParserState {
@@ -102,6 +109,27 @@ func (p *GlobalParser) peekState() *GlobalParserState {
 		return nil
 	}
 	return state.(*GlobalParserState)
+}
+
+func (p *GlobalParser) findOrMakeType(name string) *TypeDecl {
+	name = fixTypeName(name)
+
+	t := p.PkgInfo.Types[name]
+	if t == nil {
+		return &TypeDecl{
+			Name: name,
+		}
+	}
+
+	return t
+}
+
+func makePkg() *Pkg {
+	return &Pkg{}
+}
+
+func fixTypeName(name string) string {
+	return name //TODO
 }
 
 func makeTypes() map[string]*TypeDecl {

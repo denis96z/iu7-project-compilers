@@ -52,7 +52,7 @@ func main() {
 	p := parser.NewDZParser(ts)
 	antlr.ParseTreeWalkerDefault.Walk(globalParser, p.Start())
 
-	fmt.Println(globalParser.Declarations)
+	fmt.Println(globalParser.PkgInfo)
 
 	//ts.Seek(0)
 	//antlr.ParseTreeWalkerDefault.Walk(&ast.GlobalParser{}, p.Start())
