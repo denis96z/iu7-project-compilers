@@ -8,27 +8,34 @@ import (
 
 type PkgInfo struct {
 	Pkg        *Pkg
-	Types      map[string]*TypeDecl
-	Procedures map[string]*ProcDecl
+	Types      map[string]*Type
+	Procedures map[string]*Procedure
+	Functions  map[string]*Function
 }
 
 type Pkg struct {
 	Name string //TODO add imports
 }
 
-type TypeDecl struct {
+type Type struct {
 	Name     string
-	BaseType *TypeDecl
+	BaseType *Type
 }
 
-type ProcDecl struct {
+type Procedure struct {
 	Name string
 	Args map[string]*Arg
 }
 
+type Function struct {
+	Name    string
+	Args    map[string]*Arg
+	RetType *Type
+}
+
 type Arg struct {
 	Name string
-	Type *TypeDecl
+	Type *Type
 }
 
 type GlobalParser struct {
@@ -47,6 +54,7 @@ type GlobalParserState struct {
 const (
 	GlobalParserStatePkg = iota
 	GlobalParserStateProcDecl
+	GlobalParserStateFuncDecl
 )
 
 func NewGlobalParser() *GlobalParser {
@@ -55,7 +63,8 @@ func NewGlobalParser() *GlobalParser {
 		PkgInfo: PkgInfo{
 			Pkg:        makePkg(),
 			Types:      makeTypes(),
-			Procedures: make(map[string]*ProcDecl),
+			Procedures: make(map[string]*Procedure),
+			Functions:  make(map[string]*Function),
 		},
 	}
 }
@@ -63,8 +72,19 @@ func NewGlobalParser() *GlobalParser {
 func (p *GlobalParser) EnterProcheader(ctx *parser.ProcheaderContext) {
 	state := &GlobalParserState{
 		State: GlobalParserStateProcDecl,
-		Item: &ProcDecl{
-			Name: ctx.GetId().GetText(),
+		Item: &Procedure{
+			Name: fixProcName(ctx.GetId().GetText()),
+			Args: make(map[string]*Arg, 0),
+		},
+	}
+	p.stateStack.Push(state)
+}
+
+func (p *GlobalParser) EnterFuncheader(ctx *parser.FuncheaderContext) {
+	state := &GlobalParserState{
+		State: GlobalParserStateFuncDecl,
+		Item: &Function{
+			Name: fixFuncName(ctx.GetId().GetText()),
 			Args: make(map[string]*Arg, 0),
 		},
 	}
@@ -79,7 +99,16 @@ func (p *GlobalParser) EnterArgdecl(ctx *parser.ArgdeclContext) {
 
 	switch state.State {
 	case GlobalParserStateProcDecl:
-		decl := state.Item.(*ProcDecl)
+		decl := state.Item.(*Procedure)
+
+		name := ctx.GetId().GetText()
+		decl.Args[name] = &Arg{
+			Name: name,
+			Type: p.findOrMakeType(ctx.GetT().GetText()),
+		}
+
+	case GlobalParserStateFuncDecl:
+		decl := state.Item.(*Function)
 
 		name := ctx.GetId().GetText()
 		decl.Args[name] = &Arg{
@@ -89,10 +118,22 @@ func (p *GlobalParser) EnterArgdecl(ctx *parser.ArgdeclContext) {
 	}
 }
 
+func (p *GlobalParser) EnterFuncret(ctx *parser.FuncretContext) {
+	state := p.peekState()
+	decl := state.Item.(*Function)
+	decl.RetType = p.findOrMakeType(ctx.GetT().GetText())
+}
+
 func (p *GlobalParser) ExitProcheader(ctx *parser.ProcheaderContext) {
 	state := p.popState()
-	decl := state.Item.(*ProcDecl)
+	decl := state.Item.(*Procedure)
 	p.PkgInfo.Procedures[decl.Name] = decl
+}
+
+func (p *GlobalParser) ExitFuncheader(ctx *parser.FuncheaderContext) {
+	state := p.popState()
+	decl := state.Item.(*Function)
+	p.PkgInfo.Functions[decl.Name] = decl
 }
 
 func (p *GlobalParser) popState() *GlobalParserState {
@@ -111,12 +152,12 @@ func (p *GlobalParser) peekState() *GlobalParserState {
 	return state.(*GlobalParserState)
 }
 
-func (p *GlobalParser) findOrMakeType(name string) *TypeDecl {
+func (p *GlobalParser) findOrMakeType(name string) *Type {
 	name = fixTypeName(name)
 
 	t := p.PkgInfo.Types[name]
 	if t == nil {
-		return &TypeDecl{
+		return &Type{
 			Name: name,
 		}
 	}
@@ -132,8 +173,8 @@ func fixTypeName(name string) string {
 	return name //TODO
 }
 
-func makeTypes() map[string]*TypeDecl {
-	m := make(map[string]*TypeDecl)
+func makeTypes() map[string]*Type {
+	m := make(map[string]*Type)
 
 	types := []string{
 		"i8_t", "u8_t", "i16_t", "u16_t",
@@ -142,11 +183,19 @@ func makeTypes() map[string]*TypeDecl {
 	}
 
 	for _, t := range types {
-		m[t] = &TypeDecl{
+		m[t] = &Type{
 			Name:     t,
 			BaseType: nil,
 		}
 	}
 
 	return m
+}
+
+func fixProcName(name string) string {
+	return name //TODO ?
+}
+
+func fixFuncName(name string) string {
+	return name //TODO ?
 }
