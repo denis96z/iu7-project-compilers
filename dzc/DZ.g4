@@ -127,7 +127,7 @@ intasgn   : v=INT_CONST;
 floatasgn : v=FLOAT_CONST;
 boolconst : v=(TRUE | FALSE);
 
-typedecl : KW_TYPE id=TYPE ASGN typespec SEMICOLON;
+typedecl : KW_TYPE id=TYPE ASGN t=typespec SEMICOLON;
 
 block : LEFT_BRC statements RIGHT_BRC;
 

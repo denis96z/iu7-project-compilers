@@ -4085,6 +4085,12 @@ type ITypedeclContext interface {
 	// SetId sets the id token.
 	SetId(antlr.Token)
 
+	// GetT returns the t rule contexts.
+	GetT() ITypespecContext
+
+	// SetT sets the t rule contexts.
+	SetT(ITypespecContext)
+
 	// IsTypedeclContext differentiates from other interfaces.
 	IsTypedeclContext()
 }
@@ -4093,6 +4099,7 @@ type TypedeclContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 	id     antlr.Token
+	t      ITypespecContext
 }
 
 func NewEmptyTypedeclContext() *TypedeclContext {
@@ -4121,12 +4128,24 @@ func (s *TypedeclContext) GetId() antlr.Token { return s.id }
 
 func (s *TypedeclContext) SetId(v antlr.Token) { s.id = v }
 
+func (s *TypedeclContext) GetT() ITypespecContext { return s.t }
+
+func (s *TypedeclContext) SetT(v ITypespecContext) { s.t = v }
+
 func (s *TypedeclContext) KW_TYPE() antlr.TerminalNode {
 	return s.GetToken(DZParserKW_TYPE, 0)
 }
 
 func (s *TypedeclContext) ASGN() antlr.TerminalNode {
 	return s.GetToken(DZParserASGN, 0)
+}
+
+func (s *TypedeclContext) SEMICOLON() antlr.TerminalNode {
+	return s.GetToken(DZParserSEMICOLON, 0)
+}
+
+func (s *TypedeclContext) TYPE() antlr.TerminalNode {
+	return s.GetToken(DZParserTYPE, 0)
 }
 
 func (s *TypedeclContext) Typespec() ITypespecContext {
@@ -4137,14 +4156,6 @@ func (s *TypedeclContext) Typespec() ITypespecContext {
 	}
 
 	return t.(ITypespecContext)
-}
-
-func (s *TypedeclContext) SEMICOLON() antlr.TerminalNode {
-	return s.GetToken(DZParserSEMICOLON, 0)
-}
-
-func (s *TypedeclContext) TYPE() antlr.TerminalNode {
-	return s.GetToken(DZParserTYPE, 0)
 }
 
 func (s *TypedeclContext) GetRuleContext() antlr.RuleContext {
@@ -4205,7 +4216,10 @@ func (p *DZParser) Typedecl() (localctx ITypedeclContext) {
 	}
 	{
 		p.SetState(242)
-		p.Typespec()
+
+		var _x = p.Typespec()
+
+		localctx.(*TypedeclContext).t = _x
 	}
 	{
 		p.SetState(243)

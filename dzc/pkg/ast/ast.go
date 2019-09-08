@@ -2,8 +2,10 @@ package ast
 
 import (
 	"dzc/pkg/parser"
+	"fmt"
 	"strconv"
 	"strings"
+	"unicode"
 
 	"github.com/golang-collections/collections/stack"
 )
@@ -209,6 +211,55 @@ func (p *GlobalParser) ExitFuncheader(ctx *parser.FuncheaderContext) {
 	p.PkgInfo.Functions[decl.Name] = decl
 }
 
+func (p *GlobalParser) EnterTypedecl(ctx *parser.TypedeclContext) {
+	name := fixTypeName(ctx.GetId().GetText())
+	if p.findType(name) != nil {
+		panic(fmt.Sprintf("type %q already exists", name))
+	}
+
+	t := &SimpleType{
+		Name: name,
+	}
+
+	exp := fixTypeName(ctx.GetT().GetText())
+	if tExp := p.findType(exp); tExp != nil {
+		t.BaseType = tExp
+	} else if isSimpleType(exp) {
+		t.BaseType = p.findType(exp) //XXX if nil will be set later
+	} else if isRefType(exp) {
+		nameBase := parseBaseNameFromRefTypeName(exp)
+
+		bt := p.findType(nameBase)
+		if bt != nil {
+			rt := &RefType{
+				Name:     exp,
+				BaseType: bt,
+			}
+			p.PkgInfo.Types[exp] = rt
+			t.BaseType = rt
+		}
+	} else if isArrayType(exp) {
+		nameBase := parseBaseNameFromArrayTypeName(exp)
+
+		size := parseSizeFromArrayTypeName(exp).(int) //TODO check if const name
+
+		bt := p.findType(nameBase)
+		if bt != nil {
+			rt := &ArrayType{
+				Name:     exp,
+				Size:     size,
+				BaseType: bt,
+			}
+			p.PkgInfo.Types[exp] = rt
+			t.BaseType = rt
+		}
+	} else {
+		panic("unknown type") //XXX should not happen
+	}
+
+	p.PkgInfo.Types[name] = t
+}
+
 func (p *GlobalParser) popState() *GlobalParserState {
 	state := p.stateStack.Pop()
 	if state == nil {
@@ -225,6 +276,11 @@ func (p *GlobalParser) peekState() *GlobalParserState {
 	return state.(*GlobalParserState)
 }
 
+func (p *GlobalParser) findType(name string) Type {
+	name = fixTypeName(name)
+	return p.PkgInfo.Types[name]
+}
+
 func (p *GlobalParser) findOrMakeType(name string) Type {
 	name = fixTypeName(name)
 
@@ -235,7 +291,7 @@ func (p *GlobalParser) findOrMakeType(name string) Type {
 				Name: name,
 			}
 		} else if isRefType(name) {
-			nameBase := name[1:] //XXX careful here
+			nameBase := parseBaseNameFromRefTypeName(name)
 
 			bt := p.PkgInfo.Types[nameBase]
 			t = &RefType{
@@ -247,13 +303,9 @@ func (p *GlobalParser) findOrMakeType(name string) Type {
 				p.PkgInfo.Types[name] = t
 			}
 		} else if isArrayType(name) {
-			nameBase := name[1:strings.Index(name, ":")] //XXX careful here
+			nameBase := parseBaseNameFromArrayTypeName(name)
 
-			sizeStr := name[strings.Index(name, ":")+1 : len(name)-1]
-			size, err := strconv.Atoi(sizeStr)
-			if err != nil {
-				panic(err) //TODO handle constant
-			}
+			size := parseSizeFromArrayTypeName(name).(int) //TODO check if const name
 
 			bt := p.PkgInfo.Types[nameBase]
 			t = &ArrayType{
@@ -275,7 +327,7 @@ func (p *GlobalParser) findOrMakeType(name string) Type {
 
 func isSimpleType(name string) bool {
 	return !strings.HasPrefix(name, RefSymbol) && //TODO improve
-		!strings.HasPrefix(name, "[")
+		!strings.HasPrefix(name, "[") //TODO const?
 }
 
 func isRefType(name string) bool {
@@ -292,6 +344,34 @@ func fixPkgName(name string) string {
 
 func fixTypeName(name string) string {
 	return name //TODO ?
+}
+
+func parseBaseNameFromRefTypeName(name string) string {
+	name = fixTypeName(name)
+	return name[1:]
+}
+
+func parseBaseNameFromArrayTypeName(name string) string {
+	name = fixTypeName(name)
+	return name[1:strings.Index(name, ":")]
+}
+
+func parseSizeFromArrayTypeName(name string) interface{} {
+	name = fixTypeName(name)
+
+	sizeStr := name[strings.Index(name, ":")+1 : len(name)-1]
+	size, err := strconv.Atoi(sizeStr)
+	if err != nil {
+		// TODO improve check
+		for _, r := range sizeStr {
+			if r != unicode.ToUpper(r) {
+				panic(fmt.Sprintf("%q is not a constant", sizeStr)) //TODO handle gracefully
+			}
+		}
+		return sizeStr //XXX constant name is returned
+	}
+
+	return size
 }
 
 func makeTypes() map[string]Type {
