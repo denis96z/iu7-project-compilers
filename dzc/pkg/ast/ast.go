@@ -61,12 +61,27 @@ func NewGlobalParser() *GlobalParser {
 	return &GlobalParser{
 		stateStack: stack.New(),
 		PkgInfo: PkgInfo{
-			Pkg:        makePkg(),
 			Types:      makeTypes(),
 			Procedures: make(map[string]*Procedure),
 			Functions:  make(map[string]*Function),
 		},
 	}
+}
+
+func (p *GlobalParser) EnterPkg(ctx *parser.PkgContext) {
+	state := &GlobalParserState{
+		State: GlobalParserStatePkg,
+		Item: &Pkg{
+			Name: fixPkgName(ctx.GetName().GetText()),
+		},
+	}
+	p.stateStack.Push(state)
+}
+
+func (p *GlobalParser) ExitPkg(ctx *parser.PkgContext) {
+	state := p.popState()
+	pkg := state.Item.(*Pkg)
+	p.PkgInfo.Pkg = pkg
 }
 
 func (p *GlobalParser) EnterProcheader(ctx *parser.ProcheaderContext) {
@@ -165,12 +180,12 @@ func (p *GlobalParser) findOrMakeType(name string) *Type {
 	return t
 }
 
-func makePkg() *Pkg {
-	return &Pkg{}
+func fixPkgName(name string) string {
+	return name //TODO ?
 }
 
 func fixTypeName(name string) string {
-	return name //TODO
+	return name //TODO ?
 }
 
 func makeTypes() map[string]*Type {
