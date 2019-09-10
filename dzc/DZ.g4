@@ -120,7 +120,7 @@ uniondecl : KW_UNION id=TYPE LEFT_BRC unionattrs RIGHT_BRC;
 unionattrs : unionattr*;
 unionattr  : id=IDENTIFIER COLON t=typespec;
 
-constdecl : KW_CONST id=CONST COLON basictypespec ASGN constasgn SEMICOLON;
+constdecl : KW_CONST id=CONST COLON t=basictypespec ASGN v=constasgn SEMICOLON;
 constasgn : casgn | intasgn | floatasgn | boolconst;
 casgn     : id=CONST;
 intasgn   : v=INT_CONST;

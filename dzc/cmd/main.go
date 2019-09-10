@@ -1,12 +1,12 @@
 package main
 
 import (
+	"dzc/pkg/ast/constparser"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 
-	"dzc/pkg/ast"
 	"dzc/pkg/parser"
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
@@ -47,22 +47,33 @@ func main() {
 
 	ts := antlr.NewCommonTokenStream(lx, antlr.TokenDefaultChannel)
 
-	globalParser := ast.NewGlobalParser()
+	cp := constparser.NewConstParser()
 
 	p := parser.NewDZParser(ts)
-	antlr.ParseTreeWalkerDefault.Walk(globalParser, p.Start())
+	antlr.ParseTreeWalkerDefault.Walk(cp, p.Start())
+	cp.FixDefinitions()
 
-	fmt.Println(
-		globalParser.PkgInfo.Pkg,
-		globalParser.PkgInfo.Procedures,
-		globalParser.PkgInfo.Functions,
-	)
-
-	fmt.Println("TYPES:")
-	for k, v := range globalParser.PkgInfo.Types {
-		base := v.Base()
-		fmt.Println(k, base)
+	fmt.Println("CONSTANTS:")
+	for k, v := range cp.KnownConsts {
+		fmt.Println(k, v.Type, v.Value)
 	}
+	//
+	//globalParser := ast.NewGlobalParser()
+	//
+	//p := parser.NewDZParser(ts)
+	//
+	//
+	//fmt.Println(
+	//	globalParser.PkgInfo.Pkg,
+	//	globalParser.PkgInfo.Procedures,
+	//	globalParser.PkgInfo.Functions,
+	//)
+	//
+	//fmt.Println("TYPES:")
+	//for k, v := range globalParser.PkgInfo.Types {
+	//	base := v.Base()
+	//	fmt.Println(k, base)
+	//}
 
 	//ts.Seek(0)
 	//antlr.ParseTreeWalkerDefault.Walk(&ast.GlobalParser{}, p.Start())

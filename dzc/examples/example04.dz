@@ -1,0 +1,9 @@
+pkg main;
+
+const CONST_1: u8_t = 10;
+const CONST_2: u8_t = CONST_3;
+
+const CONST_3: u8_t = CONST_1;
+
+const CONST_4: bool_t = true;
+const CONST_5: bool_t = false;

@@ -3327,6 +3327,18 @@ type IConstdeclContext interface {
 	// SetId sets the id token.
 	SetId(antlr.Token)
 
+	// GetT returns the t rule contexts.
+	GetT() IBasictypespecContext
+
+	// GetV returns the v rule contexts.
+	GetV() IConstasgnContext
+
+	// SetT sets the t rule contexts.
+	SetT(IBasictypespecContext)
+
+	// SetV sets the v rule contexts.
+	SetV(IConstasgnContext)
+
 	// IsConstdeclContext differentiates from other interfaces.
 	IsConstdeclContext()
 }
@@ -3335,6 +3347,8 @@ type ConstdeclContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 	id     antlr.Token
+	t      IBasictypespecContext
+	v      IConstasgnContext
 }
 
 func NewEmptyConstdeclContext() *ConstdeclContext {
@@ -3363,12 +3377,32 @@ func (s *ConstdeclContext) GetId() antlr.Token { return s.id }
 
 func (s *ConstdeclContext) SetId(v antlr.Token) { s.id = v }
 
+func (s *ConstdeclContext) GetT() IBasictypespecContext { return s.t }
+
+func (s *ConstdeclContext) GetV() IConstasgnContext { return s.v }
+
+func (s *ConstdeclContext) SetT(v IBasictypespecContext) { s.t = v }
+
+func (s *ConstdeclContext) SetV(v IConstasgnContext) { s.v = v }
+
 func (s *ConstdeclContext) KW_CONST() antlr.TerminalNode {
 	return s.GetToken(DZParserKW_CONST, 0)
 }
 
 func (s *ConstdeclContext) COLON() antlr.TerminalNode {
 	return s.GetToken(DZParserCOLON, 0)
+}
+
+func (s *ConstdeclContext) ASGN() antlr.TerminalNode {
+	return s.GetToken(DZParserASGN, 0)
+}
+
+func (s *ConstdeclContext) SEMICOLON() antlr.TerminalNode {
+	return s.GetToken(DZParserSEMICOLON, 0)
+}
+
+func (s *ConstdeclContext) CONST() antlr.TerminalNode {
+	return s.GetToken(DZParserCONST, 0)
 }
 
 func (s *ConstdeclContext) Basictypespec() IBasictypespecContext {
@@ -3381,10 +3415,6 @@ func (s *ConstdeclContext) Basictypespec() IBasictypespecContext {
 	return t.(IBasictypespecContext)
 }
 
-func (s *ConstdeclContext) ASGN() antlr.TerminalNode {
-	return s.GetToken(DZParserASGN, 0)
-}
-
 func (s *ConstdeclContext) Constasgn() IConstasgnContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IConstasgnContext)(nil)).Elem(), 0)
 
@@ -3393,14 +3423,6 @@ func (s *ConstdeclContext) Constasgn() IConstasgnContext {
 	}
 
 	return t.(IConstasgnContext)
-}
-
-func (s *ConstdeclContext) SEMICOLON() antlr.TerminalNode {
-	return s.GetToken(DZParserSEMICOLON, 0)
-}
-
-func (s *ConstdeclContext) CONST() antlr.TerminalNode {
-	return s.GetToken(DZParserCONST, 0)
 }
 
 func (s *ConstdeclContext) GetRuleContext() antlr.RuleContext {
@@ -3461,7 +3483,10 @@ func (p *DZParser) Constdecl() (localctx IConstdeclContext) {
 	}
 	{
 		p.SetState(220)
-		p.Basictypespec()
+
+		var _x = p.Basictypespec()
+
+		localctx.(*ConstdeclContext).t = _x
 	}
 	{
 		p.SetState(221)
@@ -3469,7 +3494,10 @@ func (p *DZParser) Constdecl() (localctx IConstdeclContext) {
 	}
 	{
 		p.SetState(222)
-		p.Constasgn()
+
+		var _x = p.Constasgn()
+
+		localctx.(*ConstdeclContext).v = _x
 	}
 	{
 		p.SetState(223)

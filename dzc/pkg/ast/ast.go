@@ -1,6 +1,7 @@
 package ast
 
 import (
+	"dzc/pkg/ast/pkginfo"
 	"dzc/pkg/parser"
 	"fmt"
 	"strconv"
@@ -10,100 +11,12 @@ import (
 	"github.com/golang-collections/collections/stack"
 )
 
-type PkgInfo struct {
-	Pkg        *Pkg
-	Types      map[string]Type
-	Procedures map[string]*Procedure
-	Functions  map[string]*Function
-}
-
-type Pkg struct {
-	Name string //TODO add imports
-}
-
-type Type interface {
-	Text() string
-	Base() Type
-}
-
-type BasicType struct {
-	Name string
-}
-
-func (t BasicType) Text() string {
-	return t.Name
-}
-
-func (t BasicType) Base() Type {
-	return nil
-}
-
-type SimpleType struct {
-	Name     string
-	BaseType Type
-}
-
-func (t SimpleType) Text() string {
-	return t.Name
-}
-
-func (t SimpleType) Base() Type {
-	return t.BaseType
-}
-
-type RefType struct {
-	Name     string
-	BaseType Type
-}
-
-const (
-	RefSymbol = "@"
-)
-
-func (t RefType) Text() string {
-	return t.Name
-}
-
-func (t RefType) Base() Type {
-	return t.BaseType
-}
-
-type ArrayType struct {
-	Name     string
-	Size     int
-	BaseType Type
-}
-
-func (t ArrayType) Text() string {
-	return t.Name
-}
-
-func (t ArrayType) Base() Type {
-	return t.BaseType
-}
-
-type Procedure struct {
-	Name string
-	Args map[string]*Arg
-}
-
-type Function struct {
-	Name    string
-	Args    map[string]*Arg
-	RetType Type
-}
-
-type Arg struct {
-	Name string
-	Type Type
-}
-
 type GlobalParser struct {
 	*parser.BaseDZListener
 
 	stateStack *stack.Stack
 
-	PkgInfo PkgInfo
+	PkgInfo pkginfo.PkgInfo
 }
 
 type GlobalParserState struct {
@@ -120,10 +33,10 @@ const (
 func NewGlobalParser() *GlobalParser {
 	return &GlobalParser{
 		stateStack: stack.New(),
-		PkgInfo: PkgInfo{
+		PkgInfo: pkginfo.PkgInfo{
 			Types:      makeTypes(),
-			Procedures: make(map[string]*Procedure),
-			Functions:  make(map[string]*Function),
+			Procedures: make(map[string]*pkginfo.Procedure),
+			Functions:  make(map[string]*pkginfo.Function),
 		},
 	}
 }
@@ -131,7 +44,7 @@ func NewGlobalParser() *GlobalParser {
 func (p *GlobalParser) EnterPkg(ctx *parser.PkgContext) {
 	state := &GlobalParserState{
 		State: GlobalParserStatePkg,
-		Item: &Pkg{
+		Item: &pkginfo.Pkg{
 			Name: fixPkgName(ctx.GetName().GetText()),
 		},
 	}
@@ -140,16 +53,16 @@ func (p *GlobalParser) EnterPkg(ctx *parser.PkgContext) {
 
 func (p *GlobalParser) ExitPkg(ctx *parser.PkgContext) {
 	state := p.popState()
-	pkg := state.Item.(*Pkg)
+	pkg := state.Item.(*pkginfo.Pkg)
 	p.PkgInfo.Pkg = pkg
 }
 
 func (p *GlobalParser) EnterProcheader(ctx *parser.ProcheaderContext) {
 	state := &GlobalParserState{
 		State: GlobalParserStateProcDecl,
-		Item: &Procedure{
+		Item: &pkginfo.Procedure{
 			Name: fixProcName(ctx.GetId().GetText()),
-			Args: make(map[string]*Arg, 0),
+			Args: make(map[string]*pkginfo.Arg, 0),
 		},
 	}
 	p.stateStack.Push(state)
@@ -158,9 +71,9 @@ func (p *GlobalParser) EnterProcheader(ctx *parser.ProcheaderContext) {
 func (p *GlobalParser) EnterFuncheader(ctx *parser.FuncheaderContext) {
 	state := &GlobalParserState{
 		State: GlobalParserStateFuncDecl,
-		Item: &Function{
+		Item: &pkginfo.Function{
 			Name: fixFuncName(ctx.GetId().GetText()),
-			Args: make(map[string]*Arg, 0),
+			Args: make(map[string]*pkginfo.Arg, 0),
 		},
 	}
 	p.stateStack.Push(state)
@@ -174,19 +87,19 @@ func (p *GlobalParser) EnterArgdecl(ctx *parser.ArgdeclContext) {
 
 	switch state.State {
 	case GlobalParserStateProcDecl:
-		decl := state.Item.(*Procedure)
+		decl := state.Item.(*pkginfo.Procedure)
 
 		name := ctx.GetId().GetText()
-		decl.Args[name] = &Arg{
+		decl.Args[name] = &pkginfo.Arg{
 			Name: name,
 			Type: p.findOrMakeType(ctx.GetT().GetText()),
 		}
 
 	case GlobalParserStateFuncDecl:
-		decl := state.Item.(*Function)
+		decl := state.Item.(*pkginfo.Function)
 
 		name := ctx.GetId().GetText()
-		decl.Args[name] = &Arg{
+		decl.Args[name] = &pkginfo.Arg{
 			Name: name,
 			Type: p.findOrMakeType(ctx.GetT().GetText()),
 		}
@@ -195,19 +108,19 @@ func (p *GlobalParser) EnterArgdecl(ctx *parser.ArgdeclContext) {
 
 func (p *GlobalParser) EnterFuncret(ctx *parser.FuncretContext) {
 	state := p.peekState()
-	decl := state.Item.(*Function)
+	decl := state.Item.(*pkginfo.Function)
 	decl.RetType = p.findOrMakeType(ctx.GetT().GetText())
 }
 
 func (p *GlobalParser) ExitProcheader(ctx *parser.ProcheaderContext) {
 	state := p.popState()
-	decl := state.Item.(*Procedure)
+	decl := state.Item.(*pkginfo.Procedure)
 	p.PkgInfo.Procedures[decl.Name] = decl
 }
 
 func (p *GlobalParser) ExitFuncheader(ctx *parser.FuncheaderContext) {
 	state := p.popState()
-	decl := state.Item.(*Function)
+	decl := state.Item.(*pkginfo.Function)
 	p.PkgInfo.Functions[decl.Name] = decl
 }
 
@@ -217,7 +130,7 @@ func (p *GlobalParser) EnterTypedecl(ctx *parser.TypedeclContext) {
 		panic(fmt.Sprintf("type %q already exists", name))
 	}
 
-	t := &SimpleType{
+	t := &pkginfo.SimpleType{
 		Name: name,
 	}
 
@@ -231,7 +144,7 @@ func (p *GlobalParser) EnterTypedecl(ctx *parser.TypedeclContext) {
 
 		bt := p.findType(nameBase)
 		if bt != nil {
-			rt := &RefType{
+			rt := &pkginfo.RefType{
 				Name:     exp,
 				BaseType: bt,
 			}
@@ -241,11 +154,11 @@ func (p *GlobalParser) EnterTypedecl(ctx *parser.TypedeclContext) {
 	} else if isArrayType(exp) {
 		nameBase := parseBaseNameFromArrayTypeName(exp)
 
-		size := parseSizeFromArrayTypeName(exp).(int) //TODO check if const name
+		size := parseSizeFromArrayTypeName(exp).(int) //TODO check if constparser name
 
 		bt := p.findType(nameBase)
 		if bt != nil {
-			rt := &ArrayType{
+			rt := &pkginfo.ArrayType{
 				Name:     exp,
 				Size:     size,
 				BaseType: bt,
@@ -276,25 +189,25 @@ func (p *GlobalParser) peekState() *GlobalParserState {
 	return state.(*GlobalParserState)
 }
 
-func (p *GlobalParser) findType(name string) Type {
+func (p *GlobalParser) findType(name string) pkginfo.Type {
 	name = fixTypeName(name)
 	return p.PkgInfo.Types[name]
 }
 
-func (p *GlobalParser) findOrMakeType(name string) Type {
+func (p *GlobalParser) findOrMakeType(name string) pkginfo.Type {
 	name = fixTypeName(name)
 
 	t := p.PkgInfo.Types[name]
 	if t == nil {
 		if isSimpleType(name) {
-			return &SimpleType{
+			return &pkginfo.SimpleType{
 				Name: name,
 			}
 		} else if isRefType(name) {
 			nameBase := parseBaseNameFromRefTypeName(name)
 
 			bt := p.PkgInfo.Types[nameBase]
-			t = &RefType{
+			t = &pkginfo.RefType{
 				Name:     name,
 				BaseType: bt,
 			}
@@ -305,10 +218,10 @@ func (p *GlobalParser) findOrMakeType(name string) Type {
 		} else if isArrayType(name) {
 			nameBase := parseBaseNameFromArrayTypeName(name)
 
-			size := parseSizeFromArrayTypeName(name).(int) //TODO check if const name
+			size := parseSizeFromArrayTypeName(name).(int) //TODO check if constparser name
 
 			bt := p.PkgInfo.Types[nameBase]
-			t = &ArrayType{
+			t = &pkginfo.ArrayType{
 				Name:     name,
 				Size:     size,
 				BaseType: bt,
@@ -326,12 +239,12 @@ func (p *GlobalParser) findOrMakeType(name string) Type {
 }
 
 func isSimpleType(name string) bool {
-	return !strings.HasPrefix(name, RefSymbol) && //TODO improve
-		!strings.HasPrefix(name, "[") //TODO const?
+	return !strings.HasPrefix(name, pkginfo.RefSymbol) && //TODO improve
+		!strings.HasPrefix(name, "[") //TODO constparser?
 }
 
 func isRefType(name string) bool {
-	return strings.HasPrefix(name, RefSymbol)
+	return strings.HasPrefix(name, pkginfo.RefSymbol)
 }
 
 func isArrayType(name string) bool {
@@ -374,8 +287,8 @@ func parseSizeFromArrayTypeName(name string) interface{} {
 	return size
 }
 
-func makeTypes() map[string]Type {
-	m := make(map[string]Type)
+func makeTypes() map[string]pkginfo.Type {
+	m := make(map[string]pkginfo.Type)
 
 	types := []string{
 		"i8_t", "u8_t", "i16_t", "u16_t",
@@ -385,7 +298,7 @@ func makeTypes() map[string]Type {
 
 	for _, t := range types {
 		name := fixTypeName(t)
-		m[name] = &BasicType{
+		m[name] = &pkginfo.BasicType{
 			Name: t,
 		}
 	}
