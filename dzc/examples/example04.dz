@@ -29,3 +29,11 @@ type type7_t = [u8_t:10];
 type type8_t = [type7_t:10];
 
 type type9_t = [u8_t:SIZE];
+
+func sum(a: u8_t, b: u8_t): u8_t {}
+
+func foo(): size_t {}
+
+proc print(x: u8_t) {}
+
+proc sum(a: size_t, b: size_t) {}

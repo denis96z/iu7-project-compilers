@@ -8,7 +8,7 @@ import (
 	"dzc/pkg/parser"
 )
 
-type TypeParser struct {
+type Parser struct {
 	*parser.BaseDZListener
 
 	Types map[string]pkginfo.Type
@@ -17,8 +17,8 @@ type TypeParser struct {
 	incompleteTypes map[string]pkginfo.Type
 }
 
-func NewParser(consts map[string]*pkginfo.Const) *TypeParser {
-	return &TypeParser{
+func NewParser(consts map[string]*pkginfo.Const) *Parser {
+	return &Parser{
 		Types: make(map[string]pkginfo.Type),
 
 		consts:          consts,
@@ -26,7 +26,7 @@ func NewParser(consts map[string]*pkginfo.Const) *TypeParser {
 	}
 }
 
-func (p *TypeParser) EnterTypedecl(ctx *parser.TypedeclContext) {
+func (p *Parser) EnterTypedecl(ctx *parser.TypedeclContext) {
 	name := utils.FixTypeName(ctx.GetId().GetText())
 	if p.Types[name] != nil {
 		panic(fmt.Sprintf("type %q is redeclared", name))
@@ -129,7 +129,7 @@ func (p *TypeParser) EnterTypedecl(ctx *parser.TypedeclContext) {
 	}
 }
 
-func (p *TypeParser) addIncompleteType(name string, baseTypeName string) {
+func (p *Parser) addIncompleteType(name string, baseTypeName string) {
 	p.incompleteTypes[name] =
 		&incompleteType{
 			name:         name,
@@ -150,7 +150,7 @@ func (t *incompleteType) Base() pkginfo.Type {
 	return nil
 }
 
-func (p *TypeParser) FixIncomplete() {
+func (p *Parser) FixIncomplete() {
 	for name, t := range p.incompleteTypes {
 		t := t.(*incompleteType)
 
@@ -204,5 +204,11 @@ func (p *TypeParser) FixIncomplete() {
 			Name:     name,
 			BaseType: tBase,
 		}
+	}
+}
+
+func (p *Parser) AddBasic() {
+	for k, v := range utils.GetBasicTypes() {
+		p.Types[k] = v
 	}
 }

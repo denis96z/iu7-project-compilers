@@ -2,6 +2,7 @@ package main
 
 import (
 	"dzc/pkg/ast/constparser"
+	"dzc/pkg/ast/subparser"
 	"dzc/pkg/ast/typeparser"
 	"fmt"
 	"io/ioutil"
@@ -64,10 +65,27 @@ func main() {
 	p = parser.NewDZParser(ts)
 	antlr.ParseTreeWalkerDefault.Walk(tp, p.Start())
 	tp.FixIncomplete()
+	tp.AddBasic()
 
 	fmt.Println("TYPES:")
 	for k, v := range tp.Types {
 		fmt.Println(k, v.Text(), v.Base())
+	}
+
+	ts.Seek(0)
+
+	sp := subparser.New(tp.Types)
+	p = parser.NewDZParser(ts)
+	antlr.ParseTreeWalkerDefault.Walk(sp, p.Start())
+
+	fmt.Println("FUNCTIONS:")
+	for k, v := range sp.Functions {
+		fmt.Println(k, v.Name, v.Args, v.RetType)
+	}
+
+	fmt.Println("PROCEDURES:")
+	for k, v := range sp.Procedures {
+		fmt.Println(k, v.Name, v.Args)
 	}
 
 	//
@@ -83,7 +101,7 @@ func main() {
 	//)
 	//
 	//fmt.Println("TYPES:")
-	//for k, v := range globalParser.PkgInfo.Types {
+	//for k, v := range globalParser.PkgInfo.types {
 	//	base := v.Base()
 	//	fmt.Println(k, base)
 	//}
