@@ -1,12 +1,11 @@
 package constparser
 
 import (
-	"fmt"
-	"strconv"
-
 	"dzc/pkg/ast/pkginfo"
 	"dzc/pkg/ast/utils"
 	"dzc/pkg/parser"
+	"fmt"
+	"strconv"
 
 	"github.com/pkg/errors"
 )
@@ -14,14 +13,14 @@ import (
 type ConstParser struct {
 	*parser.BaseDZListener
 
-	KnownConsts   map[string]*pkginfo.Constant
-	unknownConsts map[string]*pkginfo.Constant
+	KnownConsts   map[string]*pkginfo.Const
+	unknownConsts map[string]*pkginfo.Const
 }
 
-func NewConstParser() *ConstParser {
+func NewParser() *ConstParser {
 	return &ConstParser{
-		KnownConsts:   make(map[string]*pkginfo.Constant),
-		unknownConsts: make(map[string]*pkginfo.Constant),
+		KnownConsts:   make(map[string]*pkginfo.Const),
+		unknownConsts: make(map[string]*pkginfo.Const),
 	}
 }
 
@@ -60,6 +59,10 @@ func (p *ConstParser) EnterConstdecl(ctx *parser.ConstdeclContext) {
 		value, err = strconv.ParseInt(vText, 10, 64)
 	case pkginfo.BasicTypeU64:
 		value, err = strconv.ParseUint(vText, 10, 64)
+	case pkginfo.BasicTypeSize:
+		value, err = strconv.ParseUint(vText, 10, pkginfo.PtrSize)
+	case pkginfo.BasicTypeSSize:
+		value, err = strconv.ParseInt(vText, 10, pkginfo.PtrSize)
 	case pkginfo.BasicTypeBool:
 		if vText == pkginfo.BoolFalse {
 			value = false
@@ -73,7 +76,7 @@ func (p *ConstParser) EnterConstdecl(ctx *parser.ConstdeclContext) {
 		panic(fmt.Sprintf("unknown basic type %q", tName))
 	}
 
-	c := &pkginfo.Constant{
+	c := &pkginfo.Const{
 		Name: name, Type: t,
 	}
 

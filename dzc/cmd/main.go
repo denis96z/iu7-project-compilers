@@ -2,6 +2,7 @@ package main
 
 import (
 	"dzc/pkg/ast/constparser"
+	"dzc/pkg/ast/typeparser"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -47,8 +48,7 @@ func main() {
 
 	ts := antlr.NewCommonTokenStream(lx, antlr.TokenDefaultChannel)
 
-	cp := constparser.NewConstParser()
-
+	cp := constparser.NewParser()
 	p := parser.NewDZParser(ts)
 	antlr.ParseTreeWalkerDefault.Walk(cp, p.Start())
 	cp.FixDefinitions()
@@ -57,6 +57,19 @@ func main() {
 	for k, v := range cp.KnownConsts {
 		fmt.Println(k, v.Type, v.Value)
 	}
+
+	ts.Seek(0)
+
+	tp := typeparser.NewParser(cp.KnownConsts)
+	p = parser.NewDZParser(ts)
+	antlr.ParseTreeWalkerDefault.Walk(tp, p.Start())
+	tp.FixIncomplete()
+
+	fmt.Println("TYPES:")
+	for k, v := range tp.Types {
+		fmt.Println(k, v.Text(), v.Base())
+	}
+
 	//
 	//globalParser := ast.NewGlobalParser()
 	//

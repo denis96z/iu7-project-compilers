@@ -26,9 +26,8 @@ func init() {
 	basicTypes = make(map[string]pkginfo.Type)
 	for _, t := range bTypes {
 		name := FixTypeName(t)
-		basicTypes[name] = &pkginfo.BasicType{
-			Name: t,
-		}
+		basicTypes[name] =
+			&pkginfo.BasicType{Name: t}
 	}
 }
 
@@ -90,13 +89,10 @@ func ParseSizeFromArrayTypeName(name string) interface{} {
 	sizeStr := name[strings.Index(name, ":")+1 : len(name)-1]
 	size, err := strconv.Atoi(sizeStr)
 	if err != nil {
-		// TODO improve check
-		for _, r := range sizeStr {
-			if r != unicode.ToUpper(r) {
-				panic(fmt.Sprintf("%q is not a constant", sizeStr)) //TODO handle gracefully
-			}
+		if IsConst(sizeStr) {
+			return sizeStr
 		}
-		return sizeStr //XXX constant name is returned
+		panic(fmt.Sprintf("%q in %q is not a constant name", sizeStr, name))
 	}
 
 	return size

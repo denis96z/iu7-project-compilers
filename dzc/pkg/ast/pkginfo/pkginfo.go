@@ -1,5 +1,16 @@
 package pkginfo
 
+import (
+	"unsafe"
+)
+
+var PtrSize int
+
+func init() {
+	var v int
+	PtrSize = int(unsafe.Sizeof(&v))
+}
+
 type PkgInfo struct {
 	Pkg        *Pkg
 	Types      map[string]Type
@@ -11,7 +22,7 @@ type Pkg struct {
 	Name string //TODO add imports
 }
 
-type Constant struct {
+type Const struct {
 	Name  string
 	Type  Type
 	Value interface{}
