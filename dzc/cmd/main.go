@@ -50,19 +50,19 @@ func main() {
 
 	ts := antlr.NewCommonTokenStream(lx, antlr.TokenDefaultChannel)
 
-	cp := constparser.NewParser()
+	cp := constparser.New()
 	p := parser.NewDZParser(ts)
 	antlr.ParseTreeWalkerDefault.Walk(cp, p.Start())
-	cp.FixDefinitions()
+	cp.FixIncomplete()
 
 	fmt.Println("CONSTANTS:")
-	for k, v := range cp.KnownConsts {
+	for k, v := range cp.Consts {
 		fmt.Println(k, v.Type, v.Value)
 	}
 
 	ts.Seek(0)
 
-	tp := typeparser.NewParser(cp.KnownConsts)
+	tp := typeparser.New(cp.Consts)
 	p = parser.NewDZParser(ts)
 	antlr.ParseTreeWalkerDefault.Walk(tp, p.Start())
 	tp.FixIncomplete()
@@ -75,7 +75,7 @@ func main() {
 
 	ts.Seek(0)
 
-	cpx := complexparser.NewParser(tp.Types)
+	cpx := complexparser.New(tp.Types)
 	p = parser.NewDZParser(ts)
 	antlr.ParseTreeWalkerDefault.Walk(cpx, p.Start())
 

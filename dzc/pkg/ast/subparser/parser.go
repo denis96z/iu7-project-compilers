@@ -1,7 +1,7 @@
 package subparser
 
 import (
-	"fmt"
+	"log"
 
 	"dzc/pkg/ast/pkginfo"
 	"dzc/pkg/ast/utils"
@@ -32,7 +32,7 @@ func New(types map[string]pkginfo.Type) *Parser {
 func (p *Parser) EnterProcheader(ctx *parser.ProcheaderContext) {
 	name := ctx.GetId().GetText()
 	if p.Procedures[name] != nil {
-		panic(fmt.Sprintf("proc %q is redeclared", name))
+		log.Fatalf("proc %q is redeclared", name)
 	}
 	p.currentName = name
 }
@@ -47,7 +47,7 @@ func (p *Parser) ExitProcdecl(ctx *parser.ProcdeclContext) {
 func (p *Parser) EnterFuncheader(ctx *parser.FuncheaderContext) {
 	name := ctx.GetId().GetText()
 	if p.Functions[name] != nil {
-		panic(fmt.Sprintf("func %q is redeclared", name))
+		log.Fatalf("func %q is redeclared", name)
 	}
 	p.currentName = name
 }
@@ -67,7 +67,7 @@ func (p *Parser) EnterArgs(ctx *parser.ArgsContext) {
 func (p *Parser) EnterArgdecl(ctx *parser.ArgdeclContext) {
 	name := ctx.GetId().GetText()
 	if p.currentArgs[name] != nil {
-		panic(fmt.Sprintf("arg %q in %q declaration is redeclared", name, p.currentName))
+		log.Fatalf("arg %q in %q declaration is redeclared", name, p.currentName)
 	}
 
 	arg := &pkginfo.Arg{
@@ -79,7 +79,7 @@ func (p *Parser) EnterArgdecl(ctx *parser.ArgdeclContext) {
 		arg.Type = t
 	} else {
 		//TODO make type if base is known
-		panic(fmt.Sprintf("arg %q in %q declaration has unknown type %q", name, p.currentName, tName))
+		log.Fatalf("arg %q in %q declaration has unknown type %q", name, p.currentName, tName)
 	}
 
 	p.currentArgs[name] = arg
@@ -91,6 +91,6 @@ func (p *Parser) EnterFuncret(ctx *parser.FuncretContext) {
 		p.currentRetType = t
 	} else {
 		//TODO make type if base is known
-		panic(fmt.Sprintf("return type %q in %q declaration is unknown", tName, p.currentName))
+		log.Fatalf("return type %q in %q declaration is unknown", tName, p.currentName)
 	}
 }

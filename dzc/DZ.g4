@@ -71,14 +71,14 @@ XOR_ASGN: '^=';
 
 REF: '@';
 
-CONST:      [A-Z]([_]?[A-Z0-9])*;
-TYPE:       [a-z]([_]?[a-z0-9])*[_][t];
-IDENTIFIER: [a-z]([_]?[a-z0-9])*;
-
 INT_CONST:   [-]?[0-9]+;
 FLOAT_CONST: [-]?[0-9]+([.][0-9]+)?;
 TRUE:        'true';
 FALSE:       'false';
+
+CONST:      [A-Z]([_]?[A-Z0-9])*;
+TYPE:       [a-z]([_]?[a-z0-9])*[_][t];
+IDENTIFIER: [a-z]([_]?[a-z0-9])*;
 
 WHITESPACE: [ \r\n\t]+ -> skip;
 

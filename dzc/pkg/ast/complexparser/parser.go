@@ -1,7 +1,7 @@
 package complexparser
 
 import (
-	"fmt"
+	"log"
 
 	"dzc/pkg/ast/pkginfo"
 	"dzc/pkg/parser"
@@ -22,7 +22,7 @@ type Parser struct {
 	currentEnumOptions []string
 }
 
-func NewParser(types map[string]pkginfo.Type) *Parser {
+func New(types map[string]pkginfo.Type) *Parser {
 	return &Parser{
 		types:   types,
 		Enums:   make(map[string]*pkginfo.Enum),
@@ -33,7 +33,7 @@ func NewParser(types map[string]pkginfo.Type) *Parser {
 func (p *Parser) EnterEnumdecl(ctx *parser.EnumdeclContext) {
 	name := ctx.GetId().GetText()
 	if !p.isTypeNew(name) {
-		panic(fmt.Sprintf("type %q is redeclared", name))
+		log.Fatalf("type %q is redeclared", name)
 	}
 	p.currentEnumName = name
 }
@@ -54,7 +54,7 @@ func (p *Parser) EnterEnumoption(ctx *parser.EnumoptionContext) {
 	name := ctx.GetId().GetText()
 	for _, o := range p.currentEnumOptions {
 		if name == o {
-			panic(fmt.Sprintf("option %q is redeclared in enum %q", name, p.currentEnumName))
+			log.Fatalf("option %q is redeclared in enum %q", name, p.currentEnumName)
 		}
 	}
 	p.currentEnumOptions = append(p.currentEnumOptions, name)
@@ -63,7 +63,7 @@ func (p *Parser) EnterEnumoption(ctx *parser.EnumoptionContext) {
 func (p *Parser) EnterStructdecl(ctx *parser.StructdeclContext) {
 	name := ctx.GetId().GetText()
 	if !p.isTypeNew(name) {
-		panic(fmt.Sprintf("type %q is redeclared", name))
+		log.Fatalf("type %q is redeclared", name)
 	}
 	p.currentStructName = name
 }
@@ -83,7 +83,7 @@ func (p *Parser) EnterStructattrs(ctx *parser.StructattrsContext) {
 func (p *Parser) EnterStructattr(ctx *parser.StructattrContext) {
 	name := ctx.GetId().GetText()
 	if p.currentStructAttrs[name] != nil {
-		panic(fmt.Sprintf("attr %q of type %q is redeclared", name, p.currentStructName))
+		log.Fatalf("attr %q of type %q is redeclared", name, p.currentStructName)
 	}
 
 	tName := ctx.GetT().GetText()
@@ -91,7 +91,7 @@ func (p *Parser) EnterStructattr(ctx *parser.StructattrContext) {
 	//TODO add support for nested structs
 	t := p.types[tName]
 	if t == nil {
-		panic(fmt.Sprintf("attr %q of type %q has unknown type %q", name, p.currentStructName, tName))
+		log.Fatalf("attr %q of type %q has unknown type %q", name, p.currentStructName, tName)
 	}
 
 	p.currentStructAttrs[name] =

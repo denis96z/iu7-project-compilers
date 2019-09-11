@@ -1,39 +1,41 @@
 package constparser
 
 import (
+	"fmt"
+	"log"
+	"strconv"
+
 	"dzc/pkg/ast/pkginfo"
 	"dzc/pkg/ast/utils"
 	"dzc/pkg/parser"
-	"fmt"
-	"strconv"
 
 	"github.com/pkg/errors"
 )
 
-type ConstParser struct {
+type Parser struct {
 	*parser.BaseDZListener
 
-	KnownConsts   map[string]*pkginfo.Const
-	unknownConsts map[string]*pkginfo.Const
+	Consts           map[string]*pkginfo.Const
+	incompleteConsts map[string]*pkginfo.Const
 }
 
-func NewParser() *ConstParser {
-	return &ConstParser{
-		KnownConsts:   make(map[string]*pkginfo.Const),
-		unknownConsts: make(map[string]*pkginfo.Const),
+func New() *Parser {
+	return &Parser{
+		Consts:           make(map[string]*pkginfo.Const),
+		incompleteConsts: make(map[string]*pkginfo.Const),
 	}
 }
 
-func (p *ConstParser) EnterConstdecl(ctx *parser.ConstdeclContext) {
+func (p *Parser) EnterConstdecl(ctx *parser.ConstdeclContext) {
 	name := ctx.GetId().GetText()
 
-	if p.KnownConsts[name] != nil {
-		panic("constant %q is redeclared")
+	if p.Consts[name] != nil {
+		log.Fatalf("constant %q is redeclared", name)
 	}
 
 	tName := utils.FixTypeName(ctx.GetT().GetText())
 	if !utils.IsBasicType(tName) {
-		panic("constant of type %q not allowed: basic type is required")
+		log.Fatalf("constant %q is not of basic type (%q)", name, tName)
 	}
 	t := utils.GetBasicType(tName)
 
@@ -82,44 +84,44 @@ func (p *ConstParser) EnterConstdecl(ctx *parser.ConstdeclContext) {
 
 	if err == nil {
 		c.Value = value
-		p.KnownConsts[name] = c
+		p.Consts[name] = c
 		return
 	}
 
 	if !utils.IsConst(vText) {
-		panic(err)
+		log.Fatal(err)
 	}
 
-	if vc := p.KnownConsts[vText]; vc != nil {
+	if vc := p.Consts[vText]; vc != nil {
 		if vc.Type != c.Type {
 			panic(fmt.Sprintf("definition of %q type mismatch", name))
 		}
 
 		c.Value = vc.Value
-		p.KnownConsts[name] = c
+		p.Consts[name] = c
 
 		return
 	}
 
 	c.Value = vText
-	p.unknownConsts[name] = c
+	p.incompleteConsts[name] = c
 }
 
-func (p *ConstParser) FixDefinitions() {
-	for name, c := range p.unknownConsts {
-		if p.KnownConsts[name] != nil {
+func (p *Parser) FixIncomplete() {
+	for name, c := range p.incompleteConsts {
+		if p.Consts[name] != nil {
 			panic(fmt.Sprintf("constant %q is redeclared", name))
 		}
 
-		if vc := p.KnownConsts[c.Value.(string)]; vc != nil {
+		if vc := p.Consts[c.Value.(string)]; vc != nil {
 			if vc.Type != c.Type {
 				panic(fmt.Sprintf("definition of %q type mismatch", name))
 			}
 
 			c.Value = vc.Value
-			p.KnownConsts[name] = c
+			p.Consts[name] = c
 
-			delete(p.unknownConsts, name)
+			delete(p.incompleteConsts, name)
 			continue
 		}
 

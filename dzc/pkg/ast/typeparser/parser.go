@@ -2,6 +2,7 @@ package typeparser
 
 import (
 	"fmt"
+	"log"
 
 	"dzc/pkg/ast/pkginfo"
 	"dzc/pkg/ast/utils"
@@ -17,7 +18,7 @@ type Parser struct {
 	incompleteTypes map[string]pkginfo.Type
 }
 
-func NewParser(consts map[string]*pkginfo.Const) *Parser {
+func New(consts map[string]*pkginfo.Const) *Parser {
 	return &Parser{
 		Types: make(map[string]pkginfo.Type),
 
@@ -168,7 +169,7 @@ func (p *Parser) FixIncomplete() {
 				}
 				p.Types[t.baseTypeName] = tBase
 			} else {
-				panic(fmt.Sprintf("type %q in %q declaration is unknown", bName, name))
+				log.Fatalf("type %q in %q declaration is unknown", bName, name)
 			}
 		} else if utils.IsArrayType(t.baseTypeName) {
 			bName := utils.ParseBaseNameFromArrayTypeName(t.baseTypeName)
@@ -192,12 +193,12 @@ func (p *Parser) FixIncomplete() {
 				}
 				p.Types[t.baseTypeName] = tBase
 			} else {
-				panic(fmt.Sprintf("type %q in %q declaration is unknown", bName, name))
+				log.Fatalf("type %q in %q declaration is unknown", bName, name)
 			}
 		}
 
 		if tBase == nil {
-			panic(fmt.Sprintf("no base type for %q", name))
+			log.Fatalf("no base type for %q", name)
 		}
 
 		p.Types[name] = &pkginfo.SimpleType{
