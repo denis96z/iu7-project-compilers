@@ -1,18 +1,19 @@
 package main
 
 import (
-	"dzc/pkg/ast/pkginfo"
-	"dzc/pkg/codegen"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 
 	"dzc/pkg/ast/complexparser"
 	"dzc/pkg/ast/constparser"
+	"dzc/pkg/ast/pkginfo"
 	"dzc/pkg/ast/pkgparser"
 	"dzc/pkg/ast/subparser"
 	"dzc/pkg/ast/typeparser"
+	"dzc/pkg/codegen"
 	"dzc/pkg/parser"
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
@@ -23,17 +24,20 @@ func main() {
 		log.Fatal("source filename is required")
 	}
 
-	file, err := os.Open(os.Args[1])
+	nameSrc := os.Args[1]
+	pathSrc := filepath.Dir(nameSrc)
+
+	fSrc, err := os.Open(nameSrc)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer func() {
-		if err := file.Close(); err != nil {
+		if err := fSrc.Close(); err != nil {
 			log.Fatal(err)
 		}
 	}()
 
-	src, err := ioutil.ReadAll(file)
+	src, err := ioutil.ReadAll(fSrc)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -117,36 +121,34 @@ func main() {
 	}
 
 	pkg := &pkginfo.PkgInfo{
-		Pkg:    pPkg.Pkg,
-		Consts: pConst.Consts,
-		Types:  pTypes.Types,
+		Pkg:     pPkg.Pkg,
+		Consts:  pConst.Consts,
+		Types:   pTypes.Types,
+		Enums:   pComplex.Enums,
+		Structs: pComplex.Structs,
 	}
 
-	code, err := codegen.GenPkgCode(pkg)
+	dst, err := codegen.GenPkgCode(pkg)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println(code)
+	nameDst := fmt.Sprintf(
+		"%s/%s.c", pathSrc, pkg.Pkg.Name,
+	)
 
-	//
-	//globalParser := ast.NewGlobalParser()
-	//
-	//p := parser.NewDZParser(ts)
-	//
-	//
-	//fmt.Println(
-	//	globalParser.PkgInfo.Pkg,
-	//	globalParser.PkgInfo.Procedures,
-	//	globalParser.PkgInfo.Functions,
-	//)
-	//
-	//fmt.Println("TYPES:")
-	//for k, v := range globalParser.PkgInfo.types {
-	//	base := v.Base()
-	//	fmt.Println(k, base)
-	//}
+	dSrc, err := os.Create(nameDst)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func() {
+		if err := dSrc.Close(); err != nil {
+			log.Fatal(err)
+		}
+	}()
 
-	//ts.Seek(0)
-	//antlr.ParseTreeWalkerDefault.Walk(&ast.GlobalParser{}, p.Start())
+	_, err = dSrc.WriteString(dst)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
