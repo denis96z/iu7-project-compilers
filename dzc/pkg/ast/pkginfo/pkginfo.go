@@ -13,7 +13,10 @@ func init() {
 
 type PkgInfo struct {
 	Pkg        *Pkg
+	Consts     map[string]*Const
 	Types      map[string]Type
+	Enums      map[string]*Enum
+	Structs    map[string]*Struct
 	Procedures map[string]*Procedure
 	Functions  map[string]*Function
 }

@@ -14,7 +14,6 @@ KW_CONST:  'const';
 KW_LET:    'let';
 KW_STRUCT: 'struct';
 KW_ENUM:   'enum';
-KW_UNION:  'union';
 KW_RETURN: 'return';
 
 I8_T:    'i8_t';

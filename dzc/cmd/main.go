@@ -1,6 +1,8 @@
 package main
 
 import (
+	"dzc/pkg/ast/pkginfo"
+	"dzc/pkg/codegen"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -113,6 +115,19 @@ func main() {
 	for k, v := range pSub.Procedures {
 		fmt.Println(k, v.Name, v.Args)
 	}
+
+	pkg := &pkginfo.PkgInfo{
+		Pkg:    pPkg.Pkg,
+		Consts: pConst.Consts,
+		Types:  pTypes.Types,
+	}
+
+	code, err := codegen.GenPkgCode(pkg)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(code)
 
 	//
 	//globalParser := ast.NewGlobalParser()
