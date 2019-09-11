@@ -237,11 +237,11 @@ func (s *BaseDZListener) EnterStatement(ctx *StatementContext) {}
 // ExitStatement is called when production statement is exited.
 func (s *BaseDZListener) ExitStatement(ctx *StatementContext) {}
 
-// EnterAssignment is called when production assignment is entered.
-func (s *BaseDZListener) EnterAssignment(ctx *AssignmentContext) {}
+// EnterEquation is called when production equation is entered.
+func (s *BaseDZListener) EnterEquation(ctx *EquationContext) {}
 
-// ExitAssignment is called when production assignment is exited.
-func (s *BaseDZListener) ExitAssignment(ctx *AssignmentContext) {}
+// ExitEquation is called when production equation is exited.
+func (s *BaseDZListener) ExitEquation(ctx *EquationContext) {}
 
 // EnterAsgnop is called when production asgnop is entered.
 func (s *BaseDZListener) EnterAsgnop(ctx *AsgnopContext) {}
@@ -291,11 +291,17 @@ func (s *BaseDZListener) EnterTrueloop(ctx *TrueloopContext) {}
 // ExitTrueloop is called when production trueloop is exited.
 func (s *BaseDZListener) ExitTrueloop(ctx *TrueloopContext) {}
 
-// EnterExpression is called when production expression is entered.
-func (s *BaseDZListener) EnterExpression(ctx *ExpressionContext) {}
+// EnterExpr is called when production expr is entered.
+func (s *BaseDZListener) EnterExpr(ctx *ExprContext) {}
 
-// ExitExpression is called when production expression is exited.
-func (s *BaseDZListener) ExitExpression(ctx *ExpressionContext) {}
+// ExitExpr is called when production expr is exited.
+func (s *BaseDZListener) ExitExpr(ctx *ExprContext) {}
+
+// EnterEvalres is called when production evalres is entered.
+func (s *BaseDZListener) EnterEvalres(ctx *EvalresContext) {}
+
+// ExitEvalres is called when production evalres is exited.
+func (s *BaseDZListener) ExitEvalres(ctx *EvalresContext) {}
 
 // EnterRetstatement is called when production retstatement is entered.
 func (s *BaseDZListener) EnterRetstatement(ctx *RetstatementContext) {}

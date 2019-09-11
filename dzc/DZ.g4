@@ -136,26 +136,34 @@ arraytypespec  : LEFT_BRK id=simpletypespec COLON size=sizespec RIGHT_BRK;
 sizespec       : INT_CONST | name=CONST;
 
 statements : statement*;
-statement  : assignment | condition | loop | retstatement SEMICOLON;
+statement  : equation | condition | loop | retstatement SEMICOLON;
 
-assignment : id=IDENTIFIER asgnop expression SEMICOLON;
-asgnop     : id=(ASGN | ADD_ASGN | SUB_ASGN | MUL_ASGN | DIV_ASGN);
+equation : id=IDENTIFIER asgnop expr SEMICOLON;
+asgnop   : id=(ASGN | ADD_ASGN | SUB_ASGN | MUL_ASGN | DIV_ASGN);
 
 condition : ifblock elseblocks;
 
-ifblock    : KW_IF expression block;
+ifblock    : KW_IF expr block;
 elseblocks : elifblock* elseblock?;
-elifblock  : KW_ELIF expression block;
+elifblock  : KW_ELIF expr block;
 elseblock  : KW_ELSE block;
 
 loop : trueloop;
 trueloop : KW_LOOP block;
 
-expression :;
+expr           : evalres | (evalres);
+evalres        : constexpr;
 
 retstatement
     : procretstatement
     | funcretstatement
     ;
 procretstatement : KW_RETURN;
-funcretstatement : KW_RETURN v=expression;
+funcretstatement : KW_RETURN v=expr;
+
+//equation
+//    : expr relop expr
+//    ;
+//
+//relop
+//    :

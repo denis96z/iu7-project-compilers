@@ -116,8 +116,8 @@ type DZListener interface {
 	// EnterStatement is called when entering the statement production.
 	EnterStatement(c *StatementContext)
 
-	// EnterAssignment is called when entering the assignment production.
-	EnterAssignment(c *AssignmentContext)
+	// EnterEquation is called when entering the equation production.
+	EnterEquation(c *EquationContext)
 
 	// EnterAsgnop is called when entering the asgnop production.
 	EnterAsgnop(c *AsgnopContext)
@@ -143,8 +143,11 @@ type DZListener interface {
 	// EnterTrueloop is called when entering the trueloop production.
 	EnterTrueloop(c *TrueloopContext)
 
-	// EnterExpression is called when entering the expression production.
-	EnterExpression(c *ExpressionContext)
+	// EnterExpr is called when entering the expr production.
+	EnterExpr(c *ExprContext)
+
+	// EnterEvalres is called when entering the evalres production.
+	EnterEvalres(c *EvalresContext)
 
 	// EnterRetstatement is called when entering the retstatement production.
 	EnterRetstatement(c *RetstatementContext)
@@ -263,8 +266,8 @@ type DZListener interface {
 	// ExitStatement is called when exiting the statement production.
 	ExitStatement(c *StatementContext)
 
-	// ExitAssignment is called when exiting the assignment production.
-	ExitAssignment(c *AssignmentContext)
+	// ExitEquation is called when exiting the equation production.
+	ExitEquation(c *EquationContext)
 
 	// ExitAsgnop is called when exiting the asgnop production.
 	ExitAsgnop(c *AsgnopContext)
@@ -290,8 +293,11 @@ type DZListener interface {
 	// ExitTrueloop is called when exiting the trueloop production.
 	ExitTrueloop(c *TrueloopContext)
 
-	// ExitExpression is called when exiting the expression production.
-	ExitExpression(c *ExpressionContext)
+	// ExitExpr is called when exiting the expr production.
+	ExitExpr(c *ExprContext)
+
+	// ExitEvalres is called when exiting the evalres production.
+	ExitEvalres(c *EvalresContext)
 
 	// ExitRetstatement is called when exiting the retstatement production.
 	ExitRetstatement(c *RetstatementContext)

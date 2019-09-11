@@ -10,8 +10,9 @@ import (
 )
 
 const (
-	tmp = `
-// pkg {{ .Pkg.Name }}
+	tmp =
+`
+//{{ .Pkg.Name }}
 
 #include <stdint.h>
 #include <stddef.h>
@@ -19,9 +20,10 @@ const (
 #define true 1
 #define false 0
 
-{{ range .Consts }}
-#define {{ .Name }} {{ .Value }};
-{{ end }}
+{{ range .Consts -}}
+#define {{ .Name }} {{ .Value }}
+{{ end -}}
+
 `
 )
 
