@@ -37,3 +37,7 @@ func foo(): size_t {}
 proc print(x: u8_t) {}
 
 proc sum(a: size_t, b: size_t) {}
+
+struct struct1_t {
+    attr1: u8_t,
+}

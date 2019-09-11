@@ -2,6 +2,8 @@ BUILD_DIR := $(PWD)/build
 TESTS_DIR := $(PWD)/tests
 TOOLS_DIR := $(PWD)/tools
 
+BINARY_NAME := dzc
+
 COVERAGE_PROFILE_FILE := $(TESTS_DIR)/c.out
 COVERAGE_REPORT_FILE := $(TESTS_DIR)/c.html
 
@@ -16,6 +18,10 @@ fmt:
 .PHONY: dep
 dep:
 	go mod tidy && go mod vendor && go mod verify
+
+.PHONY: build
+build:
+	go build -o $(BUILD_DIR)/$(BINARY_NAME) ./cmd/main.go
 
 .PHONY: gen
 gen:

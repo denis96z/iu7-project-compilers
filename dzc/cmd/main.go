@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dzc/pkg/ast/complexparser"
 	"dzc/pkg/ast/constparser"
 	"dzc/pkg/ast/subparser"
 	"dzc/pkg/ast/typeparser"
@@ -70,6 +71,22 @@ func main() {
 	fmt.Println("TYPES:")
 	for k, v := range tp.Types {
 		fmt.Println(k, v.Text(), v.Base())
+	}
+
+	ts.Seek(0)
+
+	cpx := complexparser.NewParser(tp.Types)
+	p = parser.NewDZParser(ts)
+	antlr.ParseTreeWalkerDefault.Walk(cpx, p.Start())
+
+	fmt.Println("ENUMS:")
+	for k, v := range cpx.Enums {
+		fmt.Println(k, v.Name, v.Options)
+	}
+
+	fmt.Println("STRUCTS:")
+	for k, v := range cpx.Structs {
+		fmt.Println(k, v.Name, v.Attrs)
 	}
 
 	ts.Seek(0)

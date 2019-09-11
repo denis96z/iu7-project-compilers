@@ -1,8 +1,15 @@
 package complexparser
 
-import "fmt"
+import (
+	"fmt"
+
+	"dzc/pkg/ast/pkginfo"
+	"dzc/pkg/parser"
+)
 
 type Parser struct {
+	*parser.BaseDZListener
+
 	Enums   map[string]*pkginfo.Enum
 	Structs map[string]*pkginfo.Struct
 
@@ -43,7 +50,7 @@ func (p *Parser) EnterEnumoptions(ctx *parser.EnumoptionsContext) {
 	p.currentEnumOptions = make([]string, 0)
 }
 
-func (p *Parser) EnterEnumoption(ctx *parser.EnumOptionContext) {
+func (p *Parser) EnterEnumoption(ctx *parser.EnumoptionContext) {
 	name := ctx.GetId().GetText()
 	for _, o := range p.currentEnumOptions {
 		if name == o {
@@ -70,7 +77,7 @@ func (p *Parser) ExistStructdecl(ctx *parser.StructdeclContext) {
 }
 
 func (p *Parser) EnterStructattrs(ctx *parser.StructattrsContext) {
-	p.currentStructAttrs = make(map[string]*pkginfo.Attrs)
+	p.currentStructAttrs = make(map[string]*pkginfo.Attr)
 }
 
 func (p *Parser) EnterStructattr(ctx *parser.StructattrContext) {
@@ -94,6 +101,6 @@ func (p *Parser) EnterStructattr(ctx *parser.StructattrContext) {
 		}
 }
 
-func (p *Parser) checkTypeIsNew(name string) {
+func (p *Parser) checkTypeIsNew(name string) bool {
 	return p.Enums[name] == nil && p.Structs[name] == nil && p.types[name] == nil
 }

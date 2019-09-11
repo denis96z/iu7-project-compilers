@@ -107,7 +107,7 @@ complexdecl : structdecl | enumdecl | uniondecl;
 
 structdecl  : KW_STRUCT id=TYPE LEFT_BRC structattrs RIGHT_BRC;
 structattrs : structattr*;
-structattr  : id=IDENTIFIER COLON t=typespec;
+structattr  : id=IDENTIFIER COLON t=typespec SEMICOLONE;
 
 enumdecl    : KW_ENUM id=TYPE LEFT_BRC enumoptions RIGHT_BRC;
 enumoptions : enumoption*;
