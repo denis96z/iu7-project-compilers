@@ -50,15 +50,6 @@ type DZListener interface {
 	// EnterComplexdecl is called when entering the complexdecl production.
 	EnterComplexdecl(c *ComplexdeclContext)
 
-	// EnterStructdecl is called when entering the structdecl production.
-	EnterStructdecl(c *StructdeclContext)
-
-	// EnterStructattrs is called when entering the structattrs production.
-	EnterStructattrs(c *StructattrsContext)
-
-	// EnterStructattr is called when entering the structattr production.
-	EnterStructattr(c *StructattrContext)
-
 	// EnterEnumdecl is called when entering the enumdecl production.
 	EnterEnumdecl(c *EnumdeclContext)
 
@@ -68,32 +59,29 @@ type DZListener interface {
 	// EnterEnumoption is called when entering the enumoption production.
 	EnterEnumoption(c *EnumoptionContext)
 
-	// EnterUniondecl is called when entering the uniondecl production.
-	EnterUniondecl(c *UniondeclContext)
+	// EnterStructdecl is called when entering the structdecl production.
+	EnterStructdecl(c *StructdeclContext)
 
-	// EnterUnionattrs is called when entering the unionattrs production.
-	EnterUnionattrs(c *UnionattrsContext)
+	// EnterStructattrs is called when entering the structattrs production.
+	EnterStructattrs(c *StructattrsContext)
 
-	// EnterUnionattr is called when entering the unionattr production.
-	EnterUnionattr(c *UnionattrContext)
+	// EnterStructattr is called when entering the structattr production.
+	EnterStructattr(c *StructattrContext)
 
 	// EnterConstdecl is called when entering the constdecl production.
 	EnterConstdecl(c *ConstdeclContext)
 
-	// EnterConstasgn is called when entering the constasgn production.
-	EnterConstasgn(c *ConstasgnContext)
+	// EnterConstexpr is called when entering the constexpr production.
+	EnterConstexpr(c *ConstexprContext)
 
-	// EnterIntasgn is called when entering the intasgn production.
-	EnterIntasgn(c *IntasgnContext)
+	// EnterIntexpr is called when entering the intexpr production.
+	EnterIntexpr(c *IntexprContext)
 
-	// EnterFloatasgn is called when entering the floatasgn production.
-	EnterFloatasgn(c *FloatasgnContext)
+	// EnterBoolexpr is called when entering the boolexpr production.
+	EnterBoolexpr(c *BoolexprContext)
 
-	// EnterBoolconst is called when entering the boolconst production.
-	EnterBoolconst(c *BoolconstContext)
-
-	// EnterCasgn is called when entering the casgn production.
-	EnterCasgn(c *CasgnContext)
+	// EnterConstval is called when entering the constval production.
+	EnterConstval(c *ConstvalContext)
 
 	// EnterTypedecl is called when entering the typedecl production.
 	EnterTypedecl(c *TypedeclContext)
@@ -209,15 +197,6 @@ type DZListener interface {
 	// ExitComplexdecl is called when exiting the complexdecl production.
 	ExitComplexdecl(c *ComplexdeclContext)
 
-	// ExitStructdecl is called when exiting the structdecl production.
-	ExitStructdecl(c *StructdeclContext)
-
-	// ExitStructattrs is called when exiting the structattrs production.
-	ExitStructattrs(c *StructattrsContext)
-
-	// ExitStructattr is called when exiting the structattr production.
-	ExitStructattr(c *StructattrContext)
-
 	// ExitEnumdecl is called when exiting the enumdecl production.
 	ExitEnumdecl(c *EnumdeclContext)
 
@@ -227,32 +206,29 @@ type DZListener interface {
 	// ExitEnumoption is called when exiting the enumoption production.
 	ExitEnumoption(c *EnumoptionContext)
 
-	// ExitUniondecl is called when exiting the uniondecl production.
-	ExitUniondecl(c *UniondeclContext)
+	// ExitStructdecl is called when exiting the structdecl production.
+	ExitStructdecl(c *StructdeclContext)
 
-	// ExitUnionattrs is called when exiting the unionattrs production.
-	ExitUnionattrs(c *UnionattrsContext)
+	// ExitStructattrs is called when exiting the structattrs production.
+	ExitStructattrs(c *StructattrsContext)
 
-	// ExitUnionattr is called when exiting the unionattr production.
-	ExitUnionattr(c *UnionattrContext)
+	// ExitStructattr is called when exiting the structattr production.
+	ExitStructattr(c *StructattrContext)
 
 	// ExitConstdecl is called when exiting the constdecl production.
 	ExitConstdecl(c *ConstdeclContext)
 
-	// ExitConstasgn is called when exiting the constasgn production.
-	ExitConstasgn(c *ConstasgnContext)
+	// ExitConstexpr is called when exiting the constexpr production.
+	ExitConstexpr(c *ConstexprContext)
 
-	// ExitIntasgn is called when exiting the intasgn production.
-	ExitIntasgn(c *IntasgnContext)
+	// ExitIntexpr is called when exiting the intexpr production.
+	ExitIntexpr(c *IntexprContext)
 
-	// ExitFloatasgn is called when exiting the floatasgn production.
-	ExitFloatasgn(c *FloatasgnContext)
+	// ExitBoolexpr is called when exiting the boolexpr production.
+	ExitBoolexpr(c *BoolexprContext)
 
-	// ExitBoolconst is called when exiting the boolconst production.
-	ExitBoolconst(c *BoolconstContext)
-
-	// ExitCasgn is called when exiting the casgn production.
-	ExitCasgn(c *CasgnContext)
+	// ExitConstval is called when exiting the constval production.
+	ExitConstval(c *ConstvalContext)
 
 	// ExitTypedecl is called when exiting the typedecl production.
 	ExitTypedecl(c *TypedeclContext)

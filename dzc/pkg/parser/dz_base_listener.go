@@ -105,24 +105,6 @@ func (s *BaseDZListener) EnterComplexdecl(ctx *ComplexdeclContext) {}
 // ExitComplexdecl is called when production complexdecl is exited.
 func (s *BaseDZListener) ExitComplexdecl(ctx *ComplexdeclContext) {}
 
-// EnterStructdecl is called when production structdecl is entered.
-func (s *BaseDZListener) EnterStructdecl(ctx *StructdeclContext) {}
-
-// ExitStructdecl is called when production structdecl is exited.
-func (s *BaseDZListener) ExitStructdecl(ctx *StructdeclContext) {}
-
-// EnterStructattrs is called when production structattrs is entered.
-func (s *BaseDZListener) EnterStructattrs(ctx *StructattrsContext) {}
-
-// ExitStructattrs is called when production structattrs is exited.
-func (s *BaseDZListener) ExitStructattrs(ctx *StructattrsContext) {}
-
-// EnterStructattr is called when production structattr is entered.
-func (s *BaseDZListener) EnterStructattr(ctx *StructattrContext) {}
-
-// ExitStructattr is called when production structattr is exited.
-func (s *BaseDZListener) ExitStructattr(ctx *StructattrContext) {}
-
 // EnterEnumdecl is called when production enumdecl is entered.
 func (s *BaseDZListener) EnterEnumdecl(ctx *EnumdeclContext) {}
 
@@ -141,23 +123,23 @@ func (s *BaseDZListener) EnterEnumoption(ctx *EnumoptionContext) {}
 // ExitEnumoption is called when production enumoption is exited.
 func (s *BaseDZListener) ExitEnumoption(ctx *EnumoptionContext) {}
 
-// EnterUniondecl is called when production uniondecl is entered.
-func (s *BaseDZListener) EnterUniondecl(ctx *UniondeclContext) {}
+// EnterStructdecl is called when production structdecl is entered.
+func (s *BaseDZListener) EnterStructdecl(ctx *StructdeclContext) {}
 
-// ExitUniondecl is called when production uniondecl is exited.
-func (s *BaseDZListener) ExitUniondecl(ctx *UniondeclContext) {}
+// ExitStructdecl is called when production structdecl is exited.
+func (s *BaseDZListener) ExitStructdecl(ctx *StructdeclContext) {}
 
-// EnterUnionattrs is called when production unionattrs is entered.
-func (s *BaseDZListener) EnterUnionattrs(ctx *UnionattrsContext) {}
+// EnterStructattrs is called when production structattrs is entered.
+func (s *BaseDZListener) EnterStructattrs(ctx *StructattrsContext) {}
 
-// ExitUnionattrs is called when production unionattrs is exited.
-func (s *BaseDZListener) ExitUnionattrs(ctx *UnionattrsContext) {}
+// ExitStructattrs is called when production structattrs is exited.
+func (s *BaseDZListener) ExitStructattrs(ctx *StructattrsContext) {}
 
-// EnterUnionattr is called when production unionattr is entered.
-func (s *BaseDZListener) EnterUnionattr(ctx *UnionattrContext) {}
+// EnterStructattr is called when production structattr is entered.
+func (s *BaseDZListener) EnterStructattr(ctx *StructattrContext) {}
 
-// ExitUnionattr is called when production unionattr is exited.
-func (s *BaseDZListener) ExitUnionattr(ctx *UnionattrContext) {}
+// ExitStructattr is called when production structattr is exited.
+func (s *BaseDZListener) ExitStructattr(ctx *StructattrContext) {}
 
 // EnterConstdecl is called when production constdecl is entered.
 func (s *BaseDZListener) EnterConstdecl(ctx *ConstdeclContext) {}
@@ -165,35 +147,29 @@ func (s *BaseDZListener) EnterConstdecl(ctx *ConstdeclContext) {}
 // ExitConstdecl is called when production constdecl is exited.
 func (s *BaseDZListener) ExitConstdecl(ctx *ConstdeclContext) {}
 
-// EnterConstasgn is called when production constasgn is entered.
-func (s *BaseDZListener) EnterConstasgn(ctx *ConstasgnContext) {}
+// EnterConstexpr is called when production constexpr is entered.
+func (s *BaseDZListener) EnterConstexpr(ctx *ConstexprContext) {}
 
-// ExitConstasgn is called when production constasgn is exited.
-func (s *BaseDZListener) ExitConstasgn(ctx *ConstasgnContext) {}
+// ExitConstexpr is called when production constexpr is exited.
+func (s *BaseDZListener) ExitConstexpr(ctx *ConstexprContext) {}
 
-// EnterIntasgn is called when production intasgn is entered.
-func (s *BaseDZListener) EnterIntasgn(ctx *IntasgnContext) {}
+// EnterIntexpr is called when production intexpr is entered.
+func (s *BaseDZListener) EnterIntexpr(ctx *IntexprContext) {}
 
-// ExitIntasgn is called when production intasgn is exited.
-func (s *BaseDZListener) ExitIntasgn(ctx *IntasgnContext) {}
+// ExitIntexpr is called when production intexpr is exited.
+func (s *BaseDZListener) ExitIntexpr(ctx *IntexprContext) {}
 
-// EnterFloatasgn is called when production floatasgn is entered.
-func (s *BaseDZListener) EnterFloatasgn(ctx *FloatasgnContext) {}
+// EnterBoolexpr is called when production boolexpr is entered.
+func (s *BaseDZListener) EnterBoolexpr(ctx *BoolexprContext) {}
 
-// ExitFloatasgn is called when production floatasgn is exited.
-func (s *BaseDZListener) ExitFloatasgn(ctx *FloatasgnContext) {}
+// ExitBoolexpr is called when production boolexpr is exited.
+func (s *BaseDZListener) ExitBoolexpr(ctx *BoolexprContext) {}
 
-// EnterBoolconst is called when production boolconst is entered.
-func (s *BaseDZListener) EnterBoolconst(ctx *BoolconstContext) {}
+// EnterConstval is called when production constval is entered.
+func (s *BaseDZListener) EnterConstval(ctx *ConstvalContext) {}
 
-// ExitBoolconst is called when production boolconst is exited.
-func (s *BaseDZListener) ExitBoolconst(ctx *BoolconstContext) {}
-
-// EnterCasgn is called when production casgn is entered.
-func (s *BaseDZListener) EnterCasgn(ctx *CasgnContext) {}
-
-// ExitCasgn is called when production casgn is exited.
-func (s *BaseDZListener) ExitCasgn(ctx *CasgnContext) {}
+// ExitConstval is called when production constval is exited.
+func (s *BaseDZListener) ExitConstval(ctx *ConstvalContext) {}
 
 // EnterTypedecl is called when production typedecl is entered.
 func (s *BaseDZListener) EnterTypedecl(ctx *TypedeclContext) {}

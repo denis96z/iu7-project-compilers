@@ -16,7 +16,7 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 70, 339,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 70, 311,
 	4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7,
 	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 4, 11, 9, 11, 4, 12, 9, 12, 4, 13,
 	9, 13, 4, 14, 9, 14, 4, 15, 9, 15, 4, 16, 9, 16, 4, 17, 9, 17, 4, 18, 9,
@@ -26,169 +26,157 @@ var parserATN = []uint16{
 	9, 34, 4, 35, 9, 35, 4, 36, 9, 36, 4, 37, 9, 37, 4, 38, 9, 38, 4, 39, 9,
 	39, 4, 40, 9, 40, 4, 41, 9, 41, 4, 42, 9, 42, 4, 43, 9, 43, 4, 44, 9, 44,
 	4, 45, 9, 45, 4, 46, 9, 46, 4, 47, 9, 47, 4, 48, 9, 48, 4, 49, 9, 49, 4,
-	50, 9, 50, 4, 51, 9, 51, 4, 52, 9, 52, 4, 53, 9, 53, 4, 54, 9, 54, 3, 2,
-	3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 7, 4, 118, 10, 4, 12, 4,
-	14, 4, 121, 11, 4, 3, 5, 3, 5, 3, 5, 3, 5, 5, 5, 127, 10, 5, 3, 6, 3, 6,
-	5, 6, 131, 10, 6, 3, 7, 3, 7, 3, 7, 3, 7, 3, 8, 3, 8, 3, 8, 3, 8, 3, 9,
-	3, 9, 3, 9, 3, 10, 3, 10, 3, 10, 3, 10, 3, 11, 3, 11, 3, 11, 3, 11, 3,
-	12, 3, 12, 3, 12, 7, 12, 155, 10, 12, 12, 12, 14, 12, 158, 11, 12, 5, 12,
-	160, 10, 12, 3, 13, 3, 13, 3, 13, 3, 13, 3, 14, 3, 14, 3, 14, 3, 15, 3,
-	15, 3, 15, 5, 15, 172, 10, 15, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16,
-	3, 17, 7, 17, 181, 10, 17, 12, 17, 14, 17, 184, 11, 17, 3, 18, 3, 18, 3,
-	18, 3, 18, 3, 18, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 20, 6, 20,
-	198, 10, 20, 13, 20, 14, 20, 199, 3, 21, 3, 21, 3, 21, 3, 22, 3, 22, 3,
-	22, 3, 22, 3, 22, 3, 22, 3, 23, 7, 23, 212, 10, 23, 12, 23, 14, 23, 215,
-	11, 23, 3, 24, 3, 24, 3, 24, 3, 24, 3, 25, 3, 25, 3, 25, 3, 25, 3, 25,
-	3, 25, 3, 25, 3, 25, 3, 26, 3, 26, 3, 26, 3, 26, 5, 26, 233, 10, 26, 3,
-	27, 3, 27, 3, 28, 3, 28, 3, 29, 3, 29, 3, 30, 3, 30, 3, 31, 3, 31, 3, 31,
-	3, 31, 3, 31, 3, 31, 3, 32, 3, 32, 3, 32, 3, 32, 3, 33, 3, 33, 3, 33, 5,
-	33, 256, 10, 33, 3, 34, 3, 34, 5, 34, 260, 10, 34, 3, 35, 3, 35, 3, 36,
-	3, 36, 3, 37, 3, 37, 3, 37, 3, 38, 3, 38, 3, 38, 3, 38, 3, 38, 3, 38, 3,
-	39, 3, 39, 5, 39, 277, 10, 39, 3, 40, 7, 40, 280, 10, 40, 12, 40, 14, 40,
-	283, 11, 40, 3, 41, 3, 41, 3, 41, 3, 41, 3, 41, 3, 41, 5, 41, 291, 10,
-	41, 3, 42, 3, 42, 3, 42, 3, 42, 3, 42, 3, 43, 3, 43, 3, 44, 3, 44, 3, 44,
-	3, 45, 3, 45, 3, 45, 3, 45, 3, 46, 7, 46, 308, 10, 46, 12, 46, 14, 46,
-	311, 11, 46, 3, 46, 5, 46, 314, 10, 46, 3, 47, 3, 47, 3, 47, 3, 47, 3,
-	48, 3, 48, 3, 48, 3, 49, 3, 49, 3, 50, 3, 50, 3, 50, 3, 51, 3, 51, 3, 52,
-	3, 52, 5, 52, 332, 10, 52, 3, 53, 3, 53, 3, 54, 3, 54, 3, 54, 3, 54, 2,
-	2, 55, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34,
-	36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70,
-	72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100, 102, 104,
-	106, 2, 5, 3, 2, 65, 66, 3, 2, 20, 31, 3, 2, 51, 55, 2, 311, 2, 108, 3,
-	2, 2, 2, 4, 112, 3, 2, 2, 2, 6, 119, 3, 2, 2, 2, 8, 126, 3, 2, 2, 2, 10,
-	130, 3, 2, 2, 2, 12, 132, 3, 2, 2, 2, 14, 136, 3, 2, 2, 2, 16, 140, 3,
-	2, 2, 2, 18, 143, 3, 2, 2, 2, 20, 147, 3, 2, 2, 2, 22, 159, 3, 2, 2, 2,
-	24, 161, 3, 2, 2, 2, 26, 165, 3, 2, 2, 2, 28, 171, 3, 2, 2, 2, 30, 173,
-	3, 2, 2, 2, 32, 182, 3, 2, 2, 2, 34, 185, 3, 2, 2, 2, 36, 190, 3, 2, 2,
-	2, 38, 197, 3, 2, 2, 2, 40, 201, 3, 2, 2, 2, 42, 204, 3, 2, 2, 2, 44, 213,
-	3, 2, 2, 2, 46, 216, 3, 2, 2, 2, 48, 220, 3, 2, 2, 2, 50, 232, 3, 2, 2,
-	2, 52, 234, 3, 2, 2, 2, 54, 236, 3, 2, 2, 2, 56, 238, 3, 2, 2, 2, 58, 240,
-	3, 2, 2, 2, 60, 242, 3, 2, 2, 2, 62, 248, 3, 2, 2, 2, 64, 255, 3, 2, 2,
-	2, 66, 259, 3, 2, 2, 2, 68, 261, 3, 2, 2, 2, 70, 263, 3, 2, 2, 2, 72, 265,
-	3, 2, 2, 2, 74, 268, 3, 2, 2, 2, 76, 276, 3, 2, 2, 2, 78, 281, 3, 2, 2,
-	2, 80, 290, 3, 2, 2, 2, 82, 292, 3, 2, 2, 2, 84, 297, 3, 2, 2, 2, 86, 299,
-	3, 2, 2, 2, 88, 302, 3, 2, 2, 2, 90, 309, 3, 2, 2, 2, 92, 315, 3, 2, 2,
-	2, 94, 319, 3, 2, 2, 2, 96, 322, 3, 2, 2, 2, 98, 324, 3, 2, 2, 2, 100,
-	327, 3, 2, 2, 2, 102, 331, 3, 2, 2, 2, 104, 333, 3, 2, 2, 2, 106, 335,
-	3, 2, 2, 2, 108, 109, 5, 4, 3, 2, 109, 110, 5, 6, 4, 2, 110, 111, 7, 2,
-	2, 3, 111, 3, 3, 2, 2, 2, 112, 113, 7, 3, 2, 2, 113, 114, 7, 69, 2, 2,
-	114, 115, 7, 40, 2, 2, 115, 5, 3, 2, 2, 2, 116, 118, 5, 8, 5, 2, 117, 116,
-	3, 2, 2, 2, 118, 121, 3, 2, 2, 2, 119, 117, 3, 2, 2, 2, 119, 120, 3, 2,
-	2, 2, 120, 7, 3, 2, 2, 2, 121, 119, 3, 2, 2, 2, 122, 127, 5, 10, 6, 2,
-	123, 127, 5, 28, 15, 2, 124, 127, 5, 60, 31, 2, 125, 127, 5, 48, 25, 2,
-	126, 122, 3, 2, 2, 2, 126, 123, 3, 2, 2, 2, 126, 124, 3, 2, 2, 2, 126,
-	125, 3, 2, 2, 2, 127, 9, 3, 2, 2, 2, 128, 131, 5, 12, 7, 2, 129, 131, 5,
-	14, 8, 2, 130, 128, 3, 2, 2, 2, 130, 129, 3, 2, 2, 2, 131, 11, 3, 2, 2,
-	2, 132, 133, 7, 11, 2, 2, 133, 134, 5, 16, 9, 2, 134, 135, 5, 62, 32, 2,
-	135, 13, 3, 2, 2, 2, 136, 137, 7, 12, 2, 2, 137, 138, 5, 18, 10, 2, 138,
-	139, 5, 62, 32, 2, 139, 15, 3, 2, 2, 2, 140, 141, 7, 69, 2, 2, 141, 142,
-	5, 20, 11, 2, 142, 17, 3, 2, 2, 2, 143, 144, 7, 69, 2, 2, 144, 145, 5,
-	20, 11, 2, 145, 146, 5, 26, 14, 2, 146, 19, 3, 2, 2, 2, 147, 148, 7, 32,
-	2, 2, 148, 149, 5, 22, 12, 2, 149, 150, 7, 33, 2, 2, 150, 21, 3, 2, 2,
-	2, 151, 156, 5, 24, 13, 2, 152, 153, 7, 39, 2, 2, 153, 155, 5, 24, 13,
-	2, 154, 152, 3, 2, 2, 2, 155, 158, 3, 2, 2, 2, 156, 154, 3, 2, 2, 2, 156,
-	157, 3, 2, 2, 2, 157, 160, 3, 2, 2, 2, 158, 156, 3, 2, 2, 2, 159, 151,
-	3, 2, 2, 2, 159, 160, 3, 2, 2, 2, 160, 23, 3, 2, 2, 2, 161, 162, 7, 69,
-	2, 2, 162, 163, 7, 38, 2, 2, 163, 164, 5, 64, 33, 2, 164, 25, 3, 2, 2,
-	2, 165, 166, 7, 38, 2, 2, 166, 167, 5, 64, 33, 2, 167, 27, 3, 2, 2, 2,
-	168, 172, 5, 30, 16, 2, 169, 172, 5, 36, 19, 2, 170, 172, 5, 42, 22, 2,
-	171, 168, 3, 2, 2, 2, 171, 169, 3, 2, 2, 2, 171, 170, 3, 2, 2, 2, 172,
-	29, 3, 2, 2, 2, 173, 174, 7, 16, 2, 2, 174, 175, 7, 68, 2, 2, 175, 176,
-	7, 34, 2, 2, 176, 177, 5, 32, 17, 2, 177, 178, 7, 35, 2, 2, 178, 31, 3,
-	2, 2, 2, 179, 181, 5, 34, 18, 2, 180, 179, 3, 2, 2, 2, 181, 184, 3, 2,
-	2, 2, 182, 180, 3, 2, 2, 2, 182, 183, 3, 2, 2, 2, 183, 33, 3, 2, 2, 2,
-	184, 182, 3, 2, 2, 2, 185, 186, 7, 69, 2, 2, 186, 187, 7, 38, 2, 2, 187,
-	188, 5, 64, 33, 2, 188, 189, 7, 40, 2, 2, 189, 35, 3, 2, 2, 2, 190, 191,
-	7, 17, 2, 2, 191, 192, 7, 68, 2, 2, 192, 193, 7, 34, 2, 2, 193, 194, 5,
-	38, 20, 2, 194, 195, 7, 35, 2, 2, 195, 37, 3, 2, 2, 2, 196, 198, 5, 40,
-	21, 2, 197, 196, 3, 2, 2, 2, 198, 199, 3, 2, 2, 2, 199, 197, 3, 2, 2, 2,
-	199, 200, 3, 2, 2, 2, 200, 39, 3, 2, 2, 2, 201, 202, 7, 67, 2, 2, 202,
-	203, 7, 39, 2, 2, 203, 41, 3, 2, 2, 2, 204, 205, 7, 18, 2, 2, 205, 206,
-	7, 68, 2, 2, 206, 207, 7, 34, 2, 2, 207, 208, 5, 44, 23, 2, 208, 209, 7,
-	35, 2, 2, 209, 43, 3, 2, 2, 2, 210, 212, 5, 46, 24, 2, 211, 210, 3, 2,
-	2, 2, 212, 215, 3, 2, 2, 2, 213, 211, 3, 2, 2, 2, 213, 214, 3, 2, 2, 2,
-	214, 45, 3, 2, 2, 2, 215, 213, 3, 2, 2, 2, 216, 217, 7, 69, 2, 2, 217,
-	218, 7, 38, 2, 2, 218, 219, 5, 64, 33, 2, 219, 47, 3, 2, 2, 2, 220, 221,
-	7, 13, 2, 2, 221, 222, 7, 67, 2, 2, 222, 223, 7, 38, 2, 2, 223, 224, 5,
-	68, 35, 2, 224, 225, 7, 51, 2, 2, 225, 226, 5, 50, 26, 2, 226, 227, 7,
-	40, 2, 2, 227, 49, 3, 2, 2, 2, 228, 233, 5, 52, 27, 2, 229, 233, 5, 54,
-	28, 2, 230, 233, 5, 56, 29, 2, 231, 233, 5, 58, 30, 2, 232, 228, 3, 2,
-	2, 2, 232, 229, 3, 2, 2, 2, 232, 230, 3, 2, 2, 2, 232, 231, 3, 2, 2, 2,
-	233, 51, 3, 2, 2, 2, 234, 235, 7, 63, 2, 2, 235, 53, 3, 2, 2, 2, 236, 237,
-	7, 64, 2, 2, 237, 55, 3, 2, 2, 2, 238, 239, 9, 2, 2, 2, 239, 57, 3, 2,
-	2, 2, 240, 241, 7, 67, 2, 2, 241, 59, 3, 2, 2, 2, 242, 243, 7, 4, 2, 2,
-	243, 244, 7, 68, 2, 2, 244, 245, 7, 51, 2, 2, 245, 246, 5, 64, 33, 2, 246,
-	247, 7, 40, 2, 2, 247, 61, 3, 2, 2, 2, 248, 249, 7, 34, 2, 2, 249, 250,
-	5, 78, 40, 2, 250, 251, 7, 35, 2, 2, 251, 63, 3, 2, 2, 2, 252, 256, 5,
-	66, 34, 2, 253, 256, 5, 72, 37, 2, 254, 256, 5, 74, 38, 2, 255, 252, 3,
-	2, 2, 2, 255, 253, 3, 2, 2, 2, 255, 254, 3, 2, 2, 2, 256, 65, 3, 2, 2,
-	2, 257, 260, 5, 68, 35, 2, 258, 260, 5, 70, 36, 2, 259, 257, 3, 2, 2, 2,
-	259, 258, 3, 2, 2, 2, 260, 67, 3, 2, 2, 2, 261, 262, 9, 3, 2, 2, 262, 69,
-	3, 2, 2, 2, 263, 264, 7, 68, 2, 2, 264, 71, 3, 2, 2, 2, 265, 266, 7, 62,
-	2, 2, 266, 267, 5, 66, 34, 2, 267, 73, 3, 2, 2, 2, 268, 269, 7, 36, 2,
-	2, 269, 270, 5, 66, 34, 2, 270, 271, 7, 38, 2, 2, 271, 272, 5, 76, 39,
-	2, 272, 273, 7, 37, 2, 2, 273, 75, 3, 2, 2, 2, 274, 277, 7, 63, 2, 2, 275,
-	277, 7, 67, 2, 2, 276, 274, 3, 2, 2, 2, 276, 275, 3, 2, 2, 2, 277, 77,
-	3, 2, 2, 2, 278, 280, 5, 80, 41, 2, 279, 278, 3, 2, 2, 2, 280, 283, 3,
-	2, 2, 2, 281, 279, 3, 2, 2, 2, 281, 282, 3, 2, 2, 2, 282, 79, 3, 2, 2,
-	2, 283, 281, 3, 2, 2, 2, 284, 291, 5, 82, 42, 2, 285, 291, 5, 86, 44, 2,
-	286, 291, 5, 96, 49, 2, 287, 288, 5, 102, 52, 2, 288, 289, 7, 40, 2, 2,
-	289, 291, 3, 2, 2, 2, 290, 284, 3, 2, 2, 2, 290, 285, 3, 2, 2, 2, 290,
-	286, 3, 2, 2, 2, 290, 287, 3, 2, 2, 2, 291, 81, 3, 2, 2, 2, 292, 293, 7,
-	69, 2, 2, 293, 294, 5, 84, 43, 2, 294, 295, 5, 100, 51, 2, 295, 296, 7,
-	40, 2, 2, 296, 83, 3, 2, 2, 2, 297, 298, 9, 4, 2, 2, 298, 85, 3, 2, 2,
-	2, 299, 300, 5, 88, 45, 2, 300, 301, 5, 90, 46, 2, 301, 87, 3, 2, 2, 2,
-	302, 303, 7, 8, 2, 2, 303, 304, 5, 100, 51, 2, 304, 305, 5, 62, 32, 2,
-	305, 89, 3, 2, 2, 2, 306, 308, 5, 92, 47, 2, 307, 306, 3, 2, 2, 2, 308,
-	311, 3, 2, 2, 2, 309, 307, 3, 2, 2, 2, 309, 310, 3, 2, 2, 2, 310, 313,
-	3, 2, 2, 2, 311, 309, 3, 2, 2, 2, 312, 314, 5, 94, 48, 2, 313, 312, 3,
-	2, 2, 2, 313, 314, 3, 2, 2, 2, 314, 91, 3, 2, 2, 2, 315, 316, 7, 9, 2,
-	2, 316, 317, 5, 100, 51, 2, 317, 318, 5, 62, 32, 2, 318, 93, 3, 2, 2, 2,
-	319, 320, 7, 10, 2, 2, 320, 321, 5, 62, 32, 2, 321, 95, 3, 2, 2, 2, 322,
-	323, 5, 98, 50, 2, 323, 97, 3, 2, 2, 2, 324, 325, 7, 7, 2, 2, 325, 326,
-	5, 62, 32, 2, 326, 99, 3, 2, 2, 2, 327, 328, 3, 2, 2, 2, 328, 101, 3, 2,
-	2, 2, 329, 332, 5, 104, 53, 2, 330, 332, 5, 106, 54, 2, 331, 329, 3, 2,
-	2, 2, 331, 330, 3, 2, 2, 2, 332, 103, 3, 2, 2, 2, 333, 334, 7, 19, 2, 2,
-	334, 105, 3, 2, 2, 2, 335, 336, 7, 19, 2, 2, 336, 337, 5, 100, 51, 2, 337,
-	107, 3, 2, 2, 2, 20, 119, 126, 130, 156, 159, 171, 182, 199, 213, 232,
-	255, 259, 276, 281, 290, 309, 313, 331,
+	50, 9, 50, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 7, 4,
+	110, 10, 4, 12, 4, 14, 4, 113, 11, 4, 3, 5, 3, 5, 3, 5, 3, 5, 5, 5, 119,
+	10, 5, 3, 6, 3, 6, 5, 6, 123, 10, 6, 3, 7, 3, 7, 3, 7, 3, 7, 3, 8, 3, 8,
+	3, 8, 3, 8, 3, 9, 3, 9, 3, 9, 3, 10, 3, 10, 3, 10, 3, 10, 3, 11, 3, 11,
+	3, 11, 3, 11, 3, 12, 3, 12, 3, 12, 7, 12, 147, 10, 12, 12, 12, 14, 12,
+	150, 11, 12, 5, 12, 152, 10, 12, 3, 13, 3, 13, 3, 13, 3, 13, 3, 14, 3,
+	14, 3, 14, 3, 15, 3, 15, 5, 15, 163, 10, 15, 3, 16, 3, 16, 3, 16, 3, 16,
+	3, 16, 3, 16, 3, 17, 6, 17, 172, 10, 17, 13, 17, 14, 17, 173, 3, 18, 3,
+	18, 3, 18, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 20, 7, 20, 186,
+	10, 20, 12, 20, 14, 20, 189, 11, 20, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21,
+	3, 22, 3, 22, 3, 22, 3, 22, 3, 22, 3, 22, 3, 22, 3, 22, 3, 23, 3, 23, 3,
+	23, 5, 23, 207, 10, 23, 3, 24, 3, 24, 3, 25, 3, 25, 3, 26, 3, 26, 3, 27,
+	3, 27, 3, 27, 3, 27, 3, 27, 3, 27, 3, 28, 3, 28, 3, 28, 3, 28, 3, 29, 3,
+	29, 3, 29, 5, 29, 228, 10, 29, 3, 30, 3, 30, 5, 30, 232, 10, 30, 3, 31,
+	3, 31, 3, 32, 3, 32, 3, 33, 3, 33, 3, 33, 3, 34, 3, 34, 3, 34, 3, 34, 3,
+	34, 3, 34, 3, 35, 3, 35, 5, 35, 249, 10, 35, 3, 36, 7, 36, 252, 10, 36,
+	12, 36, 14, 36, 255, 11, 36, 3, 37, 3, 37, 3, 37, 3, 37, 3, 37, 3, 37,
+	5, 37, 263, 10, 37, 3, 38, 3, 38, 3, 38, 3, 38, 3, 38, 3, 39, 3, 39, 3,
+	40, 3, 40, 3, 40, 3, 41, 3, 41, 3, 41, 3, 41, 3, 42, 7, 42, 280, 10, 42,
+	12, 42, 14, 42, 283, 11, 42, 3, 42, 5, 42, 286, 10, 42, 3, 43, 3, 43, 3,
+	43, 3, 43, 3, 44, 3, 44, 3, 44, 3, 45, 3, 45, 3, 46, 3, 46, 3, 46, 3, 47,
+	3, 47, 3, 48, 3, 48, 5, 48, 304, 10, 48, 3, 49, 3, 49, 3, 50, 3, 50, 3,
+	50, 3, 50, 2, 2, 51, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28,
+	30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64,
+	66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 2,
+	5, 3, 2, 65, 66, 3, 2, 19, 30, 3, 2, 51, 55, 2, 284, 2, 100, 3, 2, 2, 2,
+	4, 104, 3, 2, 2, 2, 6, 111, 3, 2, 2, 2, 8, 118, 3, 2, 2, 2, 10, 122, 3,
+	2, 2, 2, 12, 124, 3, 2, 2, 2, 14, 128, 3, 2, 2, 2, 16, 132, 3, 2, 2, 2,
+	18, 135, 3, 2, 2, 2, 20, 139, 3, 2, 2, 2, 22, 151, 3, 2, 2, 2, 24, 153,
+	3, 2, 2, 2, 26, 157, 3, 2, 2, 2, 28, 162, 3, 2, 2, 2, 30, 164, 3, 2, 2,
+	2, 32, 171, 3, 2, 2, 2, 34, 175, 3, 2, 2, 2, 36, 178, 3, 2, 2, 2, 38, 187,
+	3, 2, 2, 2, 40, 190, 3, 2, 2, 2, 42, 195, 3, 2, 2, 2, 44, 206, 3, 2, 2,
+	2, 46, 208, 3, 2, 2, 2, 48, 210, 3, 2, 2, 2, 50, 212, 3, 2, 2, 2, 52, 214,
+	3, 2, 2, 2, 54, 220, 3, 2, 2, 2, 56, 227, 3, 2, 2, 2, 58, 231, 3, 2, 2,
+	2, 60, 233, 3, 2, 2, 2, 62, 235, 3, 2, 2, 2, 64, 237, 3, 2, 2, 2, 66, 240,
+	3, 2, 2, 2, 68, 248, 3, 2, 2, 2, 70, 253, 3, 2, 2, 2, 72, 262, 3, 2, 2,
+	2, 74, 264, 3, 2, 2, 2, 76, 269, 3, 2, 2, 2, 78, 271, 3, 2, 2, 2, 80, 274,
+	3, 2, 2, 2, 82, 281, 3, 2, 2, 2, 84, 287, 3, 2, 2, 2, 86, 291, 3, 2, 2,
+	2, 88, 294, 3, 2, 2, 2, 90, 296, 3, 2, 2, 2, 92, 299, 3, 2, 2, 2, 94, 303,
+	3, 2, 2, 2, 96, 305, 3, 2, 2, 2, 98, 307, 3, 2, 2, 2, 100, 101, 5, 4, 3,
+	2, 101, 102, 5, 6, 4, 2, 102, 103, 7, 2, 2, 3, 103, 3, 3, 2, 2, 2, 104,
+	105, 7, 3, 2, 2, 105, 106, 7, 69, 2, 2, 106, 107, 7, 39, 2, 2, 107, 5,
+	3, 2, 2, 2, 108, 110, 5, 8, 5, 2, 109, 108, 3, 2, 2, 2, 110, 113, 3, 2,
+	2, 2, 111, 109, 3, 2, 2, 2, 111, 112, 3, 2, 2, 2, 112, 7, 3, 2, 2, 2, 113,
+	111, 3, 2, 2, 2, 114, 119, 5, 42, 22, 2, 115, 119, 5, 52, 27, 2, 116, 119,
+	5, 28, 15, 2, 117, 119, 5, 10, 6, 2, 118, 114, 3, 2, 2, 2, 118, 115, 3,
+	2, 2, 2, 118, 116, 3, 2, 2, 2, 118, 117, 3, 2, 2, 2, 119, 9, 3, 2, 2, 2,
+	120, 123, 5, 12, 7, 2, 121, 123, 5, 14, 8, 2, 122, 120, 3, 2, 2, 2, 122,
+	121, 3, 2, 2, 2, 123, 11, 3, 2, 2, 2, 124, 125, 7, 11, 2, 2, 125, 126,
+	5, 16, 9, 2, 126, 127, 5, 54, 28, 2, 127, 13, 3, 2, 2, 2, 128, 129, 7,
+	12, 2, 2, 129, 130, 5, 18, 10, 2, 130, 131, 5, 54, 28, 2, 131, 15, 3, 2,
+	2, 2, 132, 133, 7, 69, 2, 2, 133, 134, 5, 20, 11, 2, 134, 17, 3, 2, 2,
+	2, 135, 136, 7, 69, 2, 2, 136, 137, 5, 20, 11, 2, 137, 138, 5, 26, 14,
+	2, 138, 19, 3, 2, 2, 2, 139, 140, 7, 31, 2, 2, 140, 141, 5, 22, 12, 2,
+	141, 142, 7, 32, 2, 2, 142, 21, 3, 2, 2, 2, 143, 148, 5, 24, 13, 2, 144,
+	145, 7, 38, 2, 2, 145, 147, 5, 24, 13, 2, 146, 144, 3, 2, 2, 2, 147, 150,
+	3, 2, 2, 2, 148, 146, 3, 2, 2, 2, 148, 149, 3, 2, 2, 2, 149, 152, 3, 2,
+	2, 2, 150, 148, 3, 2, 2, 2, 151, 143, 3, 2, 2, 2, 151, 152, 3, 2, 2, 2,
+	152, 23, 3, 2, 2, 2, 153, 154, 7, 69, 2, 2, 154, 155, 7, 37, 2, 2, 155,
+	156, 5, 58, 30, 2, 156, 25, 3, 2, 2, 2, 157, 158, 7, 37, 2, 2, 158, 159,
+	5, 58, 30, 2, 159, 27, 3, 2, 2, 2, 160, 163, 5, 30, 16, 2, 161, 163, 5,
+	36, 19, 2, 162, 160, 3, 2, 2, 2, 162, 161, 3, 2, 2, 2, 163, 29, 3, 2, 2,
+	2, 164, 165, 7, 16, 2, 2, 165, 166, 7, 68, 2, 2, 166, 167, 7, 33, 2, 2,
+	167, 168, 5, 32, 17, 2, 168, 169, 7, 34, 2, 2, 169, 31, 3, 2, 2, 2, 170,
+	172, 5, 34, 18, 2, 171, 170, 3, 2, 2, 2, 172, 173, 3, 2, 2, 2, 173, 171,
+	3, 2, 2, 2, 173, 174, 3, 2, 2, 2, 174, 33, 3, 2, 2, 2, 175, 176, 7, 67,
+	2, 2, 176, 177, 7, 38, 2, 2, 177, 35, 3, 2, 2, 2, 178, 179, 7, 15, 2, 2,
+	179, 180, 7, 68, 2, 2, 180, 181, 7, 33, 2, 2, 181, 182, 5, 38, 20, 2, 182,
+	183, 7, 34, 2, 2, 183, 37, 3, 2, 2, 2, 184, 186, 5, 40, 21, 2, 185, 184,
+	3, 2, 2, 2, 186, 189, 3, 2, 2, 2, 187, 185, 3, 2, 2, 2, 187, 188, 3, 2,
+	2, 2, 188, 39, 3, 2, 2, 2, 189, 187, 3, 2, 2, 2, 190, 191, 7, 69, 2, 2,
+	191, 192, 7, 37, 2, 2, 192, 193, 5, 56, 29, 2, 193, 194, 7, 39, 2, 2, 194,
+	41, 3, 2, 2, 2, 195, 196, 7, 13, 2, 2, 196, 197, 7, 67, 2, 2, 197, 198,
+	7, 37, 2, 2, 198, 199, 5, 60, 31, 2, 199, 200, 7, 51, 2, 2, 200, 201, 5,
+	44, 23, 2, 201, 202, 7, 39, 2, 2, 202, 43, 3, 2, 2, 2, 203, 207, 5, 46,
+	24, 2, 204, 207, 5, 48, 25, 2, 205, 207, 5, 50, 26, 2, 206, 203, 3, 2,
+	2, 2, 206, 204, 3, 2, 2, 2, 206, 205, 3, 2, 2, 2, 207, 45, 3, 2, 2, 2,
+	208, 209, 7, 64, 2, 2, 209, 47, 3, 2, 2, 2, 210, 211, 9, 2, 2, 2, 211,
+	49, 3, 2, 2, 2, 212, 213, 7, 67, 2, 2, 213, 51, 3, 2, 2, 2, 214, 215, 7,
+	4, 2, 2, 215, 216, 7, 68, 2, 2, 216, 217, 7, 51, 2, 2, 217, 218, 5, 56,
+	29, 2, 218, 219, 7, 39, 2, 2, 219, 53, 3, 2, 2, 2, 220, 221, 7, 33, 2,
+	2, 221, 222, 5, 70, 36, 2, 222, 223, 7, 34, 2, 2, 223, 55, 3, 2, 2, 2,
+	224, 228, 5, 58, 30, 2, 225, 228, 5, 64, 33, 2, 226, 228, 5, 66, 34, 2,
+	227, 224, 3, 2, 2, 2, 227, 225, 3, 2, 2, 2, 227, 226, 3, 2, 2, 2, 228,
+	57, 3, 2, 2, 2, 229, 232, 5, 60, 31, 2, 230, 232, 5, 62, 32, 2, 231, 229,
+	3, 2, 2, 2, 231, 230, 3, 2, 2, 2, 232, 59, 3, 2, 2, 2, 233, 234, 9, 3,
+	2, 2, 234, 61, 3, 2, 2, 2, 235, 236, 7, 68, 2, 2, 236, 63, 3, 2, 2, 2,
+	237, 238, 7, 63, 2, 2, 238, 239, 5, 58, 30, 2, 239, 65, 3, 2, 2, 2, 240,
+	241, 7, 35, 2, 2, 241, 242, 5, 58, 30, 2, 242, 243, 7, 37, 2, 2, 243, 244,
+	5, 68, 35, 2, 244, 245, 7, 36, 2, 2, 245, 67, 3, 2, 2, 2, 246, 249, 7,
+	64, 2, 2, 247, 249, 7, 67, 2, 2, 248, 246, 3, 2, 2, 2, 248, 247, 3, 2,
+	2, 2, 249, 69, 3, 2, 2, 2, 250, 252, 5, 72, 37, 2, 251, 250, 3, 2, 2, 2,
+	252, 255, 3, 2, 2, 2, 253, 251, 3, 2, 2, 2, 253, 254, 3, 2, 2, 2, 254,
+	71, 3, 2, 2, 2, 255, 253, 3, 2, 2, 2, 256, 263, 5, 74, 38, 2, 257, 263,
+	5, 78, 40, 2, 258, 263, 5, 88, 45, 2, 259, 260, 5, 94, 48, 2, 260, 261,
+	7, 39, 2, 2, 261, 263, 3, 2, 2, 2, 262, 256, 3, 2, 2, 2, 262, 257, 3, 2,
+	2, 2, 262, 258, 3, 2, 2, 2, 262, 259, 3, 2, 2, 2, 263, 73, 3, 2, 2, 2,
+	264, 265, 7, 69, 2, 2, 265, 266, 5, 76, 39, 2, 266, 267, 5, 92, 47, 2,
+	267, 268, 7, 39, 2, 2, 268, 75, 3, 2, 2, 2, 269, 270, 9, 4, 2, 2, 270,
+	77, 3, 2, 2, 2, 271, 272, 5, 80, 41, 2, 272, 273, 5, 82, 42, 2, 273, 79,
+	3, 2, 2, 2, 274, 275, 7, 8, 2, 2, 275, 276, 5, 92, 47, 2, 276, 277, 5,
+	54, 28, 2, 277, 81, 3, 2, 2, 2, 278, 280, 5, 84, 43, 2, 279, 278, 3, 2,
+	2, 2, 280, 283, 3, 2, 2, 2, 281, 279, 3, 2, 2, 2, 281, 282, 3, 2, 2, 2,
+	282, 285, 3, 2, 2, 2, 283, 281, 3, 2, 2, 2, 284, 286, 5, 86, 44, 2, 285,
+	284, 3, 2, 2, 2, 285, 286, 3, 2, 2, 2, 286, 83, 3, 2, 2, 2, 287, 288, 7,
+	9, 2, 2, 288, 289, 5, 92, 47, 2, 289, 290, 5, 54, 28, 2, 290, 85, 3, 2,
+	2, 2, 291, 292, 7, 10, 2, 2, 292, 293, 5, 54, 28, 2, 293, 87, 3, 2, 2,
+	2, 294, 295, 5, 90, 46, 2, 295, 89, 3, 2, 2, 2, 296, 297, 7, 7, 2, 2, 297,
+	298, 5, 54, 28, 2, 298, 91, 3, 2, 2, 2, 299, 300, 3, 2, 2, 2, 300, 93,
+	3, 2, 2, 2, 301, 304, 5, 96, 49, 2, 302, 304, 5, 98, 50, 2, 303, 301, 3,
+	2, 2, 2, 303, 302, 3, 2, 2, 2, 304, 95, 3, 2, 2, 2, 305, 306, 7, 18, 2,
+	2, 306, 97, 3, 2, 2, 2, 307, 308, 7, 18, 2, 2, 308, 309, 5, 92, 47, 2,
+	309, 99, 3, 2, 2, 2, 19, 111, 118, 122, 148, 151, 162, 173, 187, 206, 227,
+	231, 248, 253, 262, 281, 285, 303,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
 var deserializedATN = deserializer.DeserializeFromUInt16(parserATN)
 
 var literalNames = []string{
 	"", "'pkg'", "'type'", "'for'", "'while'", "'loop'", "'if'", "'elif'",
-	"'else'", "'proc'", "'func'", "'const'", "'let'", "'mut'", "'struct'",
-	"'enum'", "'union'", "'return'", "'i8_t'", "'u8_t'", "'i16_t'", "'u16_t'",
-	"'i32_t'", "'u32_t'", "'i64_t'", "'u64_t'", "'char_t'", "'bool_t'", "'size_t'",
-	"'ssize_t'", "'('", "')'", "'{'", "'}'", "'['", "']'", "':'", "','", "';'",
-	"'+'", "'-'", "'*'", "'/'", "'%'", "'<<'", "'>>'", "'&'", "'|'", "'^'",
-	"'='", "'+='", "'-='", "'*='", "'/='", "'%='", "'<<='", "'>>='", "'&='",
-	"'|='", "'^='", "'@'", "", "", "'true'", "'false'",
+	"'else'", "'proc'", "'func'", "'const'", "'let'", "'struct'", "'enum'",
+	"'union'", "'return'", "'i8_t'", "'u8_t'", "'i16_t'", "'u16_t'", "'i32_t'",
+	"'u32_t'", "'i64_t'", "'u64_t'", "'char_t'", "'bool_t'", "'size_t'", "'ssize_t'",
+	"'('", "')'", "'{'", "'}'", "'['", "']'", "':'", "','", "';'", "'+'", "'-'",
+	"'*'", "'/'", "'%'", "'<<'", "'>>'", "'~'", "'&'", "'|'", "'^'", "'='",
+	"'+='", "'-='", "'*='", "'/='", "'%='", "'<<='", "'>>='", "'~='", "'&='",
+	"'|='", "'^='", "'@'", "", "'true'", "'false'",
 }
 var symbolicNames = []string{
 	"", "KW_PKG", "KW_TYPE", "KW_FOR", "KW_WHILE", "KW_LOOP", "KW_IF", "KW_ELIF",
-	"KW_ELSE", "KW_PROC", "KW_FUNC", "KW_CONST", "KW_LET", "KW_MUT", "KW_STRUCT",
-	"KW_ENUM", "KW_UNION", "KW_RETURN", "I8_T", "U8_T", "I16_T", "U16_T", "I32_T",
-	"U32_T", "I64_T", "U64_T", "CHAR_T", "BOOL_T", "SIZE_T", "SSIZE_T", "LEFT_PRT",
+	"KW_ELSE", "KW_PROC", "KW_FUNC", "KW_CONST", "KW_LET", "KW_STRUCT", "KW_ENUM",
+	"KW_UNION", "KW_RETURN", "I8_T", "U8_T", "I16_T", "U16_T", "I32_T", "U32_T",
+	"I64_T", "U64_T", "CHAR_T", "BOOL_T", "SIZE_T", "SSIZE_T", "LEFT_PRT",
 	"RIGHT_PRT", "LEFT_BRC", "RIGHT_BRC", "LEFT_BRK", "RIGHT_BRK", "COLON",
-	"COMMA", "SEMICOLON", "ADD", "SUB", "MUL", "DIV", "MOD", "SHL", "SHR",
-	"AND", "OR", "XOR", "ASGN", "ADD_ASGN", "SUB_ASGN", "MUL_ASGN", "DIV_ASGN",
-	"MOD_ASGN", "SHL_ASGN", "SHR_ASGN", "AND_ASGN", "OR_ASGN", "XOR_ASGN",
-	"REF", "INT_CONST", "FLOAT_CONST", "TRUE", "FALSE", "CONST", "TYPE", "IDENTIFIER",
-	"WHITESPACE",
+	"COMMA", "SEMICOLON", "ADD", "SUB", "MUL", "DIV", "MOD", "BIN_SHL", "BIN_SHR",
+	"BIN_NOT", "BIN_AND", "BIN_OR", "BIN_XOR", "ASGN", "ADD_ASGN", "SUB_ASGN",
+	"MUL_ASGN", "DIV_ASGN", "MOD_ASGN", "BIN_SHL_ASGN", "BIN_SHR_ASGN", "BIN_NOT_ASGN",
+	"BIN_AND_ASGN", "BIN_OR_ASGN", "BIN_XOR_ASGN", "REF", "INT_CONST", "TRUE",
+	"FALSE", "CONST", "TYPE", "IDENTIFIER", "WHITESPACE",
 }
 
 var ruleNames = []string{
 	"start", "pkg", "decls", "decl", "subdecl", "procdecl", "funcdecl", "procheader",
 	"funcheader", "args", "argdecls", "argdecl", "funcret", "complexdecl",
-	"structdecl", "structattrs", "structattr", "enumdecl", "enumoptions", "enumoption",
-	"uniondecl", "unionattrs", "unionattr", "constdecl", "constasgn", "intasgn",
-	"floatasgn", "boolconst", "casgn", "typedecl", "block", "typespec", "simpletypespec",
-	"basictypespec", "namedtypespec", "reftypespec", "arraytypespec", "sizespec",
-	"statements", "statement", "assignment", "asgnop", "condition", "ifblock",
-	"elseblocks", "elifblock", "elseblock", "loop", "trueloop", "expression",
-	"retstatement", "procretstatement", "funcretstatement",
+	"enumdecl", "enumoptions", "enumoption", "structdecl", "structattrs", "structattr",
+	"constdecl", "constexpr", "intexpr", "boolexpr", "constval", "typedecl",
+	"block", "typespec", "simpletypespec", "basictypespec", "namedtypespec",
+	"reftypespec", "arraytypespec", "sizespec", "statements", "statement",
+	"assignment", "asgnop", "condition", "ifblock", "elseblocks", "elifblock",
+	"elseblock", "loop", "trueloop", "expression", "retstatement", "procretstatement",
+	"funcretstatement",
 }
 var decisionToDFA = make([]*antlr.DFA, len(deserializedATN.DecisionToState))
 
@@ -218,75 +206,75 @@ func NewDZParser(input antlr.TokenStream) *DZParser {
 
 // DZParser tokens.
 const (
-	DZParserEOF         = antlr.TokenEOF
-	DZParserKW_PKG      = 1
-	DZParserKW_TYPE     = 2
-	DZParserKW_FOR      = 3
-	DZParserKW_WHILE    = 4
-	DZParserKW_LOOP     = 5
-	DZParserKW_IF       = 6
-	DZParserKW_ELIF     = 7
-	DZParserKW_ELSE     = 8
-	DZParserKW_PROC     = 9
-	DZParserKW_FUNC     = 10
-	DZParserKW_CONST    = 11
-	DZParserKW_LET      = 12
-	DZParserKW_MUT      = 13
-	DZParserKW_STRUCT   = 14
-	DZParserKW_ENUM     = 15
-	DZParserKW_UNION    = 16
-	DZParserKW_RETURN   = 17
-	DZParserI8_T        = 18
-	DZParserU8_T        = 19
-	DZParserI16_T       = 20
-	DZParserU16_T       = 21
-	DZParserI32_T       = 22
-	DZParserU32_T       = 23
-	DZParserI64_T       = 24
-	DZParserU64_T       = 25
-	DZParserCHAR_T      = 26
-	DZParserBOOL_T      = 27
-	DZParserSIZE_T      = 28
-	DZParserSSIZE_T     = 29
-	DZParserLEFT_PRT    = 30
-	DZParserRIGHT_PRT   = 31
-	DZParserLEFT_BRC    = 32
-	DZParserRIGHT_BRC   = 33
-	DZParserLEFT_BRK    = 34
-	DZParserRIGHT_BRK   = 35
-	DZParserCOLON       = 36
-	DZParserCOMMA       = 37
-	DZParserSEMICOLON   = 38
-	DZParserADD         = 39
-	DZParserSUB         = 40
-	DZParserMUL         = 41
-	DZParserDIV         = 42
-	DZParserMOD         = 43
-	DZParserSHL         = 44
-	DZParserSHR         = 45
-	DZParserAND         = 46
-	DZParserOR          = 47
-	DZParserXOR         = 48
-	DZParserASGN        = 49
-	DZParserADD_ASGN    = 50
-	DZParserSUB_ASGN    = 51
-	DZParserMUL_ASGN    = 52
-	DZParserDIV_ASGN    = 53
-	DZParserMOD_ASGN    = 54
-	DZParserSHL_ASGN    = 55
-	DZParserSHR_ASGN    = 56
-	DZParserAND_ASGN    = 57
-	DZParserOR_ASGN     = 58
-	DZParserXOR_ASGN    = 59
-	DZParserREF         = 60
-	DZParserINT_CONST   = 61
-	DZParserFLOAT_CONST = 62
-	DZParserTRUE        = 63
-	DZParserFALSE       = 64
-	DZParserCONST       = 65
-	DZParserTYPE        = 66
-	DZParserIDENTIFIER  = 67
-	DZParserWHITESPACE  = 68
+	DZParserEOF          = antlr.TokenEOF
+	DZParserKW_PKG       = 1
+	DZParserKW_TYPE      = 2
+	DZParserKW_FOR       = 3
+	DZParserKW_WHILE     = 4
+	DZParserKW_LOOP      = 5
+	DZParserKW_IF        = 6
+	DZParserKW_ELIF      = 7
+	DZParserKW_ELSE      = 8
+	DZParserKW_PROC      = 9
+	DZParserKW_FUNC      = 10
+	DZParserKW_CONST     = 11
+	DZParserKW_LET       = 12
+	DZParserKW_STRUCT    = 13
+	DZParserKW_ENUM      = 14
+	DZParserKW_UNION     = 15
+	DZParserKW_RETURN    = 16
+	DZParserI8_T         = 17
+	DZParserU8_T         = 18
+	DZParserI16_T        = 19
+	DZParserU16_T        = 20
+	DZParserI32_T        = 21
+	DZParserU32_T        = 22
+	DZParserI64_T        = 23
+	DZParserU64_T        = 24
+	DZParserCHAR_T       = 25
+	DZParserBOOL_T       = 26
+	DZParserSIZE_T       = 27
+	DZParserSSIZE_T      = 28
+	DZParserLEFT_PRT     = 29
+	DZParserRIGHT_PRT    = 30
+	DZParserLEFT_BRC     = 31
+	DZParserRIGHT_BRC    = 32
+	DZParserLEFT_BRK     = 33
+	DZParserRIGHT_BRK    = 34
+	DZParserCOLON        = 35
+	DZParserCOMMA        = 36
+	DZParserSEMICOLON    = 37
+	DZParserADD          = 38
+	DZParserSUB          = 39
+	DZParserMUL          = 40
+	DZParserDIV          = 41
+	DZParserMOD          = 42
+	DZParserBIN_SHL      = 43
+	DZParserBIN_SHR      = 44
+	DZParserBIN_NOT      = 45
+	DZParserBIN_AND      = 46
+	DZParserBIN_OR       = 47
+	DZParserBIN_XOR      = 48
+	DZParserASGN         = 49
+	DZParserADD_ASGN     = 50
+	DZParserSUB_ASGN     = 51
+	DZParserMUL_ASGN     = 52
+	DZParserDIV_ASGN     = 53
+	DZParserMOD_ASGN     = 54
+	DZParserBIN_SHL_ASGN = 55
+	DZParserBIN_SHR_ASGN = 56
+	DZParserBIN_NOT_ASGN = 57
+	DZParserBIN_AND_ASGN = 58
+	DZParserBIN_OR_ASGN  = 59
+	DZParserBIN_XOR_ASGN = 60
+	DZParserREF          = 61
+	DZParserINT_CONST    = 62
+	DZParserTRUE         = 63
+	DZParserFALSE        = 64
+	DZParserCONST        = 65
+	DZParserTYPE         = 66
+	DZParserIDENTIFIER   = 67
+	DZParserWHITESPACE   = 68
 )
 
 // DZParser rules.
@@ -305,45 +293,41 @@ const (
 	DZParserRULE_argdecl          = 11
 	DZParserRULE_funcret          = 12
 	DZParserRULE_complexdecl      = 13
-	DZParserRULE_structdecl       = 14
-	DZParserRULE_structattrs      = 15
-	DZParserRULE_structattr       = 16
-	DZParserRULE_enumdecl         = 17
-	DZParserRULE_enumoptions      = 18
-	DZParserRULE_enumoption       = 19
-	DZParserRULE_uniondecl        = 20
-	DZParserRULE_unionattrs       = 21
-	DZParserRULE_unionattr        = 22
-	DZParserRULE_constdecl        = 23
-	DZParserRULE_constasgn        = 24
-	DZParserRULE_intasgn          = 25
-	DZParserRULE_floatasgn        = 26
-	DZParserRULE_boolconst        = 27
-	DZParserRULE_casgn            = 28
-	DZParserRULE_typedecl         = 29
-	DZParserRULE_block            = 30
-	DZParserRULE_typespec         = 31
-	DZParserRULE_simpletypespec   = 32
-	DZParserRULE_basictypespec    = 33
-	DZParserRULE_namedtypespec    = 34
-	DZParserRULE_reftypespec      = 35
-	DZParserRULE_arraytypespec    = 36
-	DZParserRULE_sizespec         = 37
-	DZParserRULE_statements       = 38
-	DZParserRULE_statement        = 39
-	DZParserRULE_assignment       = 40
-	DZParserRULE_asgnop           = 41
-	DZParserRULE_condition        = 42
-	DZParserRULE_ifblock          = 43
-	DZParserRULE_elseblocks       = 44
-	DZParserRULE_elifblock        = 45
-	DZParserRULE_elseblock        = 46
-	DZParserRULE_loop             = 47
-	DZParserRULE_trueloop         = 48
-	DZParserRULE_expression       = 49
-	DZParserRULE_retstatement     = 50
-	DZParserRULE_procretstatement = 51
-	DZParserRULE_funcretstatement = 52
+	DZParserRULE_enumdecl         = 14
+	DZParserRULE_enumoptions      = 15
+	DZParserRULE_enumoption       = 16
+	DZParserRULE_structdecl       = 17
+	DZParserRULE_structattrs      = 18
+	DZParserRULE_structattr       = 19
+	DZParserRULE_constdecl        = 20
+	DZParserRULE_constexpr        = 21
+	DZParserRULE_intexpr          = 22
+	DZParserRULE_boolexpr         = 23
+	DZParserRULE_constval         = 24
+	DZParserRULE_typedecl         = 25
+	DZParserRULE_block            = 26
+	DZParserRULE_typespec         = 27
+	DZParserRULE_simpletypespec   = 28
+	DZParserRULE_basictypespec    = 29
+	DZParserRULE_namedtypespec    = 30
+	DZParserRULE_reftypespec      = 31
+	DZParserRULE_arraytypespec    = 32
+	DZParserRULE_sizespec         = 33
+	DZParserRULE_statements       = 34
+	DZParserRULE_statement        = 35
+	DZParserRULE_assignment       = 36
+	DZParserRULE_asgnop           = 37
+	DZParserRULE_condition        = 38
+	DZParserRULE_ifblock          = 39
+	DZParserRULE_elseblocks       = 40
+	DZParserRULE_elifblock        = 41
+	DZParserRULE_elseblock        = 42
+	DZParserRULE_loop             = 43
+	DZParserRULE_trueloop         = 44
+	DZParserRULE_expression       = 45
+	DZParserRULE_retstatement     = 46
+	DZParserRULE_procretstatement = 47
+	DZParserRULE_funcretstatement = 48
 )
 
 // IStartContext is an interface to support dynamic dispatch.
@@ -450,15 +434,15 @@ func (p *DZParser) Start() (localctx IStartContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(106)
+		p.SetState(98)
 		p.Pkg()
 	}
 	{
-		p.SetState(107)
+		p.SetState(99)
 		p.Decls()
 	}
 	{
-		p.SetState(108)
+		p.SetState(100)
 		p.Match(DZParserEOF)
 	}
 
@@ -568,18 +552,18 @@ func (p *DZParser) Pkg() (localctx IPkgContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(110)
+		p.SetState(102)
 		p.Match(DZParserKW_PKG)
 	}
 	{
-		p.SetState(111)
+		p.SetState(103)
 
 		var _m = p.Match(DZParserIDENTIFIER)
 
 		localctx.(*PkgContext).name = _m
 	}
 	{
-		p.SetState(112)
+		p.SetState(104)
 		p.Match(DZParserSEMICOLON)
 	}
 
@@ -689,17 +673,17 @@ func (p *DZParser) Decls() (localctx IDeclsContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(117)
+	p.SetState(109)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for ((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<DZParserKW_TYPE)|(1<<DZParserKW_PROC)|(1<<DZParserKW_FUNC)|(1<<DZParserKW_CONST)|(1<<DZParserKW_STRUCT)|(1<<DZParserKW_ENUM)|(1<<DZParserKW_UNION))) != 0 {
+	for ((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<DZParserKW_TYPE)|(1<<DZParserKW_PROC)|(1<<DZParserKW_FUNC)|(1<<DZParserKW_CONST)|(1<<DZParserKW_STRUCT)|(1<<DZParserKW_ENUM))) != 0 {
 		{
-			p.SetState(114)
+			p.SetState(106)
 			p.Decl()
 		}
 
-		p.SetState(119)
+		p.SetState(111)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -745,24 +729,14 @@ func NewDeclContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokin
 
 func (s *DeclContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *DeclContext) Subdecl() ISubdeclContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISubdeclContext)(nil)).Elem(), 0)
+func (s *DeclContext) Constdecl() IConstdeclContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IConstdeclContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(ISubdeclContext)
-}
-
-func (s *DeclContext) Complexdecl() IComplexdeclContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComplexdeclContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IComplexdeclContext)
+	return t.(IConstdeclContext)
 }
 
 func (s *DeclContext) Typedecl() ITypedeclContext {
@@ -775,14 +749,24 @@ func (s *DeclContext) Typedecl() ITypedeclContext {
 	return t.(ITypedeclContext)
 }
 
-func (s *DeclContext) Constdecl() IConstdeclContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IConstdeclContext)(nil)).Elem(), 0)
+func (s *DeclContext) Complexdecl() IComplexdeclContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComplexdeclContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IConstdeclContext)
+	return t.(IComplexdeclContext)
+}
+
+func (s *DeclContext) Subdecl() ISubdeclContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISubdeclContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(ISubdeclContext)
 }
 
 func (s *DeclContext) GetRuleContext() antlr.RuleContext {
@@ -825,36 +809,36 @@ func (p *DZParser) Decl() (localctx IDeclContext) {
 		}
 	}()
 
-	p.SetState(124)
+	p.SetState(116)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case DZParserKW_PROC, DZParserKW_FUNC:
+	case DZParserKW_CONST:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(120)
-			p.Subdecl()
-		}
-
-	case DZParserKW_STRUCT, DZParserKW_ENUM, DZParserKW_UNION:
-		p.EnterOuterAlt(localctx, 2)
-		{
-			p.SetState(121)
-			p.Complexdecl()
+			p.SetState(112)
+			p.Constdecl()
 		}
 
 	case DZParserKW_TYPE:
-		p.EnterOuterAlt(localctx, 3)
+		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(122)
+			p.SetState(113)
 			p.Typedecl()
 		}
 
-	case DZParserKW_CONST:
+	case DZParserKW_STRUCT, DZParserKW_ENUM:
+		p.EnterOuterAlt(localctx, 3)
+		{
+			p.SetState(114)
+			p.Complexdecl()
+		}
+
+	case DZParserKW_PROC, DZParserKW_FUNC:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(123)
-			p.Constdecl()
+			p.SetState(115)
+			p.Subdecl()
 		}
 
 	default:
@@ -962,21 +946,21 @@ func (p *DZParser) Subdecl() (localctx ISubdeclContext) {
 		}
 	}()
 
-	p.SetState(128)
+	p.SetState(120)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case DZParserKW_PROC:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(126)
+			p.SetState(118)
 			p.Procdecl()
 		}
 
 	case DZParserKW_FUNC:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(127)
+			p.SetState(119)
 			p.Funcdecl()
 		}
 
@@ -1091,15 +1075,15 @@ func (p *DZParser) Procdecl() (localctx IProcdeclContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(130)
+		p.SetState(122)
 		p.Match(DZParserKW_PROC)
 	}
 	{
-		p.SetState(131)
+		p.SetState(123)
 		p.Procheader()
 	}
 	{
-		p.SetState(132)
+		p.SetState(124)
 		p.Block()
 	}
 
@@ -1210,15 +1194,15 @@ func (p *DZParser) Funcdecl() (localctx IFuncdeclContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(134)
+		p.SetState(126)
 		p.Match(DZParserKW_FUNC)
 	}
 	{
-		p.SetState(135)
+		p.SetState(127)
 		p.Funcheader()
 	}
 	{
-		p.SetState(136)
+		p.SetState(128)
 		p.Block()
 	}
 
@@ -1330,14 +1314,14 @@ func (p *DZParser) Procheader() (localctx IProcheaderContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(138)
+		p.SetState(130)
 
 		var _m = p.Match(DZParserIDENTIFIER)
 
 		localctx.(*ProcheaderContext).id = _m
 	}
 	{
-		p.SetState(139)
+		p.SetState(131)
 		p.Args()
 	}
 
@@ -1459,18 +1443,18 @@ func (p *DZParser) Funcheader() (localctx IFuncheaderContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(141)
+		p.SetState(133)
 
 		var _m = p.Match(DZParserIDENTIFIER)
 
 		localctx.(*FuncheaderContext).id = _m
 	}
 	{
-		p.SetState(142)
+		p.SetState(134)
 		p.Args()
 	}
 	{
-		p.SetState(143)
+		p.SetState(135)
 		p.Funcret()
 	}
 
@@ -1575,15 +1559,15 @@ func (p *DZParser) Args() (localctx IArgsContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(145)
+		p.SetState(137)
 		p.Match(DZParserLEFT_PRT)
 	}
 	{
-		p.SetState(146)
+		p.SetState(138)
 		p.Argdecls()
 	}
 	{
-		p.SetState(147)
+		p.SetState(139)
 		p.Match(DZParserRIGHT_PRT)
 	}
 
@@ -1701,30 +1685,30 @@ func (p *DZParser) Argdecls() (localctx IArgdeclsContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(157)
+	p.SetState(149)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	if _la == DZParserIDENTIFIER {
 		{
-			p.SetState(149)
+			p.SetState(141)
 			p.Argdecl()
 		}
-		p.SetState(154)
+		p.SetState(146)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
 		for _la == DZParserCOMMA {
 			{
-				p.SetState(150)
+				p.SetState(142)
 				p.Match(DZParserCOMMA)
 			}
 			{
-				p.SetState(151)
+				p.SetState(143)
 				p.Argdecl()
 			}
 
-			p.SetState(156)
+			p.SetState(148)
 			p.GetErrorHandler().Sync(p)
 			_la = p.GetTokenStream().LA(1)
 		}
@@ -1748,10 +1732,10 @@ type IArgdeclContext interface {
 	SetId(antlr.Token)
 
 	// GetT returns the t rule contexts.
-	GetT() ITypespecContext
+	GetT() ISimpletypespecContext
 
 	// SetT sets the t rule contexts.
-	SetT(ITypespecContext)
+	SetT(ISimpletypespecContext)
 
 	// IsArgdeclContext differentiates from other interfaces.
 	IsArgdeclContext()
@@ -1761,7 +1745,7 @@ type ArgdeclContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 	id     antlr.Token
-	t      ITypespecContext
+	t      ISimpletypespecContext
 }
 
 func NewEmptyArgdeclContext() *ArgdeclContext {
@@ -1790,9 +1774,9 @@ func (s *ArgdeclContext) GetId() antlr.Token { return s.id }
 
 func (s *ArgdeclContext) SetId(v antlr.Token) { s.id = v }
 
-func (s *ArgdeclContext) GetT() ITypespecContext { return s.t }
+func (s *ArgdeclContext) GetT() ISimpletypespecContext { return s.t }
 
-func (s *ArgdeclContext) SetT(v ITypespecContext) { s.t = v }
+func (s *ArgdeclContext) SetT(v ISimpletypespecContext) { s.t = v }
 
 func (s *ArgdeclContext) COLON() antlr.TerminalNode {
 	return s.GetToken(DZParserCOLON, 0)
@@ -1802,14 +1786,14 @@ func (s *ArgdeclContext) IDENTIFIER() antlr.TerminalNode {
 	return s.GetToken(DZParserIDENTIFIER, 0)
 }
 
-func (s *ArgdeclContext) Typespec() ITypespecContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ITypespecContext)(nil)).Elem(), 0)
+func (s *ArgdeclContext) Simpletypespec() ISimpletypespecContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimpletypespecContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(ITypespecContext)
+	return t.(ISimpletypespecContext)
 }
 
 func (s *ArgdeclContext) GetRuleContext() antlr.RuleContext {
@@ -1854,20 +1838,20 @@ func (p *DZParser) Argdecl() (localctx IArgdeclContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(159)
+		p.SetState(151)
 
 		var _m = p.Match(DZParserIDENTIFIER)
 
 		localctx.(*ArgdeclContext).id = _m
 	}
 	{
-		p.SetState(160)
+		p.SetState(152)
 		p.Match(DZParserCOLON)
 	}
 	{
-		p.SetState(161)
+		p.SetState(153)
 
-		var _x = p.Typespec()
+		var _x = p.Simpletypespec()
 
 		localctx.(*ArgdeclContext).t = _x
 	}
@@ -1883,10 +1867,10 @@ type IFuncretContext interface {
 	GetParser() antlr.Parser
 
 	// GetT returns the t rule contexts.
-	GetT() ITypespecContext
+	GetT() ISimpletypespecContext
 
 	// SetT sets the t rule contexts.
-	SetT(ITypespecContext)
+	SetT(ISimpletypespecContext)
 
 	// IsFuncretContext differentiates from other interfaces.
 	IsFuncretContext()
@@ -1895,7 +1879,7 @@ type IFuncretContext interface {
 type FuncretContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
-	t      ITypespecContext
+	t      ISimpletypespecContext
 }
 
 func NewEmptyFuncretContext() *FuncretContext {
@@ -1920,22 +1904,22 @@ func NewFuncretContext(parser antlr.Parser, parent antlr.ParserRuleContext, invo
 
 func (s *FuncretContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *FuncretContext) GetT() ITypespecContext { return s.t }
+func (s *FuncretContext) GetT() ISimpletypespecContext { return s.t }
 
-func (s *FuncretContext) SetT(v ITypespecContext) { s.t = v }
+func (s *FuncretContext) SetT(v ISimpletypespecContext) { s.t = v }
 
 func (s *FuncretContext) COLON() antlr.TerminalNode {
 	return s.GetToken(DZParserCOLON, 0)
 }
 
-func (s *FuncretContext) Typespec() ITypespecContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ITypespecContext)(nil)).Elem(), 0)
+func (s *FuncretContext) Simpletypespec() ISimpletypespecContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimpletypespecContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(ITypespecContext)
+	return t.(ISimpletypespecContext)
 }
 
 func (s *FuncretContext) GetRuleContext() antlr.RuleContext {
@@ -1980,13 +1964,13 @@ func (p *DZParser) Funcret() (localctx IFuncretContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(163)
+		p.SetState(155)
 		p.Match(DZParserCOLON)
 	}
 	{
-		p.SetState(164)
+		p.SetState(156)
 
-		var _x = p.Typespec()
+		var _x = p.Simpletypespec()
 
 		localctx.(*FuncretContext).t = _x
 	}
@@ -2032,16 +2016,6 @@ func NewComplexdeclContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 
 func (s *ComplexdeclContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ComplexdeclContext) Structdecl() IStructdeclContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IStructdeclContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IStructdeclContext)
-}
-
 func (s *ComplexdeclContext) Enumdecl() IEnumdeclContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEnumdeclContext)(nil)).Elem(), 0)
 
@@ -2052,14 +2026,14 @@ func (s *ComplexdeclContext) Enumdecl() IEnumdeclContext {
 	return t.(IEnumdeclContext)
 }
 
-func (s *ComplexdeclContext) Uniondecl() IUniondeclContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IUniondeclContext)(nil)).Elem(), 0)
+func (s *ComplexdeclContext) Structdecl() IStructdeclContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IStructdeclContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IUniondeclContext)
+	return t.(IStructdeclContext)
 }
 
 func (s *ComplexdeclContext) GetRuleContext() antlr.RuleContext {
@@ -2102,33 +2076,403 @@ func (p *DZParser) Complexdecl() (localctx IComplexdeclContext) {
 		}
 	}()
 
-	p.SetState(169)
+	p.SetState(160)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case DZParserKW_STRUCT:
+	case DZParserKW_ENUM:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(166)
-			p.Structdecl()
-		}
-
-	case DZParserKW_ENUM:
-		p.EnterOuterAlt(localctx, 2)
-		{
-			p.SetState(167)
+			p.SetState(158)
 			p.Enumdecl()
 		}
 
-	case DZParserKW_UNION:
-		p.EnterOuterAlt(localctx, 3)
+	case DZParserKW_STRUCT:
+		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(168)
-			p.Uniondecl()
+			p.SetState(159)
+			p.Structdecl()
 		}
 
 	default:
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+
+	return localctx
+}
+
+// IEnumdeclContext is an interface to support dynamic dispatch.
+type IEnumdeclContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// GetId returns the id token.
+	GetId() antlr.Token
+
+	// SetId sets the id token.
+	SetId(antlr.Token)
+
+	// IsEnumdeclContext differentiates from other interfaces.
+	IsEnumdeclContext()
+}
+
+type EnumdeclContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+	id     antlr.Token
+}
+
+func NewEmptyEnumdeclContext() *EnumdeclContext {
+	var p = new(EnumdeclContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = DZParserRULE_enumdecl
+	return p
+}
+
+func (*EnumdeclContext) IsEnumdeclContext() {}
+
+func NewEnumdeclContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *EnumdeclContext {
+	var p = new(EnumdeclContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = DZParserRULE_enumdecl
+
+	return p
+}
+
+func (s *EnumdeclContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *EnumdeclContext) GetId() antlr.Token { return s.id }
+
+func (s *EnumdeclContext) SetId(v antlr.Token) { s.id = v }
+
+func (s *EnumdeclContext) KW_ENUM() antlr.TerminalNode {
+	return s.GetToken(DZParserKW_ENUM, 0)
+}
+
+func (s *EnumdeclContext) LEFT_BRC() antlr.TerminalNode {
+	return s.GetToken(DZParserLEFT_BRC, 0)
+}
+
+func (s *EnumdeclContext) Enumoptions() IEnumoptionsContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEnumoptionsContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEnumoptionsContext)
+}
+
+func (s *EnumdeclContext) RIGHT_BRC() antlr.TerminalNode {
+	return s.GetToken(DZParserRIGHT_BRC, 0)
+}
+
+func (s *EnumdeclContext) TYPE() antlr.TerminalNode {
+	return s.GetToken(DZParserTYPE, 0)
+}
+
+func (s *EnumdeclContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EnumdeclContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *EnumdeclContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(DZListener); ok {
+		listenerT.EnterEnumdecl(s)
+	}
+}
+
+func (s *EnumdeclContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(DZListener); ok {
+		listenerT.ExitEnumdecl(s)
+	}
+}
+
+func (p *DZParser) Enumdecl() (localctx IEnumdeclContext) {
+	localctx = NewEnumdeclContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 28, DZParserRULE_enumdecl)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(162)
+		p.Match(DZParserKW_ENUM)
+	}
+	{
+		p.SetState(163)
+
+		var _m = p.Match(DZParserTYPE)
+
+		localctx.(*EnumdeclContext).id = _m
+	}
+	{
+		p.SetState(164)
+		p.Match(DZParserLEFT_BRC)
+	}
+	{
+		p.SetState(165)
+		p.Enumoptions()
+	}
+	{
+		p.SetState(166)
+		p.Match(DZParserRIGHT_BRC)
+	}
+
+	return localctx
+}
+
+// IEnumoptionsContext is an interface to support dynamic dispatch.
+type IEnumoptionsContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsEnumoptionsContext differentiates from other interfaces.
+	IsEnumoptionsContext()
+}
+
+type EnumoptionsContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyEnumoptionsContext() *EnumoptionsContext {
+	var p = new(EnumoptionsContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = DZParserRULE_enumoptions
+	return p
+}
+
+func (*EnumoptionsContext) IsEnumoptionsContext() {}
+
+func NewEnumoptionsContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *EnumoptionsContext {
+	var p = new(EnumoptionsContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = DZParserRULE_enumoptions
+
+	return p
+}
+
+func (s *EnumoptionsContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *EnumoptionsContext) AllEnumoption() []IEnumoptionContext {
+	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IEnumoptionContext)(nil)).Elem())
+	var tst = make([]IEnumoptionContext, len(ts))
+
+	for i, t := range ts {
+		if t != nil {
+			tst[i] = t.(IEnumoptionContext)
+		}
+	}
+
+	return tst
+}
+
+func (s *EnumoptionsContext) Enumoption(i int) IEnumoptionContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEnumoptionContext)(nil)).Elem(), i)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEnumoptionContext)
+}
+
+func (s *EnumoptionsContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EnumoptionsContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *EnumoptionsContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(DZListener); ok {
+		listenerT.EnterEnumoptions(s)
+	}
+}
+
+func (s *EnumoptionsContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(DZListener); ok {
+		listenerT.ExitEnumoptions(s)
+	}
+}
+
+func (p *DZParser) Enumoptions() (localctx IEnumoptionsContext) {
+	localctx = NewEnumoptionsContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 30, DZParserRULE_enumoptions)
+	var _la int
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	p.SetState(169)
+	p.GetErrorHandler().Sync(p)
+	_la = p.GetTokenStream().LA(1)
+
+	for ok := true; ok; ok = _la == DZParserCONST {
+		{
+			p.SetState(168)
+			p.Enumoption()
+		}
+
+		p.SetState(171)
+		p.GetErrorHandler().Sync(p)
+		_la = p.GetTokenStream().LA(1)
+	}
+
+	return localctx
+}
+
+// IEnumoptionContext is an interface to support dynamic dispatch.
+type IEnumoptionContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// GetId returns the id token.
+	GetId() antlr.Token
+
+	// SetId sets the id token.
+	SetId(antlr.Token)
+
+	// IsEnumoptionContext differentiates from other interfaces.
+	IsEnumoptionContext()
+}
+
+type EnumoptionContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+	id     antlr.Token
+}
+
+func NewEmptyEnumoptionContext() *EnumoptionContext {
+	var p = new(EnumoptionContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = DZParserRULE_enumoption
+	return p
+}
+
+func (*EnumoptionContext) IsEnumoptionContext() {}
+
+func NewEnumoptionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *EnumoptionContext {
+	var p = new(EnumoptionContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = DZParserRULE_enumoption
+
+	return p
+}
+
+func (s *EnumoptionContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *EnumoptionContext) GetId() antlr.Token { return s.id }
+
+func (s *EnumoptionContext) SetId(v antlr.Token) { s.id = v }
+
+func (s *EnumoptionContext) COMMA() antlr.TerminalNode {
+	return s.GetToken(DZParserCOMMA, 0)
+}
+
+func (s *EnumoptionContext) CONST() antlr.TerminalNode {
+	return s.GetToken(DZParserCONST, 0)
+}
+
+func (s *EnumoptionContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EnumoptionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *EnumoptionContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(DZListener); ok {
+		listenerT.EnterEnumoption(s)
+	}
+}
+
+func (s *EnumoptionContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(DZListener); ok {
+		listenerT.ExitEnumoption(s)
+	}
+}
+
+func (p *DZParser) Enumoption() (localctx IEnumoptionContext) {
+	localctx = NewEnumoptionContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 32, DZParserRULE_enumoption)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(173)
+
+		var _m = p.Match(DZParserCONST)
+
+		localctx.(*EnumoptionContext).id = _m
+	}
+	{
+		p.SetState(174)
+		p.Match(DZParserCOMMA)
 	}
 
 	return localctx
@@ -2231,7 +2575,7 @@ func (s *StructdeclContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Structdecl() (localctx IStructdeclContext) {
 	localctx = NewStructdeclContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 28, DZParserRULE_structdecl)
+	p.EnterRule(localctx, 34, DZParserRULE_structdecl)
 
 	defer func() {
 		p.ExitRule()
@@ -2251,26 +2595,26 @@ func (p *DZParser) Structdecl() (localctx IStructdeclContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(171)
+		p.SetState(176)
 		p.Match(DZParserKW_STRUCT)
 	}
 	{
-		p.SetState(172)
+		p.SetState(177)
 
 		var _m = p.Match(DZParserTYPE)
 
 		localctx.(*StructdeclContext).id = _m
 	}
 	{
-		p.SetState(173)
+		p.SetState(178)
 		p.Match(DZParserLEFT_BRC)
 	}
 	{
-		p.SetState(174)
+		p.SetState(179)
 		p.Structattrs()
 	}
 	{
-		p.SetState(175)
+		p.SetState(180)
 		p.Match(DZParserRIGHT_BRC)
 	}
 
@@ -2360,7 +2704,7 @@ func (s *StructattrsContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Structattrs() (localctx IStructattrsContext) {
 	localctx = NewStructattrsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 30, DZParserRULE_structattrs)
+	p.EnterRule(localctx, 36, DZParserRULE_structattrs)
 	var _la int
 
 	defer func() {
@@ -2380,17 +2724,17 @@ func (p *DZParser) Structattrs() (localctx IStructattrsContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(180)
+	p.SetState(185)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	for _la == DZParserIDENTIFIER {
 		{
-			p.SetState(177)
+			p.SetState(182)
 			p.Structattr()
 		}
 
-		p.SetState(182)
+		p.SetState(187)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -2502,149 +2846,7 @@ func (s *StructattrContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Structattr() (localctx IStructattrContext) {
 	localctx = NewStructattrContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 32, DZParserRULE_structattr)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(183)
-
-		var _m = p.Match(DZParserIDENTIFIER)
-
-		localctx.(*StructattrContext).id = _m
-	}
-	{
-		p.SetState(184)
-		p.Match(DZParserCOLON)
-	}
-	{
-		p.SetState(185)
-
-		var _x = p.Typespec()
-
-		localctx.(*StructattrContext).t = _x
-	}
-	{
-		p.SetState(186)
-		p.Match(DZParserSEMICOLON)
-	}
-
-	return localctx
-}
-
-// IEnumdeclContext is an interface to support dynamic dispatch.
-type IEnumdeclContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// GetId returns the id token.
-	GetId() antlr.Token
-
-	// SetId sets the id token.
-	SetId(antlr.Token)
-
-	// IsEnumdeclContext differentiates from other interfaces.
-	IsEnumdeclContext()
-}
-
-type EnumdeclContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-	id     antlr.Token
-}
-
-func NewEmptyEnumdeclContext() *EnumdeclContext {
-	var p = new(EnumdeclContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_enumdecl
-	return p
-}
-
-func (*EnumdeclContext) IsEnumdeclContext() {}
-
-func NewEnumdeclContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *EnumdeclContext {
-	var p = new(EnumdeclContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = DZParserRULE_enumdecl
-
-	return p
-}
-
-func (s *EnumdeclContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *EnumdeclContext) GetId() antlr.Token { return s.id }
-
-func (s *EnumdeclContext) SetId(v antlr.Token) { s.id = v }
-
-func (s *EnumdeclContext) KW_ENUM() antlr.TerminalNode {
-	return s.GetToken(DZParserKW_ENUM, 0)
-}
-
-func (s *EnumdeclContext) LEFT_BRC() antlr.TerminalNode {
-	return s.GetToken(DZParserLEFT_BRC, 0)
-}
-
-func (s *EnumdeclContext) Enumoptions() IEnumoptionsContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEnumoptionsContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IEnumoptionsContext)
-}
-
-func (s *EnumdeclContext) RIGHT_BRC() antlr.TerminalNode {
-	return s.GetToken(DZParserRIGHT_BRC, 0)
-}
-
-func (s *EnumdeclContext) TYPE() antlr.TerminalNode {
-	return s.GetToken(DZParserTYPE, 0)
-}
-
-func (s *EnumdeclContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *EnumdeclContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *EnumdeclContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterEnumdecl(s)
-	}
-}
-
-func (s *EnumdeclContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitEnumdecl(s)
-	}
-}
-
-func (p *DZParser) Enumdecl() (localctx IEnumdeclContext) {
-	localctx = NewEnumdeclContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 34, DZParserRULE_enumdecl)
+	p.EnterRule(localctx, 38, DZParserRULE_structattr)
 
 	defer func() {
 		p.ExitRule()
@@ -2665,665 +2867,25 @@ func (p *DZParser) Enumdecl() (localctx IEnumdeclContext) {
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(188)
-		p.Match(DZParserKW_ENUM)
-	}
-	{
-		p.SetState(189)
-
-		var _m = p.Match(DZParserTYPE)
-
-		localctx.(*EnumdeclContext).id = _m
-	}
-	{
-		p.SetState(190)
-		p.Match(DZParserLEFT_BRC)
-	}
-	{
-		p.SetState(191)
-		p.Enumoptions()
-	}
-	{
-		p.SetState(192)
-		p.Match(DZParserRIGHT_BRC)
-	}
-
-	return localctx
-}
-
-// IEnumoptionsContext is an interface to support dynamic dispatch.
-type IEnumoptionsContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsEnumoptionsContext differentiates from other interfaces.
-	IsEnumoptionsContext()
-}
-
-type EnumoptionsContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyEnumoptionsContext() *EnumoptionsContext {
-	var p = new(EnumoptionsContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_enumoptions
-	return p
-}
-
-func (*EnumoptionsContext) IsEnumoptionsContext() {}
-
-func NewEnumoptionsContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *EnumoptionsContext {
-	var p = new(EnumoptionsContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = DZParserRULE_enumoptions
-
-	return p
-}
-
-func (s *EnumoptionsContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *EnumoptionsContext) AllEnumoption() []IEnumoptionContext {
-	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IEnumoptionContext)(nil)).Elem())
-	var tst = make([]IEnumoptionContext, len(ts))
-
-	for i, t := range ts {
-		if t != nil {
-			tst[i] = t.(IEnumoptionContext)
-		}
-	}
-
-	return tst
-}
-
-func (s *EnumoptionsContext) Enumoption(i int) IEnumoptionContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEnumoptionContext)(nil)).Elem(), i)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IEnumoptionContext)
-}
-
-func (s *EnumoptionsContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *EnumoptionsContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *EnumoptionsContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterEnumoptions(s)
-	}
-}
-
-func (s *EnumoptionsContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitEnumoptions(s)
-	}
-}
-
-func (p *DZParser) Enumoptions() (localctx IEnumoptionsContext) {
-	localctx = NewEnumoptionsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 36, DZParserRULE_enumoptions)
-	var _la int
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	p.SetState(195)
-	p.GetErrorHandler().Sync(p)
-	_la = p.GetTokenStream().LA(1)
-
-	for ok := true; ok; ok = _la == DZParserCONST {
-		{
-			p.SetState(194)
-			p.Enumoption()
-		}
-
-		p.SetState(197)
-		p.GetErrorHandler().Sync(p)
-		_la = p.GetTokenStream().LA(1)
-	}
-
-	return localctx
-}
-
-// IEnumoptionContext is an interface to support dynamic dispatch.
-type IEnumoptionContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// GetId returns the id token.
-	GetId() antlr.Token
-
-	// SetId sets the id token.
-	SetId(antlr.Token)
-
-	// IsEnumoptionContext differentiates from other interfaces.
-	IsEnumoptionContext()
-}
-
-type EnumoptionContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-	id     antlr.Token
-}
-
-func NewEmptyEnumoptionContext() *EnumoptionContext {
-	var p = new(EnumoptionContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_enumoption
-	return p
-}
-
-func (*EnumoptionContext) IsEnumoptionContext() {}
-
-func NewEnumoptionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *EnumoptionContext {
-	var p = new(EnumoptionContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = DZParserRULE_enumoption
-
-	return p
-}
-
-func (s *EnumoptionContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *EnumoptionContext) GetId() antlr.Token { return s.id }
-
-func (s *EnumoptionContext) SetId(v antlr.Token) { s.id = v }
-
-func (s *EnumoptionContext) COMMA() antlr.TerminalNode {
-	return s.GetToken(DZParserCOMMA, 0)
-}
-
-func (s *EnumoptionContext) CONST() antlr.TerminalNode {
-	return s.GetToken(DZParserCONST, 0)
-}
-
-func (s *EnumoptionContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *EnumoptionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *EnumoptionContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterEnumoption(s)
-	}
-}
-
-func (s *EnumoptionContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitEnumoption(s)
-	}
-}
-
-func (p *DZParser) Enumoption() (localctx IEnumoptionContext) {
-	localctx = NewEnumoptionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 38, DZParserRULE_enumoption)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(199)
-
-		var _m = p.Match(DZParserCONST)
-
-		localctx.(*EnumoptionContext).id = _m
-	}
-	{
-		p.SetState(200)
-		p.Match(DZParserCOMMA)
-	}
-
-	return localctx
-}
-
-// IUniondeclContext is an interface to support dynamic dispatch.
-type IUniondeclContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// GetId returns the id token.
-	GetId() antlr.Token
-
-	// SetId sets the id token.
-	SetId(antlr.Token)
-
-	// IsUniondeclContext differentiates from other interfaces.
-	IsUniondeclContext()
-}
-
-type UniondeclContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-	id     antlr.Token
-}
-
-func NewEmptyUniondeclContext() *UniondeclContext {
-	var p = new(UniondeclContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_uniondecl
-	return p
-}
-
-func (*UniondeclContext) IsUniondeclContext() {}
-
-func NewUniondeclContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *UniondeclContext {
-	var p = new(UniondeclContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = DZParserRULE_uniondecl
-
-	return p
-}
-
-func (s *UniondeclContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *UniondeclContext) GetId() antlr.Token { return s.id }
-
-func (s *UniondeclContext) SetId(v antlr.Token) { s.id = v }
-
-func (s *UniondeclContext) KW_UNION() antlr.TerminalNode {
-	return s.GetToken(DZParserKW_UNION, 0)
-}
-
-func (s *UniondeclContext) LEFT_BRC() antlr.TerminalNode {
-	return s.GetToken(DZParserLEFT_BRC, 0)
-}
-
-func (s *UniondeclContext) Unionattrs() IUnionattrsContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IUnionattrsContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IUnionattrsContext)
-}
-
-func (s *UniondeclContext) RIGHT_BRC() antlr.TerminalNode {
-	return s.GetToken(DZParserRIGHT_BRC, 0)
-}
-
-func (s *UniondeclContext) TYPE() antlr.TerminalNode {
-	return s.GetToken(DZParserTYPE, 0)
-}
-
-func (s *UniondeclContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *UniondeclContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *UniondeclContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterUniondecl(s)
-	}
-}
-
-func (s *UniondeclContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitUniondecl(s)
-	}
-}
-
-func (p *DZParser) Uniondecl() (localctx IUniondeclContext) {
-	localctx = NewUniondeclContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 40, DZParserRULE_uniondecl)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(202)
-		p.Match(DZParserKW_UNION)
-	}
-	{
-		p.SetState(203)
-
-		var _m = p.Match(DZParserTYPE)
-
-		localctx.(*UniondeclContext).id = _m
-	}
-	{
-		p.SetState(204)
-		p.Match(DZParserLEFT_BRC)
-	}
-	{
-		p.SetState(205)
-		p.Unionattrs()
-	}
-	{
-		p.SetState(206)
-		p.Match(DZParserRIGHT_BRC)
-	}
-
-	return localctx
-}
-
-// IUnionattrsContext is an interface to support dynamic dispatch.
-type IUnionattrsContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsUnionattrsContext differentiates from other interfaces.
-	IsUnionattrsContext()
-}
-
-type UnionattrsContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyUnionattrsContext() *UnionattrsContext {
-	var p = new(UnionattrsContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_unionattrs
-	return p
-}
-
-func (*UnionattrsContext) IsUnionattrsContext() {}
-
-func NewUnionattrsContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *UnionattrsContext {
-	var p = new(UnionattrsContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = DZParserRULE_unionattrs
-
-	return p
-}
-
-func (s *UnionattrsContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *UnionattrsContext) AllUnionattr() []IUnionattrContext {
-	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IUnionattrContext)(nil)).Elem())
-	var tst = make([]IUnionattrContext, len(ts))
-
-	for i, t := range ts {
-		if t != nil {
-			tst[i] = t.(IUnionattrContext)
-		}
-	}
-
-	return tst
-}
-
-func (s *UnionattrsContext) Unionattr(i int) IUnionattrContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IUnionattrContext)(nil)).Elem(), i)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IUnionattrContext)
-}
-
-func (s *UnionattrsContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *UnionattrsContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *UnionattrsContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterUnionattrs(s)
-	}
-}
-
-func (s *UnionattrsContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitUnionattrs(s)
-	}
-}
-
-func (p *DZParser) Unionattrs() (localctx IUnionattrsContext) {
-	localctx = NewUnionattrsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 42, DZParserRULE_unionattrs)
-	var _la int
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	p.SetState(211)
-	p.GetErrorHandler().Sync(p)
-	_la = p.GetTokenStream().LA(1)
-
-	for _la == DZParserIDENTIFIER {
-		{
-			p.SetState(208)
-			p.Unionattr()
-		}
-
-		p.SetState(213)
-		p.GetErrorHandler().Sync(p)
-		_la = p.GetTokenStream().LA(1)
-	}
-
-	return localctx
-}
-
-// IUnionattrContext is an interface to support dynamic dispatch.
-type IUnionattrContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// GetId returns the id token.
-	GetId() antlr.Token
-
-	// SetId sets the id token.
-	SetId(antlr.Token)
-
-	// GetT returns the t rule contexts.
-	GetT() ITypespecContext
-
-	// SetT sets the t rule contexts.
-	SetT(ITypespecContext)
-
-	// IsUnionattrContext differentiates from other interfaces.
-	IsUnionattrContext()
-}
-
-type UnionattrContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-	id     antlr.Token
-	t      ITypespecContext
-}
-
-func NewEmptyUnionattrContext() *UnionattrContext {
-	var p = new(UnionattrContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_unionattr
-	return p
-}
-
-func (*UnionattrContext) IsUnionattrContext() {}
-
-func NewUnionattrContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *UnionattrContext {
-	var p = new(UnionattrContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = DZParserRULE_unionattr
-
-	return p
-}
-
-func (s *UnionattrContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *UnionattrContext) GetId() antlr.Token { return s.id }
-
-func (s *UnionattrContext) SetId(v antlr.Token) { s.id = v }
-
-func (s *UnionattrContext) GetT() ITypespecContext { return s.t }
-
-func (s *UnionattrContext) SetT(v ITypespecContext) { s.t = v }
-
-func (s *UnionattrContext) COLON() antlr.TerminalNode {
-	return s.GetToken(DZParserCOLON, 0)
-}
-
-func (s *UnionattrContext) IDENTIFIER() antlr.TerminalNode {
-	return s.GetToken(DZParserIDENTIFIER, 0)
-}
-
-func (s *UnionattrContext) Typespec() ITypespecContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ITypespecContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(ITypespecContext)
-}
-
-func (s *UnionattrContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *UnionattrContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *UnionattrContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterUnionattr(s)
-	}
-}
-
-func (s *UnionattrContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitUnionattr(s)
-	}
-}
-
-func (p *DZParser) Unionattr() (localctx IUnionattrContext) {
-	localctx = NewUnionattrContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 44, DZParserRULE_unionattr)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(214)
 
 		var _m = p.Match(DZParserIDENTIFIER)
 
-		localctx.(*UnionattrContext).id = _m
+		localctx.(*StructattrContext).id = _m
 	}
 	{
-		p.SetState(215)
+		p.SetState(189)
 		p.Match(DZParserCOLON)
 	}
 	{
-		p.SetState(216)
+		p.SetState(190)
 
 		var _x = p.Typespec()
 
-		localctx.(*UnionattrContext).t = _x
+		localctx.(*StructattrContext).t = _x
+	}
+	{
+		p.SetState(191)
+		p.Match(DZParserSEMICOLON)
 	}
 
 	return localctx
@@ -3346,13 +2908,13 @@ type IConstdeclContext interface {
 	GetT() IBasictypespecContext
 
 	// GetV returns the v rule contexts.
-	GetV() IConstasgnContext
+	GetV() IConstexprContext
 
 	// SetT sets the t rule contexts.
 	SetT(IBasictypespecContext)
 
 	// SetV sets the v rule contexts.
-	SetV(IConstasgnContext)
+	SetV(IConstexprContext)
 
 	// IsConstdeclContext differentiates from other interfaces.
 	IsConstdeclContext()
@@ -3363,7 +2925,7 @@ type ConstdeclContext struct {
 	parser antlr.Parser
 	id     antlr.Token
 	t      IBasictypespecContext
-	v      IConstasgnContext
+	v      IConstexprContext
 }
 
 func NewEmptyConstdeclContext() *ConstdeclContext {
@@ -3394,11 +2956,11 @@ func (s *ConstdeclContext) SetId(v antlr.Token) { s.id = v }
 
 func (s *ConstdeclContext) GetT() IBasictypespecContext { return s.t }
 
-func (s *ConstdeclContext) GetV() IConstasgnContext { return s.v }
+func (s *ConstdeclContext) GetV() IConstexprContext { return s.v }
 
 func (s *ConstdeclContext) SetT(v IBasictypespecContext) { s.t = v }
 
-func (s *ConstdeclContext) SetV(v IConstasgnContext) { s.v = v }
+func (s *ConstdeclContext) SetV(v IConstexprContext) { s.v = v }
 
 func (s *ConstdeclContext) KW_CONST() antlr.TerminalNode {
 	return s.GetToken(DZParserKW_CONST, 0)
@@ -3430,14 +2992,14 @@ func (s *ConstdeclContext) Basictypespec() IBasictypespecContext {
 	return t.(IBasictypespecContext)
 }
 
-func (s *ConstdeclContext) Constasgn() IConstasgnContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IConstasgnContext)(nil)).Elem(), 0)
+func (s *ConstdeclContext) Constexpr() IConstexprContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IConstexprContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IConstasgnContext)
+	return t.(IConstexprContext)
 }
 
 func (s *ConstdeclContext) GetRuleContext() antlr.RuleContext {
@@ -3462,7 +3024,7 @@ func (s *ConstdeclContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Constdecl() (localctx IConstdeclContext) {
 	localctx = NewConstdeclContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 46, DZParserRULE_constdecl)
+	p.EnterRule(localctx, 40, DZParserRULE_constdecl)
 
 	defer func() {
 		p.ExitRule()
@@ -3482,147 +3044,137 @@ func (p *DZParser) Constdecl() (localctx IConstdeclContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(218)
+		p.SetState(193)
 		p.Match(DZParserKW_CONST)
 	}
 	{
-		p.SetState(219)
+		p.SetState(194)
 
 		var _m = p.Match(DZParserCONST)
 
 		localctx.(*ConstdeclContext).id = _m
 	}
 	{
-		p.SetState(220)
+		p.SetState(195)
 		p.Match(DZParserCOLON)
 	}
 	{
-		p.SetState(221)
+		p.SetState(196)
 
 		var _x = p.Basictypespec()
 
 		localctx.(*ConstdeclContext).t = _x
 	}
 	{
-		p.SetState(222)
+		p.SetState(197)
 		p.Match(DZParserASGN)
 	}
 	{
-		p.SetState(223)
+		p.SetState(198)
 
-		var _x = p.Constasgn()
+		var _x = p.Constexpr()
 
 		localctx.(*ConstdeclContext).v = _x
 	}
 	{
-		p.SetState(224)
+		p.SetState(199)
 		p.Match(DZParserSEMICOLON)
 	}
 
 	return localctx
 }
 
-// IConstasgnContext is an interface to support dynamic dispatch.
-type IConstasgnContext interface {
+// IConstexprContext is an interface to support dynamic dispatch.
+type IConstexprContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// IsConstasgnContext differentiates from other interfaces.
-	IsConstasgnContext()
+	// IsConstexprContext differentiates from other interfaces.
+	IsConstexprContext()
 }
 
-type ConstasgnContext struct {
+type ConstexprContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
-func NewEmptyConstasgnContext() *ConstasgnContext {
-	var p = new(ConstasgnContext)
+func NewEmptyConstexprContext() *ConstexprContext {
+	var p = new(ConstexprContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_constasgn
+	p.RuleIndex = DZParserRULE_constexpr
 	return p
 }
 
-func (*ConstasgnContext) IsConstasgnContext() {}
+func (*ConstexprContext) IsConstexprContext() {}
 
-func NewConstasgnContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ConstasgnContext {
-	var p = new(ConstasgnContext)
+func NewConstexprContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ConstexprContext {
+	var p = new(ConstexprContext)
 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = DZParserRULE_constasgn
+	p.RuleIndex = DZParserRULE_constexpr
 
 	return p
 }
 
-func (s *ConstasgnContext) GetParser() antlr.Parser { return s.parser }
+func (s *ConstexprContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ConstasgnContext) Intasgn() IIntasgnContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IIntasgnContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IIntasgnContext)
-}
-
-func (s *ConstasgnContext) Floatasgn() IFloatasgnContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IFloatasgnContext)(nil)).Elem(), 0)
+func (s *ConstexprContext) Intexpr() IIntexprContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IIntexprContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IFloatasgnContext)
+	return t.(IIntexprContext)
 }
 
-func (s *ConstasgnContext) Boolconst() IBoolconstContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBoolconstContext)(nil)).Elem(), 0)
+func (s *ConstexprContext) Boolexpr() IBoolexprContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBoolexprContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IBoolconstContext)
+	return t.(IBoolexprContext)
 }
 
-func (s *ConstasgnContext) Casgn() ICasgnContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ICasgnContext)(nil)).Elem(), 0)
+func (s *ConstexprContext) Constval() IConstvalContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IConstvalContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(ICasgnContext)
+	return t.(IConstvalContext)
 }
 
-func (s *ConstasgnContext) GetRuleContext() antlr.RuleContext {
+func (s *ConstexprContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *ConstasgnContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *ConstexprContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ConstasgnContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *ConstexprContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterConstasgn(s)
+		listenerT.EnterConstexpr(s)
 	}
 }
 
-func (s *ConstasgnContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *ConstexprContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitConstasgn(s)
+		listenerT.ExitConstexpr(s)
 	}
 }
 
-func (p *DZParser) Constasgn() (localctx IConstasgnContext) {
-	localctx = NewConstasgnContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 48, DZParserRULE_constasgn)
+func (p *DZParser) Constexpr() (localctx IConstexprContext) {
+	localctx = NewConstexprContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 42, DZParserRULE_constexpr)
 
 	defer func() {
 		p.ExitRule()
@@ -3640,36 +3192,29 @@ func (p *DZParser) Constasgn() (localctx IConstasgnContext) {
 		}
 	}()
 
-	p.SetState(230)
+	p.SetState(204)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case DZParserINT_CONST:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(226)
-			p.Intasgn()
-		}
-
-	case DZParserFLOAT_CONST:
-		p.EnterOuterAlt(localctx, 2)
-		{
-			p.SetState(227)
-			p.Floatasgn()
+			p.SetState(201)
+			p.Intexpr()
 		}
 
 	case DZParserTRUE, DZParserFALSE:
-		p.EnterOuterAlt(localctx, 3)
+		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(228)
-			p.Boolconst()
+			p.SetState(202)
+			p.Boolexpr()
 		}
 
 	case DZParserCONST:
-		p.EnterOuterAlt(localctx, 4)
+		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(229)
-			p.Casgn()
+			p.SetState(203)
+			p.Constval()
 		}
 
 	default:
@@ -3679,8 +3224,8 @@ func (p *DZParser) Constasgn() (localctx IConstasgnContext) {
 	return localctx
 }
 
-// IIntasgnContext is an interface to support dynamic dispatch.
-type IIntasgnContext interface {
+// IIntexprContext is an interface to support dynamic dispatch.
+type IIntexprContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
@@ -3692,69 +3237,69 @@ type IIntasgnContext interface {
 	// SetV sets the v token.
 	SetV(antlr.Token)
 
-	// IsIntasgnContext differentiates from other interfaces.
-	IsIntasgnContext()
+	// IsIntexprContext differentiates from other interfaces.
+	IsIntexprContext()
 }
 
-type IntasgnContext struct {
+type IntexprContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 	v      antlr.Token
 }
 
-func NewEmptyIntasgnContext() *IntasgnContext {
-	var p = new(IntasgnContext)
+func NewEmptyIntexprContext() *IntexprContext {
+	var p = new(IntexprContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_intasgn
+	p.RuleIndex = DZParserRULE_intexpr
 	return p
 }
 
-func (*IntasgnContext) IsIntasgnContext() {}
+func (*IntexprContext) IsIntexprContext() {}
 
-func NewIntasgnContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *IntasgnContext {
-	var p = new(IntasgnContext)
+func NewIntexprContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *IntexprContext {
+	var p = new(IntexprContext)
 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = DZParserRULE_intasgn
+	p.RuleIndex = DZParserRULE_intexpr
 
 	return p
 }
 
-func (s *IntasgnContext) GetParser() antlr.Parser { return s.parser }
+func (s *IntexprContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *IntasgnContext) GetV() antlr.Token { return s.v }
+func (s *IntexprContext) GetV() antlr.Token { return s.v }
 
-func (s *IntasgnContext) SetV(v antlr.Token) { s.v = v }
+func (s *IntexprContext) SetV(v antlr.Token) { s.v = v }
 
-func (s *IntasgnContext) INT_CONST() antlr.TerminalNode {
+func (s *IntexprContext) INT_CONST() antlr.TerminalNode {
 	return s.GetToken(DZParserINT_CONST, 0)
 }
 
-func (s *IntasgnContext) GetRuleContext() antlr.RuleContext {
+func (s *IntexprContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *IntasgnContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *IntexprContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *IntasgnContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *IntexprContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterIntasgn(s)
+		listenerT.EnterIntexpr(s)
 	}
 }
 
-func (s *IntasgnContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *IntexprContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitIntasgn(s)
+		listenerT.ExitIntexpr(s)
 	}
 }
 
-func (p *DZParser) Intasgn() (localctx IIntasgnContext) {
-	localctx = NewIntasgnContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 50, DZParserRULE_intasgn)
+func (p *DZParser) Intexpr() (localctx IIntexprContext) {
+	localctx = NewIntexprContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 44, DZParserRULE_intexpr)
 
 	defer func() {
 		p.ExitRule()
@@ -3774,18 +3319,18 @@ func (p *DZParser) Intasgn() (localctx IIntasgnContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(232)
+		p.SetState(206)
 
 		var _m = p.Match(DZParserINT_CONST)
 
-		localctx.(*IntasgnContext).v = _m
+		localctx.(*IntexprContext).v = _m
 	}
 
 	return localctx
 }
 
-// IFloatasgnContext is an interface to support dynamic dispatch.
-type IFloatasgnContext interface {
+// IBoolexprContext is an interface to support dynamic dispatch.
+type IBoolexprContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
@@ -3797,178 +3342,73 @@ type IFloatasgnContext interface {
 	// SetV sets the v token.
 	SetV(antlr.Token)
 
-	// IsFloatasgnContext differentiates from other interfaces.
-	IsFloatasgnContext()
+	// IsBoolexprContext differentiates from other interfaces.
+	IsBoolexprContext()
 }
 
-type FloatasgnContext struct {
+type BoolexprContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 	v      antlr.Token
 }
 
-func NewEmptyFloatasgnContext() *FloatasgnContext {
-	var p = new(FloatasgnContext)
+func NewEmptyBoolexprContext() *BoolexprContext {
+	var p = new(BoolexprContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_floatasgn
+	p.RuleIndex = DZParserRULE_boolexpr
 	return p
 }
 
-func (*FloatasgnContext) IsFloatasgnContext() {}
+func (*BoolexprContext) IsBoolexprContext() {}
 
-func NewFloatasgnContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *FloatasgnContext {
-	var p = new(FloatasgnContext)
+func NewBoolexprContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *BoolexprContext {
+	var p = new(BoolexprContext)
 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = DZParserRULE_floatasgn
+	p.RuleIndex = DZParserRULE_boolexpr
 
 	return p
 }
 
-func (s *FloatasgnContext) GetParser() antlr.Parser { return s.parser }
+func (s *BoolexprContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *FloatasgnContext) GetV() antlr.Token { return s.v }
+func (s *BoolexprContext) GetV() antlr.Token { return s.v }
 
-func (s *FloatasgnContext) SetV(v antlr.Token) { s.v = v }
+func (s *BoolexprContext) SetV(v antlr.Token) { s.v = v }
 
-func (s *FloatasgnContext) FLOAT_CONST() antlr.TerminalNode {
-	return s.GetToken(DZParserFLOAT_CONST, 0)
-}
-
-func (s *FloatasgnContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *FloatasgnContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *FloatasgnContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterFloatasgn(s)
-	}
-}
-
-func (s *FloatasgnContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitFloatasgn(s)
-	}
-}
-
-func (p *DZParser) Floatasgn() (localctx IFloatasgnContext) {
-	localctx = NewFloatasgnContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 52, DZParserRULE_floatasgn)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(234)
-
-		var _m = p.Match(DZParserFLOAT_CONST)
-
-		localctx.(*FloatasgnContext).v = _m
-	}
-
-	return localctx
-}
-
-// IBoolconstContext is an interface to support dynamic dispatch.
-type IBoolconstContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// GetV returns the v token.
-	GetV() antlr.Token
-
-	// SetV sets the v token.
-	SetV(antlr.Token)
-
-	// IsBoolconstContext differentiates from other interfaces.
-	IsBoolconstContext()
-}
-
-type BoolconstContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-	v      antlr.Token
-}
-
-func NewEmptyBoolconstContext() *BoolconstContext {
-	var p = new(BoolconstContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_boolconst
-	return p
-}
-
-func (*BoolconstContext) IsBoolconstContext() {}
-
-func NewBoolconstContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *BoolconstContext {
-	var p = new(BoolconstContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = DZParserRULE_boolconst
-
-	return p
-}
-
-func (s *BoolconstContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *BoolconstContext) GetV() antlr.Token { return s.v }
-
-func (s *BoolconstContext) SetV(v antlr.Token) { s.v = v }
-
-func (s *BoolconstContext) TRUE() antlr.TerminalNode {
+func (s *BoolexprContext) TRUE() antlr.TerminalNode {
 	return s.GetToken(DZParserTRUE, 0)
 }
 
-func (s *BoolconstContext) FALSE() antlr.TerminalNode {
+func (s *BoolexprContext) FALSE() antlr.TerminalNode {
 	return s.GetToken(DZParserFALSE, 0)
 }
 
-func (s *BoolconstContext) GetRuleContext() antlr.RuleContext {
+func (s *BoolexprContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *BoolconstContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *BoolexprContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *BoolconstContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *BoolexprContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterBoolconst(s)
+		listenerT.EnterBoolexpr(s)
 	}
 }
 
-func (s *BoolconstContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *BoolexprContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitBoolconst(s)
+		listenerT.ExitBoolexpr(s)
 	}
 }
 
-func (p *DZParser) Boolconst() (localctx IBoolconstContext) {
-	localctx = NewBoolconstContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 54, DZParserRULE_boolconst)
+func (p *DZParser) Boolexpr() (localctx IBoolexprContext) {
+	localctx = NewBoolexprContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 46, DZParserRULE_boolexpr)
 	var _la int
 
 	defer func() {
@@ -3989,18 +3429,18 @@ func (p *DZParser) Boolconst() (localctx IBoolconstContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(236)
+		p.SetState(208)
 
 		var _lt = p.GetTokenStream().LT(1)
 
-		localctx.(*BoolconstContext).v = _lt
+		localctx.(*BoolexprContext).v = _lt
 
 		_la = p.GetTokenStream().LA(1)
 
 		if !(_la == DZParserTRUE || _la == DZParserFALSE) {
 			var _ri = p.GetErrorHandler().RecoverInline(p)
 
-			localctx.(*BoolconstContext).v = _ri
+			localctx.(*BoolexprContext).v = _ri
 		} else {
 			p.GetErrorHandler().ReportMatch(p)
 			p.Consume()
@@ -4010,8 +3450,8 @@ func (p *DZParser) Boolconst() (localctx IBoolconstContext) {
 	return localctx
 }
 
-// ICasgnContext is an interface to support dynamic dispatch.
-type ICasgnContext interface {
+// IConstvalContext is an interface to support dynamic dispatch.
+type IConstvalContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
@@ -4023,69 +3463,69 @@ type ICasgnContext interface {
 	// SetId sets the id token.
 	SetId(antlr.Token)
 
-	// IsCasgnContext differentiates from other interfaces.
-	IsCasgnContext()
+	// IsConstvalContext differentiates from other interfaces.
+	IsConstvalContext()
 }
 
-type CasgnContext struct {
+type ConstvalContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 	id     antlr.Token
 }
 
-func NewEmptyCasgnContext() *CasgnContext {
-	var p = new(CasgnContext)
+func NewEmptyConstvalContext() *ConstvalContext {
+	var p = new(ConstvalContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = DZParserRULE_casgn
+	p.RuleIndex = DZParserRULE_constval
 	return p
 }
 
-func (*CasgnContext) IsCasgnContext() {}
+func (*ConstvalContext) IsConstvalContext() {}
 
-func NewCasgnContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *CasgnContext {
-	var p = new(CasgnContext)
+func NewConstvalContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ConstvalContext {
+	var p = new(ConstvalContext)
 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = DZParserRULE_casgn
+	p.RuleIndex = DZParserRULE_constval
 
 	return p
 }
 
-func (s *CasgnContext) GetParser() antlr.Parser { return s.parser }
+func (s *ConstvalContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *CasgnContext) GetId() antlr.Token { return s.id }
+func (s *ConstvalContext) GetId() antlr.Token { return s.id }
 
-func (s *CasgnContext) SetId(v antlr.Token) { s.id = v }
+func (s *ConstvalContext) SetId(v antlr.Token) { s.id = v }
 
-func (s *CasgnContext) CONST() antlr.TerminalNode {
+func (s *ConstvalContext) CONST() antlr.TerminalNode {
 	return s.GetToken(DZParserCONST, 0)
 }
 
-func (s *CasgnContext) GetRuleContext() antlr.RuleContext {
+func (s *ConstvalContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *CasgnContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *ConstvalContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *CasgnContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *ConstvalContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.EnterCasgn(s)
+		listenerT.EnterConstval(s)
 	}
 }
 
-func (s *CasgnContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *ConstvalContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(DZListener); ok {
-		listenerT.ExitCasgn(s)
+		listenerT.ExitConstval(s)
 	}
 }
 
-func (p *DZParser) Casgn() (localctx ICasgnContext) {
-	localctx = NewCasgnContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 56, DZParserRULE_casgn)
+func (p *DZParser) Constval() (localctx IConstvalContext) {
+	localctx = NewConstvalContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 48, DZParserRULE_constval)
 
 	defer func() {
 		p.ExitRule()
@@ -4105,11 +3545,11 @@ func (p *DZParser) Casgn() (localctx ICasgnContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(238)
+		p.SetState(210)
 
 		var _m = p.Match(DZParserCONST)
 
-		localctx.(*CasgnContext).id = _m
+		localctx.(*ConstvalContext).id = _m
 	}
 
 	return localctx
@@ -4223,7 +3663,7 @@ func (s *TypedeclContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Typedecl() (localctx ITypedeclContext) {
 	localctx = NewTypedeclContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 58, DZParserRULE_typedecl)
+	p.EnterRule(localctx, 50, DZParserRULE_typedecl)
 
 	defer func() {
 		p.ExitRule()
@@ -4243,29 +3683,29 @@ func (p *DZParser) Typedecl() (localctx ITypedeclContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(240)
+		p.SetState(212)
 		p.Match(DZParserKW_TYPE)
 	}
 	{
-		p.SetState(241)
+		p.SetState(213)
 
 		var _m = p.Match(DZParserTYPE)
 
 		localctx.(*TypedeclContext).id = _m
 	}
 	{
-		p.SetState(242)
+		p.SetState(214)
 		p.Match(DZParserASGN)
 	}
 	{
-		p.SetState(243)
+		p.SetState(215)
 
 		var _x = p.Typespec()
 
 		localctx.(*TypedeclContext).t = _x
 	}
 	{
-		p.SetState(244)
+		p.SetState(216)
 		p.Match(DZParserSEMICOLON)
 	}
 
@@ -4350,7 +3790,7 @@ func (s *BlockContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Block() (localctx IBlockContext) {
 	localctx = NewBlockContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 60, DZParserRULE_block)
+	p.EnterRule(localctx, 52, DZParserRULE_block)
 
 	defer func() {
 		p.ExitRule()
@@ -4370,15 +3810,15 @@ func (p *DZParser) Block() (localctx IBlockContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(246)
+		p.SetState(218)
 		p.Match(DZParserLEFT_BRC)
 	}
 	{
-		p.SetState(247)
+		p.SetState(219)
 		p.Statements()
 	}
 	{
-		p.SetState(248)
+		p.SetState(220)
 		p.Match(DZParserRIGHT_BRC)
 	}
 
@@ -4475,7 +3915,7 @@ func (s *TypespecContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Typespec() (localctx ITypespecContext) {
 	localctx = NewTypespecContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 62, DZParserRULE_typespec)
+	p.EnterRule(localctx, 54, DZParserRULE_typespec)
 
 	defer func() {
 		p.ExitRule()
@@ -4493,28 +3933,28 @@ func (p *DZParser) Typespec() (localctx ITypespecContext) {
 		}
 	}()
 
-	p.SetState(253)
+	p.SetState(225)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case DZParserI8_T, DZParserU8_T, DZParserI16_T, DZParserU16_T, DZParserI32_T, DZParserU32_T, DZParserI64_T, DZParserU64_T, DZParserCHAR_T, DZParserBOOL_T, DZParserSIZE_T, DZParserSSIZE_T, DZParserTYPE:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(250)
+			p.SetState(222)
 			p.Simpletypespec()
 		}
 
 	case DZParserREF:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(251)
+			p.SetState(223)
 			p.Reftypespec()
 		}
 
 	case DZParserLEFT_BRK:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(252)
+			p.SetState(224)
 			p.Arraytypespec()
 		}
 
@@ -4605,7 +4045,7 @@ func (s *SimpletypespecContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Simpletypespec() (localctx ISimpletypespecContext) {
 	localctx = NewSimpletypespecContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 64, DZParserRULE_simpletypespec)
+	p.EnterRule(localctx, 56, DZParserRULE_simpletypespec)
 
 	defer func() {
 		p.ExitRule()
@@ -4623,21 +4063,21 @@ func (p *DZParser) Simpletypespec() (localctx ISimpletypespecContext) {
 		}
 	}()
 
-	p.SetState(257)
+	p.SetState(229)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case DZParserI8_T, DZParserU8_T, DZParserI16_T, DZParserU16_T, DZParserI32_T, DZParserU32_T, DZParserI64_T, DZParserU64_T, DZParserCHAR_T, DZParserBOOL_T, DZParserSIZE_T, DZParserSSIZE_T:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(255)
+			p.SetState(227)
 			p.Basictypespec()
 		}
 
 	case DZParserTYPE:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(256)
+			p.SetState(228)
 			p.Namedtypespec()
 		}
 
@@ -4767,7 +4207,7 @@ func (s *BasictypespecContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Basictypespec() (localctx IBasictypespecContext) {
 	localctx = NewBasictypespecContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 66, DZParserRULE_basictypespec)
+	p.EnterRule(localctx, 58, DZParserRULE_basictypespec)
 	var _la int
 
 	defer func() {
@@ -4788,7 +4228,7 @@ func (p *DZParser) Basictypespec() (localctx IBasictypespecContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(259)
+		p.SetState(231)
 
 		var _lt = p.GetTokenStream().LT(1)
 
@@ -4884,7 +4324,7 @@ func (s *NamedtypespecContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Namedtypespec() (localctx INamedtypespecContext) {
 	localctx = NewNamedtypespecContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 68, DZParserRULE_namedtypespec)
+	p.EnterRule(localctx, 60, DZParserRULE_namedtypespec)
 
 	defer func() {
 		p.ExitRule()
@@ -4904,7 +4344,7 @@ func (p *DZParser) Namedtypespec() (localctx INamedtypespecContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(261)
+		p.SetState(233)
 
 		var _m = p.Match(DZParserTYPE)
 
@@ -4999,7 +4439,7 @@ func (s *ReftypespecContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Reftypespec() (localctx IReftypespecContext) {
 	localctx = NewReftypespecContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 70, DZParserRULE_reftypespec)
+	p.EnterRule(localctx, 62, DZParserRULE_reftypespec)
 
 	defer func() {
 		p.ExitRule()
@@ -5019,11 +4459,11 @@ func (p *DZParser) Reftypespec() (localctx IReftypespecContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(263)
+		p.SetState(235)
 		p.Match(DZParserREF)
 	}
 	{
-		p.SetState(264)
+		p.SetState(236)
 
 		var _x = p.Simpletypespec()
 
@@ -5147,7 +4587,7 @@ func (s *ArraytypespecContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Arraytypespec() (localctx IArraytypespecContext) {
 	localctx = NewArraytypespecContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 72, DZParserRULE_arraytypespec)
+	p.EnterRule(localctx, 64, DZParserRULE_arraytypespec)
 
 	defer func() {
 		p.ExitRule()
@@ -5167,29 +4607,29 @@ func (p *DZParser) Arraytypespec() (localctx IArraytypespecContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(266)
+		p.SetState(238)
 		p.Match(DZParserLEFT_BRK)
 	}
 	{
-		p.SetState(267)
+		p.SetState(239)
 
 		var _x = p.Simpletypespec()
 
 		localctx.(*ArraytypespecContext).id = _x
 	}
 	{
-		p.SetState(268)
+		p.SetState(240)
 		p.Match(DZParserCOLON)
 	}
 	{
-		p.SetState(269)
+		p.SetState(241)
 
 		var _x = p.Sizespec()
 
 		localctx.(*ArraytypespecContext).size = _x
 	}
 	{
-		p.SetState(270)
+		p.SetState(242)
 		p.Match(DZParserRIGHT_BRK)
 	}
 
@@ -5275,7 +4715,7 @@ func (s *SizespecContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Sizespec() (localctx ISizespecContext) {
 	localctx = NewSizespecContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 74, DZParserRULE_sizespec)
+	p.EnterRule(localctx, 66, DZParserRULE_sizespec)
 
 	defer func() {
 		p.ExitRule()
@@ -5293,21 +4733,21 @@ func (p *DZParser) Sizespec() (localctx ISizespecContext) {
 		}
 	}()
 
-	p.SetState(274)
+	p.SetState(246)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case DZParserINT_CONST:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(272)
+			p.SetState(244)
 			p.Match(DZParserINT_CONST)
 		}
 
 	case DZParserCONST:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(273)
+			p.SetState(245)
 
 			var _m = p.Match(DZParserCONST)
 
@@ -5404,7 +4844,7 @@ func (s *StatementsContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Statements() (localctx IStatementsContext) {
 	localctx = NewStatementsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 76, DZParserRULE_statements)
+	p.EnterRule(localctx, 68, DZParserRULE_statements)
 	var _la int
 
 	defer func() {
@@ -5424,17 +4864,17 @@ func (p *DZParser) Statements() (localctx IStatementsContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(279)
+	p.SetState(251)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	for (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<DZParserKW_LOOP)|(1<<DZParserKW_IF)|(1<<DZParserKW_RETURN))) != 0) || _la == DZParserIDENTIFIER {
 		{
-			p.SetState(276)
+			p.SetState(248)
 			p.Statement()
 		}
 
-		p.SetState(281)
+		p.SetState(253)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -5546,7 +4986,7 @@ func (s *StatementContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Statement() (localctx IStatementContext) {
 	localctx = NewStatementContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 78, DZParserRULE_statement)
+	p.EnterRule(localctx, 70, DZParserRULE_statement)
 
 	defer func() {
 		p.ExitRule()
@@ -5564,39 +5004,39 @@ func (p *DZParser) Statement() (localctx IStatementContext) {
 		}
 	}()
 
-	p.SetState(288)
+	p.SetState(260)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case DZParserIDENTIFIER:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(282)
+			p.SetState(254)
 			p.Assignment()
 		}
 
 	case DZParserKW_IF:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(283)
+			p.SetState(255)
 			p.Condition()
 		}
 
 	case DZParserKW_LOOP:
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(284)
+			p.SetState(256)
 			p.Loop()
 		}
 
 	case DZParserKW_RETURN:
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(285)
+			p.SetState(257)
 			p.Retstatement()
 		}
 		{
-			p.SetState(286)
+			p.SetState(258)
 			p.Match(DZParserSEMICOLON)
 		}
 
@@ -5706,7 +5146,7 @@ func (s *AssignmentContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Assignment() (localctx IAssignmentContext) {
 	localctx = NewAssignmentContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 80, DZParserRULE_assignment)
+	p.EnterRule(localctx, 72, DZParserRULE_assignment)
 
 	defer func() {
 		p.ExitRule()
@@ -5726,22 +5166,22 @@ func (p *DZParser) Assignment() (localctx IAssignmentContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(290)
+		p.SetState(262)
 
 		var _m = p.Match(DZParserIDENTIFIER)
 
 		localctx.(*AssignmentContext).id = _m
 	}
 	{
-		p.SetState(291)
+		p.SetState(263)
 		p.Asgnop()
 	}
 	{
-		p.SetState(292)
+		p.SetState(264)
 		p.Expression()
 	}
 	{
-		p.SetState(293)
+		p.SetState(265)
 		p.Match(DZParserSEMICOLON)
 	}
 
@@ -5839,7 +5279,7 @@ func (s *AsgnopContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Asgnop() (localctx IAsgnopContext) {
 	localctx = NewAsgnopContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 82, DZParserRULE_asgnop)
+	p.EnterRule(localctx, 74, DZParserRULE_asgnop)
 	var _la int
 
 	defer func() {
@@ -5860,7 +5300,7 @@ func (p *DZParser) Asgnop() (localctx IAsgnopContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(295)
+		p.SetState(267)
 
 		var _lt = p.GetTokenStream().LT(1)
 
@@ -5961,7 +5401,7 @@ func (s *ConditionContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Condition() (localctx IConditionContext) {
 	localctx = NewConditionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 84, DZParserRULE_condition)
+	p.EnterRule(localctx, 76, DZParserRULE_condition)
 
 	defer func() {
 		p.ExitRule()
@@ -5981,11 +5421,11 @@ func (p *DZParser) Condition() (localctx IConditionContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(297)
+		p.SetState(269)
 		p.Ifblock()
 	}
 	{
-		p.SetState(298)
+		p.SetState(270)
 		p.Elseblocks()
 	}
 
@@ -6076,7 +5516,7 @@ func (s *IfblockContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Ifblock() (localctx IIfblockContext) {
 	localctx = NewIfblockContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 86, DZParserRULE_ifblock)
+	p.EnterRule(localctx, 78, DZParserRULE_ifblock)
 
 	defer func() {
 		p.ExitRule()
@@ -6096,15 +5536,15 @@ func (p *DZParser) Ifblock() (localctx IIfblockContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(300)
+		p.SetState(272)
 		p.Match(DZParserKW_IF)
 	}
 	{
-		p.SetState(301)
+		p.SetState(273)
 		p.Expression()
 	}
 	{
-		p.SetState(302)
+		p.SetState(274)
 		p.Block()
 	}
 
@@ -6204,7 +5644,7 @@ func (s *ElseblocksContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Elseblocks() (localctx IElseblocksContext) {
 	localctx = NewElseblocksContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 88, DZParserRULE_elseblocks)
+	p.EnterRule(localctx, 80, DZParserRULE_elseblocks)
 	var _la int
 
 	defer func() {
@@ -6224,27 +5664,27 @@ func (p *DZParser) Elseblocks() (localctx IElseblocksContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(307)
+	p.SetState(279)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	for _la == DZParserKW_ELIF {
 		{
-			p.SetState(304)
+			p.SetState(276)
 			p.Elifblock()
 		}
 
-		p.SetState(309)
+		p.SetState(281)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
-	p.SetState(311)
+	p.SetState(283)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	if _la == DZParserKW_ELSE {
 		{
-			p.SetState(310)
+			p.SetState(282)
 			p.Elseblock()
 		}
 
@@ -6337,7 +5777,7 @@ func (s *ElifblockContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Elifblock() (localctx IElifblockContext) {
 	localctx = NewElifblockContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 90, DZParserRULE_elifblock)
+	p.EnterRule(localctx, 82, DZParserRULE_elifblock)
 
 	defer func() {
 		p.ExitRule()
@@ -6357,15 +5797,15 @@ func (p *DZParser) Elifblock() (localctx IElifblockContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(313)
+		p.SetState(285)
 		p.Match(DZParserKW_ELIF)
 	}
 	{
-		p.SetState(314)
+		p.SetState(286)
 		p.Expression()
 	}
 	{
-		p.SetState(315)
+		p.SetState(287)
 		p.Block()
 	}
 
@@ -6446,7 +5886,7 @@ func (s *ElseblockContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Elseblock() (localctx IElseblockContext) {
 	localctx = NewElseblockContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 92, DZParserRULE_elseblock)
+	p.EnterRule(localctx, 84, DZParserRULE_elseblock)
 
 	defer func() {
 		p.ExitRule()
@@ -6466,11 +5906,11 @@ func (p *DZParser) Elseblock() (localctx IElseblockContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(317)
+		p.SetState(289)
 		p.Match(DZParserKW_ELSE)
 	}
 	{
-		p.SetState(318)
+		p.SetState(290)
 		p.Block()
 	}
 
@@ -6547,7 +5987,7 @@ func (s *LoopContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Loop() (localctx ILoopContext) {
 	localctx = NewLoopContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 94, DZParserRULE_loop)
+	p.EnterRule(localctx, 86, DZParserRULE_loop)
 
 	defer func() {
 		p.ExitRule()
@@ -6567,7 +6007,7 @@ func (p *DZParser) Loop() (localctx ILoopContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(320)
+		p.SetState(292)
 		p.Trueloop()
 	}
 
@@ -6648,7 +6088,7 @@ func (s *TrueloopContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Trueloop() (localctx ITrueloopContext) {
 	localctx = NewTrueloopContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 96, DZParserRULE_trueloop)
+	p.EnterRule(localctx, 88, DZParserRULE_trueloop)
 
 	defer func() {
 		p.ExitRule()
@@ -6668,11 +6108,11 @@ func (p *DZParser) Trueloop() (localctx ITrueloopContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(322)
+		p.SetState(294)
 		p.Match(DZParserKW_LOOP)
 	}
 	{
-		p.SetState(323)
+		p.SetState(295)
 		p.Block()
 	}
 
@@ -6738,7 +6178,7 @@ func (s *ExpressionContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Expression() (localctx IExpressionContext) {
 	localctx = NewExpressionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 98, DZParserRULE_expression)
+	p.EnterRule(localctx, 90, DZParserRULE_expression)
 
 	defer func() {
 		p.ExitRule()
@@ -6841,7 +6281,7 @@ func (s *RetstatementContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Retstatement() (localctx IRetstatementContext) {
 	localctx = NewRetstatementContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 100, DZParserRULE_retstatement)
+	p.EnterRule(localctx, 92, DZParserRULE_retstatement)
 
 	defer func() {
 		p.ExitRule()
@@ -6859,20 +6299,20 @@ func (p *DZParser) Retstatement() (localctx IRetstatementContext) {
 		}
 	}()
 
-	p.SetState(329)
+	p.SetState(301)
 	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 17, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 16, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(327)
+			p.SetState(299)
 			p.Procretstatement()
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(328)
+			p.SetState(300)
 			p.Funcretstatement()
 		}
 
@@ -6945,7 +6385,7 @@ func (s *ProcretstatementContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Procretstatement() (localctx IProcretstatementContext) {
 	localctx = NewProcretstatementContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 102, DZParserRULE_procretstatement)
+	p.EnterRule(localctx, 94, DZParserRULE_procretstatement)
 
 	defer func() {
 		p.ExitRule()
@@ -6965,7 +6405,7 @@ func (p *DZParser) Procretstatement() (localctx IProcretstatementContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(331)
+		p.SetState(303)
 		p.Match(DZParserKW_RETURN)
 	}
 
@@ -7057,7 +6497,7 @@ func (s *FuncretstatementContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *DZParser) Funcretstatement() (localctx IFuncretstatementContext) {
 	localctx = NewFuncretstatementContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 104, DZParserRULE_funcretstatement)
+	p.EnterRule(localctx, 96, DZParserRULE_funcretstatement)
 
 	defer func() {
 		p.ExitRule()
@@ -7077,11 +6517,11 @@ func (p *DZParser) Funcretstatement() (localctx IFuncretstatementContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(333)
+		p.SetState(305)
 		p.Match(DZParserKW_RETURN)
 	}
 	{
-		p.SetState(334)
+		p.SetState(306)
 
 		var _x = p.Expression()
 

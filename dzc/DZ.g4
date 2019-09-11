@@ -12,33 +12,28 @@ KW_PROC:   'proc';
 KW_FUNC:   'func';
 KW_CONST:  'const';
 KW_LET:    'let';
-KW_MUT:    'mut';
 KW_STRUCT: 'struct';
 KW_ENUM:   'enum';
 KW_UNION:  'union';
 KW_RETURN: 'return';
 
-I8_T:  'i8_t';
-U8_T:  'u8_t';
-I16_T: 'i16_t';
-U16_T: 'u16_t';
-I32_T: 'i32_t';
-U32_T: 'u32_t';
-I64_T: 'i64_t';
-U64_T: 'u64_t';
-
-CHAR_T: 'char_t';
-BOOL_T: 'bool_t';
-
+I8_T:    'i8_t';
+U8_T:    'u8_t';
+I16_T:   'i16_t';
+U16_T:   'u16_t';
+I32_T:   'i32_t';
+U32_T:   'u32_t';
+I64_T:   'i64_t';
+U64_T:   'u64_t';
+CHAR_T:  'char_t';
+BOOL_T:  'bool_t';
 SIZE_T:  'size_t';
 SSIZE_T: 'ssize_t';
 
 LEFT_PRT:  '(';
 RIGHT_PRT: ')';
-
 LEFT_BRC:  '{';
 RIGHT_BRC: '}';
-
 LEFT_BRK:  '[';
 RIGHT_BRK: ']';
 
@@ -51,11 +46,13 @@ SUB: '-';
 MUL: '*';
 DIV: '/';
 MOD: '%';
-SHL: '<<';
-SHR: '>>';
-AND: '&';
-OR:  '|';
-XOR: '^';
+
+BIN_SHL: '<<';
+BIN_SHR: '>>';
+BIN_NOT: '~';
+BIN_AND: '&';
+BIN_OR:  '|';
+BIN_XOR: '^';
 
 ASGN:     '=';
 ADD_ASGN: '+=';
@@ -63,16 +60,17 @@ SUB_ASGN: '-=';
 MUL_ASGN: '*=';
 DIV_ASGN: '/=';
 MOD_ASGN: '%=';
-SHL_ASGN: '<<=';
-SHR_ASGN: '>>=';
-AND_ASGN: '&=';
-OR_ASGN:  '|=';
-XOR_ASGN: '^=';
+
+BIN_SHL_ASGN: '<<=';
+BIN_SHR_ASGN: '>>=';
+BIN_NOT_ASGN: '~=';
+BIN_AND_ASGN: '&=';
+BIN_OR_ASGN:  '|=';
+BIN_XOR_ASGN: '^=';
 
 REF: '@';
 
 INT_CONST:   [-]?[0-9]+;
-FLOAT_CONST: [-]?[0-9]+([.][0-9]+)?;
 TRUE:        'true';
 FALSE:       'false';
 
@@ -87,7 +85,7 @@ start : pkg decls EOF;
 pkg: KW_PKG name=IDENTIFIER SEMICOLON;
 
 decls : decl*;
-decl  : subdecl | complexdecl | typedecl | constdecl;
+decl  : constdecl | typedecl | complexdecl | subdecl;
 
 subdecl : procdecl | funcdecl;
 
@@ -99,30 +97,25 @@ funcheader : id=IDENTIFIER args funcret;
 
 args     : LEFT_PRT argdecls RIGHT_PRT;
 argdecls : (argdecl (COMMA argdecl)*)?;
-argdecl  : id=IDENTIFIER COLON t=typespec;
+argdecl  : id=IDENTIFIER COLON t=simpletypespec;
 
-funcret : COLON t=typespec;
+funcret : COLON t=simpletypespec;
 
-complexdecl : structdecl | enumdecl | uniondecl;
-
-structdecl  : KW_STRUCT id=TYPE LEFT_BRC structattrs RIGHT_BRC;
-structattrs : structattr*;
-structattr  : id=IDENTIFIER COLON t=typespec SEMICOLON;
+complexdecl : enumdecl | structdecl;
 
 enumdecl    : KW_ENUM id=TYPE LEFT_BRC enumoptions RIGHT_BRC;
 enumoptions : enumoption+;
 enumoption  : id=CONST COMMA;
 
-uniondecl : KW_UNION id=TYPE LEFT_BRC unionattrs RIGHT_BRC;
-unionattrs : unionattr*;
-unionattr  : id=IDENTIFIER COLON t=typespec;
+structdecl  : KW_STRUCT id=TYPE LEFT_BRC structattrs RIGHT_BRC;
+structattrs : structattr*;
+structattr  : id=IDENTIFIER COLON t=typespec SEMICOLON;
 
-constdecl : KW_CONST id=CONST COLON t=basictypespec ASGN v=constasgn SEMICOLON;
-constasgn : intasgn | floatasgn | boolconst | casgn;
-intasgn   : v=INT_CONST;
-floatasgn : v=FLOAT_CONST;
-boolconst : v=(TRUE | FALSE);
-casgn     : id=CONST;
+constdecl : KW_CONST id=CONST COLON t=basictypespec ASGN v=constexpr SEMICOLON;
+constexpr : intexpr | boolexpr | constval;
+intexpr   : v=INT_CONST;
+boolexpr  : v=(TRUE | FALSE);
+constval  : id=CONST;
 
 typedecl : KW_TYPE id=TYPE ASGN t=typespec SEMICOLON;
 

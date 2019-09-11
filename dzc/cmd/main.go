@@ -1,15 +1,16 @@
 package main
 
 import (
-	"dzc/pkg/ast/complexparser"
-	"dzc/pkg/ast/constparser"
-	"dzc/pkg/ast/subparser"
-	"dzc/pkg/ast/typeparser"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 
+	"dzc/pkg/ast/complexparser"
+	"dzc/pkg/ast/constparser"
+	"dzc/pkg/ast/pkgparser"
+	"dzc/pkg/ast/subparser"
+	"dzc/pkg/ast/typeparser"
 	"dzc/pkg/parser"
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
@@ -50,58 +51,66 @@ func main() {
 
 	ts := antlr.NewCommonTokenStream(lx, antlr.TokenDefaultChannel)
 
-	cp := constparser.New()
+	pPkg := pkgparser.New()
 	p := parser.NewDZParser(ts)
-	antlr.ParseTreeWalkerDefault.Walk(cp, p.Start())
-	cp.FixIncomplete()
+	antlr.ParseTreeWalkerDefault.Walk(pPkg, p.Start())
+
+	fmt.Println("PKG:", pPkg.Pkg.Name)
+
+	ts.Seek(0)
+
+	pConst := constparser.New()
+	p = parser.NewDZParser(ts)
+	antlr.ParseTreeWalkerDefault.Walk(pConst, p.Start())
+	pConst.FixIncomplete()
 
 	fmt.Println("CONSTANTS:")
-	for k, v := range cp.Consts {
+	for k, v := range pConst.Consts {
 		fmt.Println(k, v.Type, v.Value)
 	}
 
 	ts.Seek(0)
 
-	tp := typeparser.New(cp.Consts)
+	pTypes := typeparser.New(pConst.Consts)
 	p = parser.NewDZParser(ts)
-	antlr.ParseTreeWalkerDefault.Walk(tp, p.Start())
-	tp.FixIncomplete()
-	tp.AddBasic()
+	antlr.ParseTreeWalkerDefault.Walk(pTypes, p.Start())
+	pTypes.FixIncomplete()
+	pTypes.AddBasic()
 
 	fmt.Println("TYPES:")
-	for k, v := range tp.Types {
+	for k, v := range pTypes.Types {
 		fmt.Println(k, v.Text(), v.Base())
 	}
 
 	ts.Seek(0)
 
-	cpx := complexparser.New(tp.Types)
+	pComplex := complexparser.New(pTypes.Types)
 	p = parser.NewDZParser(ts)
-	antlr.ParseTreeWalkerDefault.Walk(cpx, p.Start())
+	antlr.ParseTreeWalkerDefault.Walk(pComplex, p.Start())
 
 	fmt.Println("ENUMS:")
-	for k, v := range cpx.Enums {
+	for k, v := range pComplex.Enums {
 		fmt.Println(k, v.Name, v.Options)
 	}
 
 	fmt.Println("STRUCTS:")
-	for k, v := range cpx.Structs {
+	for k, v := range pComplex.Structs {
 		fmt.Println(k, v.Name, v.Attrs)
 	}
 
 	ts.Seek(0)
 
-	sp := subparser.New(tp.Types)
+	pSub := subparser.New(pTypes.Types)
 	p = parser.NewDZParser(ts)
-	antlr.ParseTreeWalkerDefault.Walk(sp, p.Start())
+	antlr.ParseTreeWalkerDefault.Walk(pSub, p.Start())
 
 	fmt.Println("FUNCTIONS:")
-	for k, v := range sp.Functions {
+	for k, v := range pSub.Functions {
 		fmt.Println(k, v.Name, v.Args, v.RetType)
 	}
 
 	fmt.Println("PROCEDURES:")
-	for k, v := range sp.Procedures {
+	for k, v := range pSub.Procedures {
 		fmt.Println(k, v.Name, v.Args)
 	}
 
