@@ -33,6 +33,21 @@ type Type interface {
 	Base() Type
 }
 
+type Enum struct {
+	Name    string
+	Options []string
+}
+
+type Struct struct {
+	Name  string
+	Attrs map[string]*Attr
+}
+
+type Attr struct {
+	Name string
+	Type Type
+}
+
 const (
 	BoolFalse = "false"
 	BoolTrue  = "true"

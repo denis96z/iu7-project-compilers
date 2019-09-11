@@ -1,7 +1,6 @@
 grammar DZ;
 
 KW_PKG:    'pkg';
-KW_USE:    'use';
 KW_TYPE:   'type';
 KW_FOR:    'for';
 KW_WHILE:  'while';
@@ -42,8 +41,6 @@ RIGHT_BRC: '}';
 
 LEFT_BRK:  '[';
 RIGHT_BRK: ']';
-
-DCOLON: '::';
 
 COLON:     ':';
 COMMA:     ',';
