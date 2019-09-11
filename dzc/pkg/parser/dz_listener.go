@@ -83,9 +83,6 @@ type DZListener interface {
 	// EnterConstasgn is called when entering the constasgn production.
 	EnterConstasgn(c *ConstasgnContext)
 
-	// EnterCasgn is called when entering the casgn production.
-	EnterCasgn(c *CasgnContext)
-
 	// EnterIntasgn is called when entering the intasgn production.
 	EnterIntasgn(c *IntasgnContext)
 
@@ -94,6 +91,9 @@ type DZListener interface {
 
 	// EnterBoolconst is called when entering the boolconst production.
 	EnterBoolconst(c *BoolconstContext)
+
+	// EnterCasgn is called when entering the casgn production.
+	EnterCasgn(c *CasgnContext)
 
 	// EnterTypedecl is called when entering the typedecl production.
 	EnterTypedecl(c *TypedeclContext)
@@ -242,9 +242,6 @@ type DZListener interface {
 	// ExitConstasgn is called when exiting the constasgn production.
 	ExitConstasgn(c *ConstasgnContext)
 
-	// ExitCasgn is called when exiting the casgn production.
-	ExitCasgn(c *CasgnContext)
-
 	// ExitIntasgn is called when exiting the intasgn production.
 	ExitIntasgn(c *IntasgnContext)
 
@@ -253,6 +250,9 @@ type DZListener interface {
 
 	// ExitBoolconst is called when exiting the boolconst production.
 	ExitBoolconst(c *BoolconstContext)
+
+	// ExitCasgn is called when exiting the casgn production.
+	ExitCasgn(c *CasgnContext)
 
 	// ExitTypedecl is called when exiting the typedecl production.
 	ExitTypedecl(c *TypedeclContext)

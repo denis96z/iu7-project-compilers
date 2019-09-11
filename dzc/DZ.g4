@@ -107,22 +107,22 @@ complexdecl : structdecl | enumdecl | uniondecl;
 
 structdecl  : KW_STRUCT id=TYPE LEFT_BRC structattrs RIGHT_BRC;
 structattrs : structattr*;
-structattr  : id=IDENTIFIER COLON t=typespec SEMICOLONE;
+structattr  : id=IDENTIFIER COLON t=typespec SEMICOLON;
 
 enumdecl    : KW_ENUM id=TYPE LEFT_BRC enumoptions RIGHT_BRC;
-enumoptions : enumoption*;
-enumoption  : id=CONST;
+enumoptions : enumoption+;
+enumoption  : id=CONST COMMA;
 
 uniondecl : KW_UNION id=TYPE LEFT_BRC unionattrs RIGHT_BRC;
 unionattrs : unionattr*;
 unionattr  : id=IDENTIFIER COLON t=typespec;
 
 constdecl : KW_CONST id=CONST COLON t=basictypespec ASGN v=constasgn SEMICOLON;
-constasgn : casgn | intasgn | floatasgn | boolconst;
-casgn     : id=CONST;
+constasgn : intasgn | floatasgn | boolconst | casgn;
 intasgn   : v=INT_CONST;
 floatasgn : v=FLOAT_CONST;
 boolconst : v=(TRUE | FALSE);
+casgn     : id=CONST;
 
 typedecl : KW_TYPE id=TYPE ASGN t=typespec SEMICOLON;
 

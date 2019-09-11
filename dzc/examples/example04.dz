@@ -38,6 +38,10 @@ proc print(x: u8_t) {}
 
 proc sum(a: size_t, b: size_t) {}
 
+enum enum1_t {
+    OPTION_1, OPTION_2,
+}
+
 struct struct1_t {
-    attr1: u8_t,
+    attr1: u8_t;
 }

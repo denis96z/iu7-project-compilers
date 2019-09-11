@@ -32,7 +32,7 @@ func NewParser(types map[string]pkginfo.Type) *Parser {
 
 func (p *Parser) EnterEnumdecl(ctx *parser.EnumdeclContext) {
 	name := ctx.GetId().GetText()
-	if !p.checkTypeIsNew(name) {
+	if !p.isTypeNew(name) {
 		panic(fmt.Sprintf("type %q is redeclared", name))
 	}
 	p.currentEnumName = name
@@ -56,19 +56,19 @@ func (p *Parser) EnterEnumoption(ctx *parser.EnumoptionContext) {
 		if name == o {
 			panic(fmt.Sprintf("option %q is redeclared in enum %q", name, p.currentEnumName))
 		}
-		p.currentEnumOptions = append(p.currentEnumOptions, name)
 	}
+	p.currentEnumOptions = append(p.currentEnumOptions, name)
 }
 
 func (p *Parser) EnterStructdecl(ctx *parser.StructdeclContext) {
 	name := ctx.GetId().GetText()
-	if !p.checkTypeIsNew(name) {
+	if !p.isTypeNew(name) {
 		panic(fmt.Sprintf("type %q is redeclared", name))
 	}
 	p.currentStructName = name
 }
 
-func (p *Parser) ExistStructdecl(ctx *parser.StructdeclContext) {
+func (p *Parser) ExitStructdecl(ctx *parser.StructdeclContext) {
 	p.Structs[p.currentStructName] =
 		&pkginfo.Struct{
 			Name:  p.currentStructName,
@@ -101,6 +101,6 @@ func (p *Parser) EnterStructattr(ctx *parser.StructattrContext) {
 		}
 }
 
-func (p *Parser) checkTypeIsNew(name string) bool {
+func (p *Parser) isTypeNew(name string) bool {
 	return p.Enums[name] == nil && p.Structs[name] == nil && p.types[name] == nil
 }

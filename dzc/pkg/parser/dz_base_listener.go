@@ -171,12 +171,6 @@ func (s *BaseDZListener) EnterConstasgn(ctx *ConstasgnContext) {}
 // ExitConstasgn is called when production constasgn is exited.
 func (s *BaseDZListener) ExitConstasgn(ctx *ConstasgnContext) {}
 
-// EnterCasgn is called when production casgn is entered.
-func (s *BaseDZListener) EnterCasgn(ctx *CasgnContext) {}
-
-// ExitCasgn is called when production casgn is exited.
-func (s *BaseDZListener) ExitCasgn(ctx *CasgnContext) {}
-
 // EnterIntasgn is called when production intasgn is entered.
 func (s *BaseDZListener) EnterIntasgn(ctx *IntasgnContext) {}
 
@@ -194,6 +188,12 @@ func (s *BaseDZListener) EnterBoolconst(ctx *BoolconstContext) {}
 
 // ExitBoolconst is called when production boolconst is exited.
 func (s *BaseDZListener) ExitBoolconst(ctx *BoolconstContext) {}
+
+// EnterCasgn is called when production casgn is entered.
+func (s *BaseDZListener) EnterCasgn(ctx *CasgnContext) {}
+
+// ExitCasgn is called when production casgn is exited.
+func (s *BaseDZListener) ExitCasgn(ctx *CasgnContext) {}
 
 // EnterTypedecl is called when production typedecl is entered.
 func (s *BaseDZListener) EnterTypedecl(ctx *TypedeclContext) {}
