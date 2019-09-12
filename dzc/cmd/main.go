@@ -42,10 +42,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	lx := parser.NewDZLexer(
-		antlr.NewInputStream(string(src)),
-	)
-
 	//for {
 	//	t := lx.NextToken()
 	//	if t.GetTokenType() == antlr.TokenEOF {
@@ -55,7 +51,7 @@ func main() {
 	//		lx.SymbolicNames[t.GetTokenType()], t.GetText())
 	//}
 
-	ts := antlr.NewCommonTokenStream(lx, antlr.TokenDefaultChannel)
+
 
 	pPkg := pkgparser.New()
 	p := parser.NewDZParser(ts)
@@ -63,12 +59,10 @@ func main() {
 
 	fmt.Println("PKG:", pPkg.Pkg.Name)
 
-	ts.Seek(0)
+
 
 	pConst := constparser.New()
-	p = parser.NewDZParser(ts)
-	antlr.ParseTreeWalkerDefault.Walk(pConst, p.Start())
-	pConst.FixIncomplete()
+
 
 	fmt.Println("CONSTANTS:")
 	for k, v := range pConst.Consts {

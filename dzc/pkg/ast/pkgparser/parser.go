@@ -8,7 +8,7 @@ import (
 type Parser struct {
 	*parser.BaseDZListener
 
-	Pkg *pkginfo.Pkg
+	pkg *pkginfo.PkgInfo
 }
 
 func New() *Parser {
@@ -16,7 +16,7 @@ func New() *Parser {
 }
 
 func (p *Parser) EnterPkg(ctx *parser.PkgContext) {
-	p.Pkg = &pkginfo.Pkg{
+	p.pkg.Pkg = &pkginfo.Pkg{
 		Name: ctx.GetName().GetText(),
 	}
 }
