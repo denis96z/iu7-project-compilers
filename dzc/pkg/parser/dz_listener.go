@@ -14,98 +14,59 @@ type DZListener interface {
 	// EnterPkg is called when entering the pkg production.
 	EnterPkg(c *PkgContext)
 
-	// EnterDecls is called when entering the decls production.
-	EnterDecls(c *DeclsContext)
-
 	// EnterDecl is called when entering the decl production.
 	EnterDecl(c *DeclContext)
 
-	// EnterSubdecl is called when entering the subdecl production.
-	EnterSubdecl(c *SubdeclContext)
+	// EnterConstDecl is called when entering the constDecl production.
+	EnterConstDecl(c *ConstDeclContext)
 
-	// EnterProcdecl is called when entering the procdecl production.
-	EnterProcdecl(c *ProcdeclContext)
+	// EnterTypeDecl is called when entering the typeDecl production.
+	EnterTypeDecl(c *TypeDeclContext)
 
-	// EnterFuncdecl is called when entering the funcdecl production.
-	EnterFuncdecl(c *FuncdeclContext)
+	// EnterTypeSpec is called when entering the typeSpec production.
+	EnterTypeSpec(c *TypeSpecContext)
 
-	// EnterProcheader is called when entering the procheader production.
-	EnterProcheader(c *ProcheaderContext)
+	// EnterSimpleTypeSpec is called when entering the simpleTypeSpec production.
+	EnterSimpleTypeSpec(c *SimpleTypeSpecContext)
 
-	// EnterFuncheader is called when entering the funcheader production.
-	EnterFuncheader(c *FuncheaderContext)
+	// EnterBasicTypeSpec is called when entering the basicTypeSpec production.
+	EnterBasicTypeSpec(c *BasicTypeSpecContext)
 
-	// EnterArgs is called when entering the args production.
-	EnterArgs(c *ArgsContext)
+	// EnterNamedTypeSpec is called when entering the namedTypeSpec production.
+	EnterNamedTypeSpec(c *NamedTypeSpecContext)
 
-	// EnterArgdecls is called when entering the argdecls production.
-	EnterArgdecls(c *ArgdeclsContext)
+	// EnterRefTypeSpec is called when entering the refTypeSpec production.
+	EnterRefTypeSpec(c *RefTypeSpecContext)
 
-	// EnterArgdecl is called when entering the argdecl production.
-	EnterArgdecl(c *ArgdeclContext)
+	// EnterArrayTypeSpec is called when entering the arrayTypeSpec production.
+	EnterArrayTypeSpec(c *ArrayTypeSpecContext)
 
-	// EnterFuncret is called when entering the funcret production.
-	EnterFuncret(c *FuncretContext)
+	// EnterSliceTypeSpec is called when entering the sliceTypeSpec production.
+	EnterSliceTypeSpec(c *SliceTypeSpecContext)
 
-	// EnterComplexdecl is called when entering the complexdecl production.
-	EnterComplexdecl(c *ComplexdeclContext)
+	// EnterEnumDecl is called when entering the enumDecl production.
+	EnterEnumDecl(c *EnumDeclContext)
 
-	// EnterEnumdecl is called when entering the enumdecl production.
-	EnterEnumdecl(c *EnumdeclContext)
+	// EnterEnumOption is called when entering the enumOption production.
+	EnterEnumOption(c *EnumOptionContext)
 
-	// EnterEnumoptions is called when entering the enumoptions production.
-	EnterEnumoptions(c *EnumoptionsContext)
+	// EnterStructDecl is called when entering the structDecl production.
+	EnterStructDecl(c *StructDeclContext)
 
-	// EnterEnumoption is called when entering the enumoption production.
-	EnterEnumoption(c *EnumoptionContext)
+	// EnterStructAttr is called when entering the structAttr production.
+	EnterStructAttr(c *StructAttrContext)
 
-	// EnterStructdecl is called when entering the structdecl production.
-	EnterStructdecl(c *StructdeclContext)
+	// EnterProcDecl is called when entering the procDecl production.
+	EnterProcDecl(c *ProcDeclContext)
 
-	// EnterStructattrs is called when entering the structattrs production.
-	EnterStructattrs(c *StructattrsContext)
+	// EnterProcArg is called when entering the procArg production.
+	EnterProcArg(c *ProcArgContext)
 
-	// EnterStructattr is called when entering the structattr production.
-	EnterStructattr(c *StructattrContext)
+	// EnterFuncDecl is called when entering the funcDecl production.
+	EnterFuncDecl(c *FuncDeclContext)
 
-	// EnterConstdecl is called when entering the constdecl production.
-	EnterConstdecl(c *ConstdeclContext)
-
-	// EnterConstexpr is called when entering the constexpr production.
-	EnterConstexpr(c *ConstexprContext)
-
-	// EnterIntexpr is called when entering the intexpr production.
-	EnterIntexpr(c *IntexprContext)
-
-	// EnterBoolexpr is called when entering the boolexpr production.
-	EnterBoolexpr(c *BoolexprContext)
-
-	// EnterConstval is called when entering the constval production.
-	EnterConstval(c *ConstvalContext)
-
-	// EnterTypedecl is called when entering the typedecl production.
-	EnterTypedecl(c *TypedeclContext)
-
-	// EnterTypespec is called when entering the typespec production.
-	EnterTypespec(c *TypespecContext)
-
-	// EnterSimpletypespec is called when entering the simpletypespec production.
-	EnterSimpletypespec(c *SimpletypespecContext)
-
-	// EnterBasictypespec is called when entering the basictypespec production.
-	EnterBasictypespec(c *BasictypespecContext)
-
-	// EnterNamedtypespec is called when entering the namedtypespec production.
-	EnterNamedtypespec(c *NamedtypespecContext)
-
-	// EnterReftypespec is called when entering the reftypespec production.
-	EnterReftypespec(c *ReftypespecContext)
-
-	// EnterArraytypespec is called when entering the arraytypespec production.
-	EnterArraytypespec(c *ArraytypespecContext)
-
-	// EnterSizespec is called when entering the sizespec production.
-	EnterSizespec(c *SizespecContext)
+	// EnterFuncArg is called when entering the funcArg production.
+	EnterFuncArg(c *FuncArgContext)
 
 	// EnterBlock is called when entering the block production.
 	EnterBlock(c *BlockContext)
@@ -140,8 +101,8 @@ type DZListener interface {
 	// EnterContinueStatement is called when entering the continueStatement production.
 	EnterContinueStatement(c *ContinueStatementContext)
 
-	// EnterDeclaration is called when entering the declaration production.
-	EnterDeclaration(c *DeclarationContext)
+	// EnterVarDecl is called when entering the varDecl production.
+	EnterVarDecl(c *VarDeclContext)
 
 	// EnterProcCall is called when entering the procCall production.
 	EnterProcCall(c *ProcCallContext)
@@ -170,98 +131,59 @@ type DZListener interface {
 	// ExitPkg is called when exiting the pkg production.
 	ExitPkg(c *PkgContext)
 
-	// ExitDecls is called when exiting the decls production.
-	ExitDecls(c *DeclsContext)
-
 	// ExitDecl is called when exiting the decl production.
 	ExitDecl(c *DeclContext)
 
-	// ExitSubdecl is called when exiting the subdecl production.
-	ExitSubdecl(c *SubdeclContext)
+	// ExitConstDecl is called when exiting the constDecl production.
+	ExitConstDecl(c *ConstDeclContext)
 
-	// ExitProcdecl is called when exiting the procdecl production.
-	ExitProcdecl(c *ProcdeclContext)
+	// ExitTypeDecl is called when exiting the typeDecl production.
+	ExitTypeDecl(c *TypeDeclContext)
 
-	// ExitFuncdecl is called when exiting the funcdecl production.
-	ExitFuncdecl(c *FuncdeclContext)
+	// ExitTypeSpec is called when exiting the typeSpec production.
+	ExitTypeSpec(c *TypeSpecContext)
 
-	// ExitProcheader is called when exiting the procheader production.
-	ExitProcheader(c *ProcheaderContext)
+	// ExitSimpleTypeSpec is called when exiting the simpleTypeSpec production.
+	ExitSimpleTypeSpec(c *SimpleTypeSpecContext)
 
-	// ExitFuncheader is called when exiting the funcheader production.
-	ExitFuncheader(c *FuncheaderContext)
+	// ExitBasicTypeSpec is called when exiting the basicTypeSpec production.
+	ExitBasicTypeSpec(c *BasicTypeSpecContext)
 
-	// ExitArgs is called when exiting the args production.
-	ExitArgs(c *ArgsContext)
+	// ExitNamedTypeSpec is called when exiting the namedTypeSpec production.
+	ExitNamedTypeSpec(c *NamedTypeSpecContext)
 
-	// ExitArgdecls is called when exiting the argdecls production.
-	ExitArgdecls(c *ArgdeclsContext)
+	// ExitRefTypeSpec is called when exiting the refTypeSpec production.
+	ExitRefTypeSpec(c *RefTypeSpecContext)
 
-	// ExitArgdecl is called when exiting the argdecl production.
-	ExitArgdecl(c *ArgdeclContext)
+	// ExitArrayTypeSpec is called when exiting the arrayTypeSpec production.
+	ExitArrayTypeSpec(c *ArrayTypeSpecContext)
 
-	// ExitFuncret is called when exiting the funcret production.
-	ExitFuncret(c *FuncretContext)
+	// ExitSliceTypeSpec is called when exiting the sliceTypeSpec production.
+	ExitSliceTypeSpec(c *SliceTypeSpecContext)
 
-	// ExitComplexdecl is called when exiting the complexdecl production.
-	ExitComplexdecl(c *ComplexdeclContext)
+	// ExitEnumDecl is called when exiting the enumDecl production.
+	ExitEnumDecl(c *EnumDeclContext)
 
-	// ExitEnumdecl is called when exiting the enumdecl production.
-	ExitEnumdecl(c *EnumdeclContext)
+	// ExitEnumOption is called when exiting the enumOption production.
+	ExitEnumOption(c *EnumOptionContext)
 
-	// ExitEnumoptions is called when exiting the enumoptions production.
-	ExitEnumoptions(c *EnumoptionsContext)
+	// ExitStructDecl is called when exiting the structDecl production.
+	ExitStructDecl(c *StructDeclContext)
 
-	// ExitEnumoption is called when exiting the enumoption production.
-	ExitEnumoption(c *EnumoptionContext)
+	// ExitStructAttr is called when exiting the structAttr production.
+	ExitStructAttr(c *StructAttrContext)
 
-	// ExitStructdecl is called when exiting the structdecl production.
-	ExitStructdecl(c *StructdeclContext)
+	// ExitProcDecl is called when exiting the procDecl production.
+	ExitProcDecl(c *ProcDeclContext)
 
-	// ExitStructattrs is called when exiting the structattrs production.
-	ExitStructattrs(c *StructattrsContext)
+	// ExitProcArg is called when exiting the procArg production.
+	ExitProcArg(c *ProcArgContext)
 
-	// ExitStructattr is called when exiting the structattr production.
-	ExitStructattr(c *StructattrContext)
+	// ExitFuncDecl is called when exiting the funcDecl production.
+	ExitFuncDecl(c *FuncDeclContext)
 
-	// ExitConstdecl is called when exiting the constdecl production.
-	ExitConstdecl(c *ConstdeclContext)
-
-	// ExitConstexpr is called when exiting the constexpr production.
-	ExitConstexpr(c *ConstexprContext)
-
-	// ExitIntexpr is called when exiting the intexpr production.
-	ExitIntexpr(c *IntexprContext)
-
-	// ExitBoolexpr is called when exiting the boolexpr production.
-	ExitBoolexpr(c *BoolexprContext)
-
-	// ExitConstval is called when exiting the constval production.
-	ExitConstval(c *ConstvalContext)
-
-	// ExitTypedecl is called when exiting the typedecl production.
-	ExitTypedecl(c *TypedeclContext)
-
-	// ExitTypespec is called when exiting the typespec production.
-	ExitTypespec(c *TypespecContext)
-
-	// ExitSimpletypespec is called when exiting the simpletypespec production.
-	ExitSimpletypespec(c *SimpletypespecContext)
-
-	// ExitBasictypespec is called when exiting the basictypespec production.
-	ExitBasictypespec(c *BasictypespecContext)
-
-	// ExitNamedtypespec is called when exiting the namedtypespec production.
-	ExitNamedtypespec(c *NamedtypespecContext)
-
-	// ExitReftypespec is called when exiting the reftypespec production.
-	ExitReftypespec(c *ReftypespecContext)
-
-	// ExitArraytypespec is called when exiting the arraytypespec production.
-	ExitArraytypespec(c *ArraytypespecContext)
-
-	// ExitSizespec is called when exiting the sizespec production.
-	ExitSizespec(c *SizespecContext)
+	// ExitFuncArg is called when exiting the funcArg production.
+	ExitFuncArg(c *FuncArgContext)
 
 	// ExitBlock is called when exiting the block production.
 	ExitBlock(c *BlockContext)
@@ -296,8 +218,8 @@ type DZListener interface {
 	// ExitContinueStatement is called when exiting the continueStatement production.
 	ExitContinueStatement(c *ContinueStatementContext)
 
-	// ExitDeclaration is called when exiting the declaration production.
-	ExitDeclaration(c *DeclarationContext)
+	// ExitVarDecl is called when exiting the varDecl production.
+	ExitVarDecl(c *VarDeclContext)
 
 	// ExitProcCall is called when exiting the procCall production.
 	ExitProcCall(c *ProcCallContext)

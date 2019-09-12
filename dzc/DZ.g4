@@ -17,6 +17,8 @@ KW_LET:      'let';
 KW_STRUCT:   'struct';
 KW_ENUM:     'enum';
 KW_RETURN:   'return';
+KW_TRUE:     'true';
+KW_FALSE:    'false';
 
 I8_T:    'i8_t';
 U8_T:    'u8_t';
@@ -49,12 +51,20 @@ DIV: '/';
 MOD: '%';
 
 NOT: '~';
+REF: '@';
 
 SHL: '<<';
 SHR: '>>';
 AND: '&';
 OR:  '|';
 XOR: '^';
+
+EQL:      '==';
+NOT_EQL:  '!=';
+GRT:      '>';
+GRT_EQL:  '>=';
+LESS:     '<';
+LESS_EQL: '<=';
 
 ASGN:     '=';
 ADD_ASGN: '+=';
@@ -69,71 +79,107 @@ AND_ASGN: '&=';
 OR_ASGN:  '|=';
 XOR_ASGN: '^=';
 
-REF: '@';
-
-INT_CONST:   [-]?[0-9]+;
-TRUE:        'true';
-FALSE:       'false';
-
 CONST:      [A-Z]([_]?[A-Z0-9])*;
+INT_VALUE:  [-]?[0-9]+;
 TYPE:       [a-z]([_]?[a-z0-9])*[_][t];
 IDENTIFIER: [a-z]([_]?[a-z0-9])*;
 
 WHITESPACE: [ \r\n\t]+ -> skip;
 
-start : pkg decls EOF;
+start
+    : pkg decl* EOF
+    ;
 
-pkg: KW_PKG name=IDENTIFIER SEMICOLON;
+pkg
+    : KW_PKG name=IDENTIFIER SEMICOLON
+    ;
 
-decls : decl*;
-decl  : constdecl | typedecl | complexdecl | subdecl;
+decl
+    : constDecl
+    | typeDecl
+    | enumDecl
+    | structDecl
+    | procDecl
+    | funcDecl
+    ;
 
-subdecl : procdecl | funcdecl;
 
-procdecl : KW_PROC procheader block;
-funcdecl : KW_FUNC funcheader block;
+constDecl
+    : KW_CONST name=CONST COLON tName=basicTypeSpec ASGN value=(INT_VALUE | KW_TRUE | KW_FALSE | CONST) SEMICOLON
+    ;
 
-procheader : id=IDENTIFIER args;
-funcheader : id=IDENTIFIER args funcret;
+typeDecl
+    : KW_TYPE name=TYPE ASGN tName=typeSpec SEMICOLON
+    ;
 
-args     : LEFT_PRT argdecls RIGHT_PRT;
-argdecls : (argdecl (COMMA argdecl)*)?;
-argdecl  : id=IDENTIFIER COLON t=simpletypespec;
+typeSpec
+    : simpleTypeSpec
+    | refTypeSpec
+    | arrayTypeSpec
+    | sliceTypeSpec
+    ;
 
-funcret : COLON t=simpletypespec;
+simpleTypeSpec
+    : basicTypeSpec
+    | namedTypeSpec
+    ;
 
-complexdecl : enumdecl | structdecl;
+basicTypeSpec
+    : I8_T | U8_T
+    | I16_T | U16_T
+    | I32_T | U32_T
+    | I64_T | U64_T
+    | SIZE_T | SSIZE_T
+    | CHAR_T | BOOL_T
+    ;
 
-enumdecl    : KW_ENUM id=TYPE LEFT_BRC enumoptions RIGHT_BRC;
-enumoptions : enumoption+;
-enumoption  : id=CONST COMMA;
+namedTypeSpec
+    : name=TYPE
+    ;
 
-structdecl  : KW_STRUCT id=TYPE LEFT_BRC structattrs RIGHT_BRC;
-structattrs : structattr*;
-structattr  : id=IDENTIFIER COLON t=typespec SEMICOLON;
+refTypeSpec
+    : REF tName=simpleTypeSpec
+    ;
 
-constdecl : KW_CONST id=CONST COLON t=basictypespec ASGN v=constexpr SEMICOLON;
-constexpr : intexpr | boolexpr | constval;
-intexpr   : v=INT_CONST;
-boolexpr  : v=(TRUE | FALSE);
-constval  : id=CONST;
+arrayTypeSpec
+    : LEFT_BRK tName=simpleTypeSpec COLON size=(INT_VALUE | CONST) RIGHT_BRK
+    ;
 
-typedecl : KW_TYPE id=TYPE ASGN t=typespec SEMICOLON;
+sliceTypeSpec
+    : LEFT_BRK tName=simpleTypeSpec RIGHT_BRK
+    ;
 
-typespec       : simpletypespec | reftypespec | arraytypespec;
-simpletypespec : basictypespec | namedtypespec;
-basictypespec  : id=(
-                     I8_T   | U8_T    |
-                     I16_T  | U16_T   |
-                     I32_T  | U32_T   |
-                     I64_T  | U64_T   |
-                     CHAR_T | BOOL_T  |
-                     SIZE_T | SSIZE_T
-                 );
-namedtypespec  : id=TYPE;
-reftypespec    : REF id=simpletypespec;
-arraytypespec  : LEFT_BRK id=simpletypespec COLON size=sizespec RIGHT_BRK;
-sizespec       : INT_CONST | name=CONST;
+enumDecl
+    : KW_ENUM name=TYPE LEFT_BRC enumOption (COMMA enumOption)* RIGHT_BRC
+    ;
+
+enumOption
+    : name=CONST COMMA
+    ;
+
+structDecl
+    : KW_STRUCT name=TYPE LEFT_BRC structAttr* RIGHT_BRC
+    ;
+
+structAttr
+    : name=IDENTIFIER COLON tName=typeSpec SEMICOLON
+    ;
+
+procDecl
+    : KW_PROC name=IDENTIFIER LEFT_PRT (procArg (COMMA procArg)*)? RIGHT_PRT body=block
+    ;
+
+procArg
+    : name=IDENTIFIER COLON tName=typeSpec
+    ;
+
+funcDecl
+    : KW_FUNC name=IDENTIFIER LEFT_PRT (funcArg (COMMA funcArg)*)? COLON tName=typeSpec RIGHT_PRT body=block
+    ;
+
+funcArg
+    : name=IDENTIFIER COLON tName=typeSpec
+    ;
 
 block
     : statement*;
@@ -144,7 +190,7 @@ statement
     | breakStatement
     | continueStatement
     | procCall
-    | declaration SEMICOLON
+    | varDecl SEMICOLON
     | expression SEMICOLON
     | returnStatement
     ;
@@ -178,7 +224,7 @@ continueStatement
     : KW_CONTINUE
     ;
 
-declaration
+varDecl
     : KW_LET name=IDENTIFIER ASGN value=expression;
 
 procCall
@@ -189,8 +235,8 @@ procParam
 
 expression
     : varName=IDENTIFIER
-    | intValue=INT_CONST
-    | boolValue=(TRUE | FALSE)
+    | intValue=INT_VALUE
+    | boolValue=(KW_TRUE | KW_FALSE)
     | constName=CONST
     | LEFT_BRK brkExpr=expression RIGHT_BRK
     | LEFT_PRT prtExpr=expression RIGHT_PRT
@@ -213,6 +259,7 @@ binaryOperator
     | AND | OR  | XOR | SHL | SHR
     | ADD_ASGN  | SUB_ASGN  | MUL_ASGN | DIV_ASGN | MOD_ASGN
     | AND_ASGN  | OR_ASGN   | XOR_ASGN | SHL_ASGN | SHR_ASGN
+    | EQL | GRT | LESS | GRT_EQL | LESS_EQL
     ;
 
 returnStatement

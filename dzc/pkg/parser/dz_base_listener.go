@@ -33,191 +33,113 @@ func (s *BaseDZListener) EnterPkg(ctx *PkgContext) {}
 // ExitPkg is called when production pkg is exited.
 func (s *BaseDZListener) ExitPkg(ctx *PkgContext) {}
 
-// EnterDecls is called when production decls is entered.
-func (s *BaseDZListener) EnterDecls(ctx *DeclsContext) {}
-
-// ExitDecls is called when production decls is exited.
-func (s *BaseDZListener) ExitDecls(ctx *DeclsContext) {}
-
 // EnterDecl is called when production decl is entered.
 func (s *BaseDZListener) EnterDecl(ctx *DeclContext) {}
 
 // ExitDecl is called when production decl is exited.
 func (s *BaseDZListener) ExitDecl(ctx *DeclContext) {}
 
-// EnterSubdecl is called when production subdecl is entered.
-func (s *BaseDZListener) EnterSubdecl(ctx *SubdeclContext) {}
+// EnterConstDecl is called when production constDecl is entered.
+func (s *BaseDZListener) EnterConstDecl(ctx *ConstDeclContext) {}
 
-// ExitSubdecl is called when production subdecl is exited.
-func (s *BaseDZListener) ExitSubdecl(ctx *SubdeclContext) {}
+// ExitConstDecl is called when production constDecl is exited.
+func (s *BaseDZListener) ExitConstDecl(ctx *ConstDeclContext) {}
 
-// EnterProcdecl is called when production procdecl is entered.
-func (s *BaseDZListener) EnterProcdecl(ctx *ProcdeclContext) {}
+// EnterTypeDecl is called when production typeDecl is entered.
+func (s *BaseDZListener) EnterTypeDecl(ctx *TypeDeclContext) {}
 
-// ExitProcdecl is called when production procdecl is exited.
-func (s *BaseDZListener) ExitProcdecl(ctx *ProcdeclContext) {}
+// ExitTypeDecl is called when production typeDecl is exited.
+func (s *BaseDZListener) ExitTypeDecl(ctx *TypeDeclContext) {}
 
-// EnterFuncdecl is called when production funcdecl is entered.
-func (s *BaseDZListener) EnterFuncdecl(ctx *FuncdeclContext) {}
+// EnterTypeSpec is called when production typeSpec is entered.
+func (s *BaseDZListener) EnterTypeSpec(ctx *TypeSpecContext) {}
 
-// ExitFuncdecl is called when production funcdecl is exited.
-func (s *BaseDZListener) ExitFuncdecl(ctx *FuncdeclContext) {}
+// ExitTypeSpec is called when production typeSpec is exited.
+func (s *BaseDZListener) ExitTypeSpec(ctx *TypeSpecContext) {}
 
-// EnterProcheader is called when production procheader is entered.
-func (s *BaseDZListener) EnterProcheader(ctx *ProcheaderContext) {}
+// EnterSimpleTypeSpec is called when production simpleTypeSpec is entered.
+func (s *BaseDZListener) EnterSimpleTypeSpec(ctx *SimpleTypeSpecContext) {}
 
-// ExitProcheader is called when production procheader is exited.
-func (s *BaseDZListener) ExitProcheader(ctx *ProcheaderContext) {}
+// ExitSimpleTypeSpec is called when production simpleTypeSpec is exited.
+func (s *BaseDZListener) ExitSimpleTypeSpec(ctx *SimpleTypeSpecContext) {}
 
-// EnterFuncheader is called when production funcheader is entered.
-func (s *BaseDZListener) EnterFuncheader(ctx *FuncheaderContext) {}
+// EnterBasicTypeSpec is called when production basicTypeSpec is entered.
+func (s *BaseDZListener) EnterBasicTypeSpec(ctx *BasicTypeSpecContext) {}
 
-// ExitFuncheader is called when production funcheader is exited.
-func (s *BaseDZListener) ExitFuncheader(ctx *FuncheaderContext) {}
+// ExitBasicTypeSpec is called when production basicTypeSpec is exited.
+func (s *BaseDZListener) ExitBasicTypeSpec(ctx *BasicTypeSpecContext) {}
 
-// EnterArgs is called when production args is entered.
-func (s *BaseDZListener) EnterArgs(ctx *ArgsContext) {}
+// EnterNamedTypeSpec is called when production namedTypeSpec is entered.
+func (s *BaseDZListener) EnterNamedTypeSpec(ctx *NamedTypeSpecContext) {}
 
-// ExitArgs is called when production args is exited.
-func (s *BaseDZListener) ExitArgs(ctx *ArgsContext) {}
+// ExitNamedTypeSpec is called when production namedTypeSpec is exited.
+func (s *BaseDZListener) ExitNamedTypeSpec(ctx *NamedTypeSpecContext) {}
 
-// EnterArgdecls is called when production argdecls is entered.
-func (s *BaseDZListener) EnterArgdecls(ctx *ArgdeclsContext) {}
+// EnterRefTypeSpec is called when production refTypeSpec is entered.
+func (s *BaseDZListener) EnterRefTypeSpec(ctx *RefTypeSpecContext) {}
 
-// ExitArgdecls is called when production argdecls is exited.
-func (s *BaseDZListener) ExitArgdecls(ctx *ArgdeclsContext) {}
+// ExitRefTypeSpec is called when production refTypeSpec is exited.
+func (s *BaseDZListener) ExitRefTypeSpec(ctx *RefTypeSpecContext) {}
 
-// EnterArgdecl is called when production argdecl is entered.
-func (s *BaseDZListener) EnterArgdecl(ctx *ArgdeclContext) {}
+// EnterArrayTypeSpec is called when production arrayTypeSpec is entered.
+func (s *BaseDZListener) EnterArrayTypeSpec(ctx *ArrayTypeSpecContext) {}
 
-// ExitArgdecl is called when production argdecl is exited.
-func (s *BaseDZListener) ExitArgdecl(ctx *ArgdeclContext) {}
+// ExitArrayTypeSpec is called when production arrayTypeSpec is exited.
+func (s *BaseDZListener) ExitArrayTypeSpec(ctx *ArrayTypeSpecContext) {}
 
-// EnterFuncret is called when production funcret is entered.
-func (s *BaseDZListener) EnterFuncret(ctx *FuncretContext) {}
+// EnterSliceTypeSpec is called when production sliceTypeSpec is entered.
+func (s *BaseDZListener) EnterSliceTypeSpec(ctx *SliceTypeSpecContext) {}
 
-// ExitFuncret is called when production funcret is exited.
-func (s *BaseDZListener) ExitFuncret(ctx *FuncretContext) {}
+// ExitSliceTypeSpec is called when production sliceTypeSpec is exited.
+func (s *BaseDZListener) ExitSliceTypeSpec(ctx *SliceTypeSpecContext) {}
 
-// EnterComplexdecl is called when production complexdecl is entered.
-func (s *BaseDZListener) EnterComplexdecl(ctx *ComplexdeclContext) {}
+// EnterEnumDecl is called when production enumDecl is entered.
+func (s *BaseDZListener) EnterEnumDecl(ctx *EnumDeclContext) {}
 
-// ExitComplexdecl is called when production complexdecl is exited.
-func (s *BaseDZListener) ExitComplexdecl(ctx *ComplexdeclContext) {}
+// ExitEnumDecl is called when production enumDecl is exited.
+func (s *BaseDZListener) ExitEnumDecl(ctx *EnumDeclContext) {}
 
-// EnterEnumdecl is called when production enumdecl is entered.
-func (s *BaseDZListener) EnterEnumdecl(ctx *EnumdeclContext) {}
+// EnterEnumOption is called when production enumOption is entered.
+func (s *BaseDZListener) EnterEnumOption(ctx *EnumOptionContext) {}
 
-// ExitEnumdecl is called when production enumdecl is exited.
-func (s *BaseDZListener) ExitEnumdecl(ctx *EnumdeclContext) {}
+// ExitEnumOption is called when production enumOption is exited.
+func (s *BaseDZListener) ExitEnumOption(ctx *EnumOptionContext) {}
 
-// EnterEnumoptions is called when production enumoptions is entered.
-func (s *BaseDZListener) EnterEnumoptions(ctx *EnumoptionsContext) {}
+// EnterStructDecl is called when production structDecl is entered.
+func (s *BaseDZListener) EnterStructDecl(ctx *StructDeclContext) {}
 
-// ExitEnumoptions is called when production enumoptions is exited.
-func (s *BaseDZListener) ExitEnumoptions(ctx *EnumoptionsContext) {}
+// ExitStructDecl is called when production structDecl is exited.
+func (s *BaseDZListener) ExitStructDecl(ctx *StructDeclContext) {}
 
-// EnterEnumoption is called when production enumoption is entered.
-func (s *BaseDZListener) EnterEnumoption(ctx *EnumoptionContext) {}
+// EnterStructAttr is called when production structAttr is entered.
+func (s *BaseDZListener) EnterStructAttr(ctx *StructAttrContext) {}
 
-// ExitEnumoption is called when production enumoption is exited.
-func (s *BaseDZListener) ExitEnumoption(ctx *EnumoptionContext) {}
+// ExitStructAttr is called when production structAttr is exited.
+func (s *BaseDZListener) ExitStructAttr(ctx *StructAttrContext) {}
 
-// EnterStructdecl is called when production structdecl is entered.
-func (s *BaseDZListener) EnterStructdecl(ctx *StructdeclContext) {}
+// EnterProcDecl is called when production procDecl is entered.
+func (s *BaseDZListener) EnterProcDecl(ctx *ProcDeclContext) {}
 
-// ExitStructdecl is called when production structdecl is exited.
-func (s *BaseDZListener) ExitStructdecl(ctx *StructdeclContext) {}
+// ExitProcDecl is called when production procDecl is exited.
+func (s *BaseDZListener) ExitProcDecl(ctx *ProcDeclContext) {}
 
-// EnterStructattrs is called when production structattrs is entered.
-func (s *BaseDZListener) EnterStructattrs(ctx *StructattrsContext) {}
+// EnterProcArg is called when production procArg is entered.
+func (s *BaseDZListener) EnterProcArg(ctx *ProcArgContext) {}
 
-// ExitStructattrs is called when production structattrs is exited.
-func (s *BaseDZListener) ExitStructattrs(ctx *StructattrsContext) {}
+// ExitProcArg is called when production procArg is exited.
+func (s *BaseDZListener) ExitProcArg(ctx *ProcArgContext) {}
 
-// EnterStructattr is called when production structattr is entered.
-func (s *BaseDZListener) EnterStructattr(ctx *StructattrContext) {}
+// EnterFuncDecl is called when production funcDecl is entered.
+func (s *BaseDZListener) EnterFuncDecl(ctx *FuncDeclContext) {}
 
-// ExitStructattr is called when production structattr is exited.
-func (s *BaseDZListener) ExitStructattr(ctx *StructattrContext) {}
+// ExitFuncDecl is called when production funcDecl is exited.
+func (s *BaseDZListener) ExitFuncDecl(ctx *FuncDeclContext) {}
 
-// EnterConstdecl is called when production constdecl is entered.
-func (s *BaseDZListener) EnterConstdecl(ctx *ConstdeclContext) {}
+// EnterFuncArg is called when production funcArg is entered.
+func (s *BaseDZListener) EnterFuncArg(ctx *FuncArgContext) {}
 
-// ExitConstdecl is called when production constdecl is exited.
-func (s *BaseDZListener) ExitConstdecl(ctx *ConstdeclContext) {}
-
-// EnterConstexpr is called when production constexpr is entered.
-func (s *BaseDZListener) EnterConstexpr(ctx *ConstexprContext) {}
-
-// ExitConstexpr is called when production constexpr is exited.
-func (s *BaseDZListener) ExitConstexpr(ctx *ConstexprContext) {}
-
-// EnterIntexpr is called when production intexpr is entered.
-func (s *BaseDZListener) EnterIntexpr(ctx *IntexprContext) {}
-
-// ExitIntexpr is called when production intexpr is exited.
-func (s *BaseDZListener) ExitIntexpr(ctx *IntexprContext) {}
-
-// EnterBoolexpr is called when production boolexpr is entered.
-func (s *BaseDZListener) EnterBoolexpr(ctx *BoolexprContext) {}
-
-// ExitBoolexpr is called when production boolexpr is exited.
-func (s *BaseDZListener) ExitBoolexpr(ctx *BoolexprContext) {}
-
-// EnterConstval is called when production constval is entered.
-func (s *BaseDZListener) EnterConstval(ctx *ConstvalContext) {}
-
-// ExitConstval is called when production constval is exited.
-func (s *BaseDZListener) ExitConstval(ctx *ConstvalContext) {}
-
-// EnterTypedecl is called when production typedecl is entered.
-func (s *BaseDZListener) EnterTypedecl(ctx *TypedeclContext) {}
-
-// ExitTypedecl is called when production typedecl is exited.
-func (s *BaseDZListener) ExitTypedecl(ctx *TypedeclContext) {}
-
-// EnterTypespec is called when production typespec is entered.
-func (s *BaseDZListener) EnterTypespec(ctx *TypespecContext) {}
-
-// ExitTypespec is called when production typespec is exited.
-func (s *BaseDZListener) ExitTypespec(ctx *TypespecContext) {}
-
-// EnterSimpletypespec is called when production simpletypespec is entered.
-func (s *BaseDZListener) EnterSimpletypespec(ctx *SimpletypespecContext) {}
-
-// ExitSimpletypespec is called when production simpletypespec is exited.
-func (s *BaseDZListener) ExitSimpletypespec(ctx *SimpletypespecContext) {}
-
-// EnterBasictypespec is called when production basictypespec is entered.
-func (s *BaseDZListener) EnterBasictypespec(ctx *BasictypespecContext) {}
-
-// ExitBasictypespec is called when production basictypespec is exited.
-func (s *BaseDZListener) ExitBasictypespec(ctx *BasictypespecContext) {}
-
-// EnterNamedtypespec is called when production namedtypespec is entered.
-func (s *BaseDZListener) EnterNamedtypespec(ctx *NamedtypespecContext) {}
-
-// ExitNamedtypespec is called when production namedtypespec is exited.
-func (s *BaseDZListener) ExitNamedtypespec(ctx *NamedtypespecContext) {}
-
-// EnterReftypespec is called when production reftypespec is entered.
-func (s *BaseDZListener) EnterReftypespec(ctx *ReftypespecContext) {}
-
-// ExitReftypespec is called when production reftypespec is exited.
-func (s *BaseDZListener) ExitReftypespec(ctx *ReftypespecContext) {}
-
-// EnterArraytypespec is called when production arraytypespec is entered.
-func (s *BaseDZListener) EnterArraytypespec(ctx *ArraytypespecContext) {}
-
-// ExitArraytypespec is called when production arraytypespec is exited.
-func (s *BaseDZListener) ExitArraytypespec(ctx *ArraytypespecContext) {}
-
-// EnterSizespec is called when production sizespec is entered.
-func (s *BaseDZListener) EnterSizespec(ctx *SizespecContext) {}
-
-// ExitSizespec is called when production sizespec is exited.
-func (s *BaseDZListener) ExitSizespec(ctx *SizespecContext) {}
+// ExitFuncArg is called when production funcArg is exited.
+func (s *BaseDZListener) ExitFuncArg(ctx *FuncArgContext) {}
 
 // EnterBlock is called when production block is entered.
 func (s *BaseDZListener) EnterBlock(ctx *BlockContext) {}
@@ -285,11 +207,11 @@ func (s *BaseDZListener) EnterContinueStatement(ctx *ContinueStatementContext) {
 // ExitContinueStatement is called when production continueStatement is exited.
 func (s *BaseDZListener) ExitContinueStatement(ctx *ContinueStatementContext) {}
 
-// EnterDeclaration is called when production declaration is entered.
-func (s *BaseDZListener) EnterDeclaration(ctx *DeclarationContext) {}
+// EnterVarDecl is called when production varDecl is entered.
+func (s *BaseDZListener) EnterVarDecl(ctx *VarDeclContext) {}
 
-// ExitDeclaration is called when production declaration is exited.
-func (s *BaseDZListener) ExitDeclaration(ctx *DeclarationContext) {}
+// ExitVarDecl is called when production varDecl is exited.
+func (s *BaseDZListener) ExitVarDecl(ctx *VarDeclContext) {}
 
 // EnterProcCall is called when production procCall is entered.
 func (s *BaseDZListener) EnterProcCall(ctx *ProcCallContext) {}
