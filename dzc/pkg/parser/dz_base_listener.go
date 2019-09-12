@@ -177,12 +177,6 @@ func (s *BaseDZListener) EnterTypedecl(ctx *TypedeclContext) {}
 // ExitTypedecl is called when production typedecl is exited.
 func (s *BaseDZListener) ExitTypedecl(ctx *TypedeclContext) {}
 
-// EnterBlock is called when production block is entered.
-func (s *BaseDZListener) EnterBlock(ctx *BlockContext) {}
-
-// ExitBlock is called when production block is exited.
-func (s *BaseDZListener) ExitBlock(ctx *BlockContext) {}
-
 // EnterTypespec is called when production typespec is entered.
 func (s *BaseDZListener) EnterTypespec(ctx *TypespecContext) {}
 
@@ -225,11 +219,11 @@ func (s *BaseDZListener) EnterSizespec(ctx *SizespecContext) {}
 // ExitSizespec is called when production sizespec is exited.
 func (s *BaseDZListener) ExitSizespec(ctx *SizespecContext) {}
 
-// EnterStatements is called when production statements is entered.
-func (s *BaseDZListener) EnterStatements(ctx *StatementsContext) {}
+// EnterBlock is called when production block is entered.
+func (s *BaseDZListener) EnterBlock(ctx *BlockContext) {}
 
-// ExitStatements is called when production statements is exited.
-func (s *BaseDZListener) ExitStatements(ctx *StatementsContext) {}
+// ExitBlock is called when production block is exited.
+func (s *BaseDZListener) ExitBlock(ctx *BlockContext) {}
 
 // EnterStatement is called when production statement is entered.
 func (s *BaseDZListener) EnterStatement(ctx *StatementContext) {}
@@ -237,47 +231,29 @@ func (s *BaseDZListener) EnterStatement(ctx *StatementContext) {}
 // ExitStatement is called when production statement is exited.
 func (s *BaseDZListener) ExitStatement(ctx *StatementContext) {}
 
-// EnterEquation is called when production equation is entered.
-func (s *BaseDZListener) EnterEquation(ctx *EquationContext) {}
-
-// ExitEquation is called when production equation is exited.
-func (s *BaseDZListener) ExitEquation(ctx *EquationContext) {}
-
-// EnterAsgnop is called when production asgnop is entered.
-func (s *BaseDZListener) EnterAsgnop(ctx *AsgnopContext) {}
-
-// ExitAsgnop is called when production asgnop is exited.
-func (s *BaseDZListener) ExitAsgnop(ctx *AsgnopContext) {}
-
 // EnterCondition is called when production condition is entered.
 func (s *BaseDZListener) EnterCondition(ctx *ConditionContext) {}
 
 // ExitCondition is called when production condition is exited.
 func (s *BaseDZListener) ExitCondition(ctx *ConditionContext) {}
 
-// EnterIfblock is called when production ifblock is entered.
-func (s *BaseDZListener) EnterIfblock(ctx *IfblockContext) {}
+// EnterIfConditionBranch is called when production ifConditionBranch is entered.
+func (s *BaseDZListener) EnterIfConditionBranch(ctx *IfConditionBranchContext) {}
 
-// ExitIfblock is called when production ifblock is exited.
-func (s *BaseDZListener) ExitIfblock(ctx *IfblockContext) {}
+// ExitIfConditionBranch is called when production ifConditionBranch is exited.
+func (s *BaseDZListener) ExitIfConditionBranch(ctx *IfConditionBranchContext) {}
 
-// EnterElseblocks is called when production elseblocks is entered.
-func (s *BaseDZListener) EnterElseblocks(ctx *ElseblocksContext) {}
+// EnterElifConditionBranch is called when production elifConditionBranch is entered.
+func (s *BaseDZListener) EnterElifConditionBranch(ctx *ElifConditionBranchContext) {}
 
-// ExitElseblocks is called when production elseblocks is exited.
-func (s *BaseDZListener) ExitElseblocks(ctx *ElseblocksContext) {}
+// ExitElifConditionBranch is called when production elifConditionBranch is exited.
+func (s *BaseDZListener) ExitElifConditionBranch(ctx *ElifConditionBranchContext) {}
 
-// EnterElifblock is called when production elifblock is entered.
-func (s *BaseDZListener) EnterElifblock(ctx *ElifblockContext) {}
+// EnterElseConditionBranch is called when production elseConditionBranch is entered.
+func (s *BaseDZListener) EnterElseConditionBranch(ctx *ElseConditionBranchContext) {}
 
-// ExitElifblock is called when production elifblock is exited.
-func (s *BaseDZListener) ExitElifblock(ctx *ElifblockContext) {}
-
-// EnterElseblock is called when production elseblock is entered.
-func (s *BaseDZListener) EnterElseblock(ctx *ElseblockContext) {}
-
-// ExitElseblock is called when production elseblock is exited.
-func (s *BaseDZListener) ExitElseblock(ctx *ElseblockContext) {}
+// ExitElseConditionBranch is called when production elseConditionBranch is exited.
+func (s *BaseDZListener) ExitElseConditionBranch(ctx *ElseConditionBranchContext) {}
 
 // EnterLoop is called when production loop is entered.
 func (s *BaseDZListener) EnterLoop(ctx *LoopContext) {}
@@ -285,38 +261,74 @@ func (s *BaseDZListener) EnterLoop(ctx *LoopContext) {}
 // ExitLoop is called when production loop is exited.
 func (s *BaseDZListener) ExitLoop(ctx *LoopContext) {}
 
-// EnterTrueloop is called when production trueloop is entered.
-func (s *BaseDZListener) EnterTrueloop(ctx *TrueloopContext) {}
+// EnterTrueLoop is called when production trueLoop is entered.
+func (s *BaseDZListener) EnterTrueLoop(ctx *TrueLoopContext) {}
 
-// ExitTrueloop is called when production trueloop is exited.
-func (s *BaseDZListener) ExitTrueloop(ctx *TrueloopContext) {}
+// ExitTrueLoop is called when production trueLoop is exited.
+func (s *BaseDZListener) ExitTrueLoop(ctx *TrueLoopContext) {}
 
-// EnterExpr is called when production expr is entered.
-func (s *BaseDZListener) EnterExpr(ctx *ExprContext) {}
+// EnterWhileLoop is called when production whileLoop is entered.
+func (s *BaseDZListener) EnterWhileLoop(ctx *WhileLoopContext) {}
 
-// ExitExpr is called when production expr is exited.
-func (s *BaseDZListener) ExitExpr(ctx *ExprContext) {}
+// ExitWhileLoop is called when production whileLoop is exited.
+func (s *BaseDZListener) ExitWhileLoop(ctx *WhileLoopContext) {}
 
-// EnterEvalres is called when production evalres is entered.
-func (s *BaseDZListener) EnterEvalres(ctx *EvalresContext) {}
+// EnterBreakStatement is called when production breakStatement is entered.
+func (s *BaseDZListener) EnterBreakStatement(ctx *BreakStatementContext) {}
 
-// ExitEvalres is called when production evalres is exited.
-func (s *BaseDZListener) ExitEvalres(ctx *EvalresContext) {}
+// ExitBreakStatement is called when production breakStatement is exited.
+func (s *BaseDZListener) ExitBreakStatement(ctx *BreakStatementContext) {}
 
-// EnterRetstatement is called when production retstatement is entered.
-func (s *BaseDZListener) EnterRetstatement(ctx *RetstatementContext) {}
+// EnterContinueStatement is called when production continueStatement is entered.
+func (s *BaseDZListener) EnterContinueStatement(ctx *ContinueStatementContext) {}
 
-// ExitRetstatement is called when production retstatement is exited.
-func (s *BaseDZListener) ExitRetstatement(ctx *RetstatementContext) {}
+// ExitContinueStatement is called when production continueStatement is exited.
+func (s *BaseDZListener) ExitContinueStatement(ctx *ContinueStatementContext) {}
 
-// EnterProcretstatement is called when production procretstatement is entered.
-func (s *BaseDZListener) EnterProcretstatement(ctx *ProcretstatementContext) {}
+// EnterDeclaration is called when production declaration is entered.
+func (s *BaseDZListener) EnterDeclaration(ctx *DeclarationContext) {}
 
-// ExitProcretstatement is called when production procretstatement is exited.
-func (s *BaseDZListener) ExitProcretstatement(ctx *ProcretstatementContext) {}
+// ExitDeclaration is called when production declaration is exited.
+func (s *BaseDZListener) ExitDeclaration(ctx *DeclarationContext) {}
 
-// EnterFuncretstatement is called when production funcretstatement is entered.
-func (s *BaseDZListener) EnterFuncretstatement(ctx *FuncretstatementContext) {}
+// EnterProcCall is called when production procCall is entered.
+func (s *BaseDZListener) EnterProcCall(ctx *ProcCallContext) {}
 
-// ExitFuncretstatement is called when production funcretstatement is exited.
-func (s *BaseDZListener) ExitFuncretstatement(ctx *FuncretstatementContext) {}
+// ExitProcCall is called when production procCall is exited.
+func (s *BaseDZListener) ExitProcCall(ctx *ProcCallContext) {}
+
+// EnterProcParam is called when production procParam is entered.
+func (s *BaseDZListener) EnterProcParam(ctx *ProcParamContext) {}
+
+// ExitProcParam is called when production procParam is exited.
+func (s *BaseDZListener) ExitProcParam(ctx *ProcParamContext) {}
+
+// EnterExpression is called when production expression is entered.
+func (s *BaseDZListener) EnterExpression(ctx *ExpressionContext) {}
+
+// ExitExpression is called when production expression is exited.
+func (s *BaseDZListener) ExitExpression(ctx *ExpressionContext) {}
+
+// EnterFuncParam is called when production funcParam is entered.
+func (s *BaseDZListener) EnterFuncParam(ctx *FuncParamContext) {}
+
+// ExitFuncParam is called when production funcParam is exited.
+func (s *BaseDZListener) ExitFuncParam(ctx *FuncParamContext) {}
+
+// EnterUnaryOperator is called when production unaryOperator is entered.
+func (s *BaseDZListener) EnterUnaryOperator(ctx *UnaryOperatorContext) {}
+
+// ExitUnaryOperator is called when production unaryOperator is exited.
+func (s *BaseDZListener) ExitUnaryOperator(ctx *UnaryOperatorContext) {}
+
+// EnterBinaryOperator is called when production binaryOperator is entered.
+func (s *BaseDZListener) EnterBinaryOperator(ctx *BinaryOperatorContext) {}
+
+// ExitBinaryOperator is called when production binaryOperator is exited.
+func (s *BaseDZListener) ExitBinaryOperator(ctx *BinaryOperatorContext) {}
+
+// EnterReturnStatement is called when production returnStatement is entered.
+func (s *BaseDZListener) EnterReturnStatement(ctx *ReturnStatementContext) {}
+
+// ExitReturnStatement is called when production returnStatement is exited.
+func (s *BaseDZListener) ExitReturnStatement(ctx *ReturnStatementContext) {}

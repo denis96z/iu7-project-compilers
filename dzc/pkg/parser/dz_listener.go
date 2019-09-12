@@ -86,9 +86,6 @@ type DZListener interface {
 	// EnterTypedecl is called when entering the typedecl production.
 	EnterTypedecl(c *TypedeclContext)
 
-	// EnterBlock is called when entering the block production.
-	EnterBlock(c *BlockContext)
-
 	// EnterTypespec is called when entering the typespec production.
 	EnterTypespec(c *TypespecContext)
 
@@ -110,53 +107,62 @@ type DZListener interface {
 	// EnterSizespec is called when entering the sizespec production.
 	EnterSizespec(c *SizespecContext)
 
-	// EnterStatements is called when entering the statements production.
-	EnterStatements(c *StatementsContext)
+	// EnterBlock is called when entering the block production.
+	EnterBlock(c *BlockContext)
 
 	// EnterStatement is called when entering the statement production.
 	EnterStatement(c *StatementContext)
 
-	// EnterEquation is called when entering the equation production.
-	EnterEquation(c *EquationContext)
-
-	// EnterAsgnop is called when entering the asgnop production.
-	EnterAsgnop(c *AsgnopContext)
-
 	// EnterCondition is called when entering the condition production.
 	EnterCondition(c *ConditionContext)
 
-	// EnterIfblock is called when entering the ifblock production.
-	EnterIfblock(c *IfblockContext)
+	// EnterIfConditionBranch is called when entering the ifConditionBranch production.
+	EnterIfConditionBranch(c *IfConditionBranchContext)
 
-	// EnterElseblocks is called when entering the elseblocks production.
-	EnterElseblocks(c *ElseblocksContext)
+	// EnterElifConditionBranch is called when entering the elifConditionBranch production.
+	EnterElifConditionBranch(c *ElifConditionBranchContext)
 
-	// EnterElifblock is called when entering the elifblock production.
-	EnterElifblock(c *ElifblockContext)
-
-	// EnterElseblock is called when entering the elseblock production.
-	EnterElseblock(c *ElseblockContext)
+	// EnterElseConditionBranch is called when entering the elseConditionBranch production.
+	EnterElseConditionBranch(c *ElseConditionBranchContext)
 
 	// EnterLoop is called when entering the loop production.
 	EnterLoop(c *LoopContext)
 
-	// EnterTrueloop is called when entering the trueloop production.
-	EnterTrueloop(c *TrueloopContext)
+	// EnterTrueLoop is called when entering the trueLoop production.
+	EnterTrueLoop(c *TrueLoopContext)
 
-	// EnterExpr is called when entering the expr production.
-	EnterExpr(c *ExprContext)
+	// EnterWhileLoop is called when entering the whileLoop production.
+	EnterWhileLoop(c *WhileLoopContext)
 
-	// EnterEvalres is called when entering the evalres production.
-	EnterEvalres(c *EvalresContext)
+	// EnterBreakStatement is called when entering the breakStatement production.
+	EnterBreakStatement(c *BreakStatementContext)
 
-	// EnterRetstatement is called when entering the retstatement production.
-	EnterRetstatement(c *RetstatementContext)
+	// EnterContinueStatement is called when entering the continueStatement production.
+	EnterContinueStatement(c *ContinueStatementContext)
 
-	// EnterProcretstatement is called when entering the procretstatement production.
-	EnterProcretstatement(c *ProcretstatementContext)
+	// EnterDeclaration is called when entering the declaration production.
+	EnterDeclaration(c *DeclarationContext)
 
-	// EnterFuncretstatement is called when entering the funcretstatement production.
-	EnterFuncretstatement(c *FuncretstatementContext)
+	// EnterProcCall is called when entering the procCall production.
+	EnterProcCall(c *ProcCallContext)
+
+	// EnterProcParam is called when entering the procParam production.
+	EnterProcParam(c *ProcParamContext)
+
+	// EnterExpression is called when entering the expression production.
+	EnterExpression(c *ExpressionContext)
+
+	// EnterFuncParam is called when entering the funcParam production.
+	EnterFuncParam(c *FuncParamContext)
+
+	// EnterUnaryOperator is called when entering the unaryOperator production.
+	EnterUnaryOperator(c *UnaryOperatorContext)
+
+	// EnterBinaryOperator is called when entering the binaryOperator production.
+	EnterBinaryOperator(c *BinaryOperatorContext)
+
+	// EnterReturnStatement is called when entering the returnStatement production.
+	EnterReturnStatement(c *ReturnStatementContext)
 
 	// ExitStart is called when exiting the start production.
 	ExitStart(c *StartContext)
@@ -236,9 +242,6 @@ type DZListener interface {
 	// ExitTypedecl is called when exiting the typedecl production.
 	ExitTypedecl(c *TypedeclContext)
 
-	// ExitBlock is called when exiting the block production.
-	ExitBlock(c *BlockContext)
-
 	// ExitTypespec is called when exiting the typespec production.
 	ExitTypespec(c *TypespecContext)
 
@@ -260,51 +263,60 @@ type DZListener interface {
 	// ExitSizespec is called when exiting the sizespec production.
 	ExitSizespec(c *SizespecContext)
 
-	// ExitStatements is called when exiting the statements production.
-	ExitStatements(c *StatementsContext)
+	// ExitBlock is called when exiting the block production.
+	ExitBlock(c *BlockContext)
 
 	// ExitStatement is called when exiting the statement production.
 	ExitStatement(c *StatementContext)
 
-	// ExitEquation is called when exiting the equation production.
-	ExitEquation(c *EquationContext)
-
-	// ExitAsgnop is called when exiting the asgnop production.
-	ExitAsgnop(c *AsgnopContext)
-
 	// ExitCondition is called when exiting the condition production.
 	ExitCondition(c *ConditionContext)
 
-	// ExitIfblock is called when exiting the ifblock production.
-	ExitIfblock(c *IfblockContext)
+	// ExitIfConditionBranch is called when exiting the ifConditionBranch production.
+	ExitIfConditionBranch(c *IfConditionBranchContext)
 
-	// ExitElseblocks is called when exiting the elseblocks production.
-	ExitElseblocks(c *ElseblocksContext)
+	// ExitElifConditionBranch is called when exiting the elifConditionBranch production.
+	ExitElifConditionBranch(c *ElifConditionBranchContext)
 
-	// ExitElifblock is called when exiting the elifblock production.
-	ExitElifblock(c *ElifblockContext)
-
-	// ExitElseblock is called when exiting the elseblock production.
-	ExitElseblock(c *ElseblockContext)
+	// ExitElseConditionBranch is called when exiting the elseConditionBranch production.
+	ExitElseConditionBranch(c *ElseConditionBranchContext)
 
 	// ExitLoop is called when exiting the loop production.
 	ExitLoop(c *LoopContext)
 
-	// ExitTrueloop is called when exiting the trueloop production.
-	ExitTrueloop(c *TrueloopContext)
+	// ExitTrueLoop is called when exiting the trueLoop production.
+	ExitTrueLoop(c *TrueLoopContext)
 
-	// ExitExpr is called when exiting the expr production.
-	ExitExpr(c *ExprContext)
+	// ExitWhileLoop is called when exiting the whileLoop production.
+	ExitWhileLoop(c *WhileLoopContext)
 
-	// ExitEvalres is called when exiting the evalres production.
-	ExitEvalres(c *EvalresContext)
+	// ExitBreakStatement is called when exiting the breakStatement production.
+	ExitBreakStatement(c *BreakStatementContext)
 
-	// ExitRetstatement is called when exiting the retstatement production.
-	ExitRetstatement(c *RetstatementContext)
+	// ExitContinueStatement is called when exiting the continueStatement production.
+	ExitContinueStatement(c *ContinueStatementContext)
 
-	// ExitProcretstatement is called when exiting the procretstatement production.
-	ExitProcretstatement(c *ProcretstatementContext)
+	// ExitDeclaration is called when exiting the declaration production.
+	ExitDeclaration(c *DeclarationContext)
 
-	// ExitFuncretstatement is called when exiting the funcretstatement production.
-	ExitFuncretstatement(c *FuncretstatementContext)
+	// ExitProcCall is called when exiting the procCall production.
+	ExitProcCall(c *ProcCallContext)
+
+	// ExitProcParam is called when exiting the procParam production.
+	ExitProcParam(c *ProcParamContext)
+
+	// ExitExpression is called when exiting the expression production.
+	ExitExpression(c *ExpressionContext)
+
+	// ExitFuncParam is called when exiting the funcParam production.
+	ExitFuncParam(c *FuncParamContext)
+
+	// ExitUnaryOperator is called when exiting the unaryOperator production.
+	ExitUnaryOperator(c *UnaryOperatorContext)
+
+	// ExitBinaryOperator is called when exiting the binaryOperator production.
+	ExitBinaryOperator(c *BinaryOperatorContext)
+
+	// ExitReturnStatement is called when exiting the returnStatement production.
+	ExitReturnStatement(c *ReturnStatementContext)
 }

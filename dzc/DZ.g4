@@ -1,20 +1,22 @@
 grammar DZ;
 
-KW_PKG:    'pkg';
-KW_TYPE:   'type';
-KW_FOR:    'for';
-KW_WHILE:  'while';
-KW_LOOP:   'loop';
-KW_IF:     'if';
-KW_ELIF:   'elif';
-KW_ELSE:   'else';
-KW_PROC:   'proc';
-KW_FUNC:   'func';
-KW_CONST:  'const';
-KW_LET:    'let';
-KW_STRUCT: 'struct';
-KW_ENUM:   'enum';
-KW_RETURN: 'return';
+KW_PKG:      'pkg';
+KW_TYPE:     'type';
+KW_FOR:      'for';
+KW_WHILE:    'while';
+KW_LOOP:     'loop';
+KW_BREAK:    'break';
+KW_CONTINUE: 'continue';
+KW_IF:       'if';
+KW_ELIF:     'elif';
+KW_ELSE:     'else';
+KW_PROC:     'proc';
+KW_FUNC:     'func';
+KW_CONST:    'const';
+KW_LET:      'let';
+KW_STRUCT:   'struct';
+KW_ENUM:     'enum';
+KW_RETURN:   'return';
 
 I8_T:    'i8_t';
 U8_T:    'u8_t';
@@ -46,12 +48,13 @@ MUL: '*';
 DIV: '/';
 MOD: '%';
 
-BIN_SHL: '<<';
-BIN_SHR: '>>';
-BIN_NOT: '~';
-BIN_AND: '&';
-BIN_OR:  '|';
-BIN_XOR: '^';
+NOT: '~';
+
+SHL: '<<';
+SHR: '>>';
+AND: '&';
+OR:  '|';
+XOR: '^';
 
 ASGN:     '=';
 ADD_ASGN: '+=';
@@ -60,12 +63,11 @@ MUL_ASGN: '*=';
 DIV_ASGN: '/=';
 MOD_ASGN: '%=';
 
-BIN_SHL_ASGN: '<<=';
-BIN_SHR_ASGN: '>>=';
-BIN_NOT_ASGN: '~=';
-BIN_AND_ASGN: '&=';
-BIN_OR_ASGN:  '|=';
-BIN_XOR_ASGN: '^=';
+SHL_ASGN: '<<=';
+SHR_ASGN: '>>=';
+AND_ASGN: '&=';
+OR_ASGN:  '|=';
+XOR_ASGN: '^=';
 
 REF: '@';
 
@@ -118,8 +120,6 @@ constval  : id=CONST;
 
 typedecl : KW_TYPE id=TYPE ASGN t=typespec SEMICOLON;
 
-block : LEFT_BRC statements RIGHT_BRC;
-
 typespec       : simpletypespec | reftypespec | arraytypespec;
 simpletypespec : basictypespec | namedtypespec;
 basictypespec  : id=(
@@ -135,35 +135,86 @@ reftypespec    : REF id=simpletypespec;
 arraytypespec  : LEFT_BRK id=simpletypespec COLON size=sizespec RIGHT_BRK;
 sizespec       : INT_CONST | name=CONST;
 
-statements : statement*;
-statement  : equation | condition | loop | retstatement SEMICOLON;
+block
+    : statement*;
 
-equation : id=IDENTIFIER asgnop expr SEMICOLON;
-asgnop   : id=(ASGN | ADD_ASGN | SUB_ASGN | MUL_ASGN | DIV_ASGN);
-
-condition : ifblock elseblocks;
-
-ifblock    : KW_IF expr block;
-elseblocks : elifblock* elseblock?;
-elifblock  : KW_ELIF expr block;
-elseblock  : KW_ELSE block;
-
-loop : trueloop;
-trueloop : KW_LOOP block;
-
-expr           : evalres | (evalres);
-evalres        : constexpr;
-
-retstatement
-    : procretstatement
-    | funcretstatement
+statement
+    : condition
+    | loop
+    | breakStatement
+    | continueStatement
+    | procCall
+    | declaration SEMICOLON
+    | expression SEMICOLON
+    | returnStatement
     ;
-procretstatement : KW_RETURN;
-funcretstatement : KW_RETURN v=expr;
 
-//equation
-//    : expr relop expr
-//    ;
-//
-//relop
-//    :
+condition
+    : ifConditionBranch elifConditionBranch* elseConditionBranch?;
+
+ifConditionBranch
+    : KW_IF cond=expression LEFT_BRC body=block RIGHT_BRC;
+
+elifConditionBranch
+    : KW_ELIF cond=expression LEFT_BRC body=block RIGHT_BRC;
+
+elseConditionBranch
+    : KW_ELSE LEFT_BRC body=block RIGHT_BRC;
+
+loop
+    : trueLoop | whileLoop;
+
+trueLoop
+    : KW_LOOP LEFT_BRC body=block RIGHT_BRC;
+
+whileLoop
+    : KW_WHILE cond=expression LEFT_BRC body=block RIGHT_BRC;
+
+breakStatement
+    : KW_BREAK
+    ;
+
+continueStatement
+    : KW_CONTINUE
+    ;
+
+declaration
+    : KW_LET name=IDENTIFIER ASGN value=expression;
+
+procCall
+    : procName=IDENTIFIER LEFT_PRT (procParam (COMMA procParam)*)? RIGHT_PRT SEMICOLON;
+
+procParam
+    : value = expression;
+
+expression
+    : varName=IDENTIFIER
+    | intValue=INT_CONST
+    | boolValue=(TRUE | FALSE)
+    | constName=CONST
+    | LEFT_BRK brkExpr=expression RIGHT_BRK
+    | LEFT_PRT prtExpr=expression RIGHT_PRT
+    | funcName=IDENTIFIER LEFT_PRT (funcParam (COMMA funcParam)*)? RIGHT_PRT
+    | lBinExpr=expression binOp=binaryOperator rBinExpr=expression
+    | unOp=unaryOperator unExpr=expression
+    ;
+
+funcParam
+    : value=expression;
+
+unaryOperator
+    : SUB
+    | NOT
+    ;
+
+binaryOperator
+    : ASGN
+    | ADD | SUB | MUL | DIV | MOD
+    | AND | OR  | XOR | SHL | SHR
+    | ADD_ASGN  | SUB_ASGN  | MUL_ASGN | DIV_ASGN | MOD_ASGN
+    | AND_ASGN  | OR_ASGN   | XOR_ASGN | SHL_ASGN | SHR_ASGN
+    ;
+
+returnStatement
+    : KW_RETURN
+    | KW_RETURN value=expression SEMICOLON;
