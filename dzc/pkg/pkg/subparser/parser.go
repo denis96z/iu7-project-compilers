@@ -3,29 +3,29 @@ package subparser
 import (
 	"log"
 
-	"dzc/pkg/ast/pkginfo"
-	"dzc/pkg/ast/utils"
 	"dzc/pkg/parser"
+	"dzc/pkg/pkg/syntax"
+	"dzc/pkg/pkg/utils"
 )
 
 type Parser struct {
 	*parser.BaseDZListener
 
-	Functions  map[string]*pkginfo.Function
-	Procedures map[string]*pkginfo.Procedure
+	Functions  map[string]*syntax.Function
+	Procedures map[string]*syntax.Procedure
 
-	types map[string]pkginfo.Type
+	types map[string]syntax.Type
 
 	currentName    string
-	currentArgs    map[string]*pkginfo.Arg
-	currentRetType pkginfo.Type
+	currentArgs    map[string]*syntax.Arg
+	currentRetType syntax.Type
 }
 
-func New(types map[string]pkginfo.Type) *Parser {
+func New(types map[string]syntax.Type) *Parser {
 	return &Parser{
 		types:      types,
-		Functions:  make(map[string]*pkginfo.Function),
-		Procedures: make(map[string]*pkginfo.Procedure),
+		Functions:  make(map[string]*syntax.Function),
+		Procedures: make(map[string]*syntax.Procedure),
 	}
 }
 
@@ -38,7 +38,7 @@ func (p *Parser) EnterProcheader(ctx *parser.ProcheaderContext) {
 }
 
 func (p *Parser) ExitProcdecl(ctx *parser.ProcdeclContext) {
-	p.Procedures[p.currentName] = &pkginfo.Procedure{
+	p.Procedures[p.currentName] = &syntax.Procedure{
 		Name: p.currentName,
 		Args: p.currentArgs,
 	}
@@ -53,7 +53,7 @@ func (p *Parser) EnterFuncheader(ctx *parser.FuncheaderContext) {
 }
 
 func (p *Parser) ExitFuncdecl(ctx *parser.FuncdeclContext) {
-	p.Functions[p.currentName] = &pkginfo.Function{
+	p.Functions[p.currentName] = &syntax.Function{
 		Name:    p.currentName,
 		Args:    p.currentArgs,
 		RetType: p.currentRetType,
@@ -61,7 +61,7 @@ func (p *Parser) ExitFuncdecl(ctx *parser.FuncdeclContext) {
 }
 
 func (p *Parser) EnterArgs(ctx *parser.ArgsContext) {
-	p.currentArgs = make(map[string]*pkginfo.Arg)
+	p.currentArgs = make(map[string]*syntax.Arg)
 }
 
 func (p *Parser) EnterArgdecl(ctx *parser.ArgdeclContext) {
@@ -70,7 +70,7 @@ func (p *Parser) EnterArgdecl(ctx *parser.ArgdeclContext) {
 		log.Fatalf("arg %q in %q declaration is redeclared", name, p.currentName)
 	}
 
-	arg := &pkginfo.Arg{
+	arg := &syntax.Arg{
 		Name: name,
 	}
 

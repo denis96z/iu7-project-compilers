@@ -2,9 +2,8 @@ package codegen
 
 import (
 	"bytes"
+	"dzc/pkg/pkg/pkg"
 	"text/template"
-
-	"dzc/pkg/ast/pkginfo"
 
 	"github.com/pkg/errors"
 )
@@ -31,11 +30,6 @@ const (
 {{ range .Consts -}}
 #define {{ .Name }} {{ .Value }}
 {{ end }}
-{{ range .Enums -}}
-typedef enum {
-{{ range .Options -}} {{ . }}, {{ end }}
-} {{ .Name }};
-{{ end -}}
 
 //stub
 int main() {
@@ -44,7 +38,7 @@ int main() {
 `
 )
 
-func GenPkgCode(pkg *pkginfo.PkgInfo) (string, error) {
+func GenPkgCode(pkg *pkg.Info) (string, error) {
 	t, err := template.New("").Parse(tmp)
 	if err != nil {
 		return "", errors.Wrap(err, "failed to parse template")

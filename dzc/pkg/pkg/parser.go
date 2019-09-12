@@ -1,8 +1,11 @@
-package ast
+package pkg
 
 import (
-	"dzc/pkg/ast/pkginfo"
 	"dzc/pkg/parser"
+	"dzc/pkg/pkg/listeners/consts"
+	"dzc/pkg/pkg/listeners/pkgs"
+	"dzc/pkg/pkg/listeners/types"
+	"dzc/pkg/pkg/pkg"
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
@@ -11,32 +14,43 @@ type Parser struct {
 	listeners []Listener
 }
 
-func New() *Parser {
+func NewParser() *Parser {
 	return &Parser{
-		listeners: nil,
+		listeners: []Listener{
+			pkgs.New(),
+			consts.New(),
+			types.New(),
+		},
 	}
 }
 
 type Listener interface {
 	antlr.ParseTreeListener
+
+	SetPkg(info *pkg.Info)
 	FixIncomplete()
+	UpdatePkg()
 }
 
-func (p *Parser) ParseSource(src string) *pkginfo.PkgInfo {
+func (p *Parser) ParseSource(src string) *pkg.Info {
 	lx := parser.NewDZLexer(
-		antlr.NewInputStream(string(src)),
+		antlr.NewInputStream(src),
 	)
 
-	_ = &pkginfo.PkgInfo{}
+	info := &pkg.Info{}
 	ts := antlr.NewCommonTokenStream(lx, antlr.TokenDefaultChannel)
 
 	for _, listener := range p.listeners {
 		ts.Seek(0)
 
+		listener.SetPkg(info)
+
 		ps := parser.NewDZParser(ts)
 		antlr.ParseTreeWalkerDefault.Walk(listener, ps.Start())
+
 		listener.FixIncomplete()
+		listener.UpdatePkg()
 	}
 
-	return nil
+	return info
 }
