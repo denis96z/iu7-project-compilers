@@ -61,7 +61,7 @@ func (v *Listener) EnterTypeDecl(ctx *parser.TypeDeclContext) {
 				BaseType: nil,
 			}
 	} else if syntax.IsRefType(tName) {
-		bt := v.types[syntax.ParseTypeNameFromRefTypeName(tName)]
+		bt := v.types[syntax.ParseValueTypeNameFromRefTypeName(tName)]
 		if bt == nil {
 			v.incompleteTypes[name] =
 				&syntax.Ref{
@@ -115,7 +115,7 @@ func (v *Listener) EnterTypeDecl(ctx *parser.TypeDeclContext) {
 		v.types[tName] = syntax.NewArray(bt, size)
 		v.types[name] = syntax.NewNamedType(name, v.types[tName])
 	} else if syntax.IsSliceType(tName) {
-		bt := v.types[syntax.ParseTypeNameFromSliceTypeName(tName)]
+		bt := v.types[syntax.ParseItemTypeNameFromSliceTypeName(tName)]
 		if bt == nil {
 			v.incompleteTypes[name] =
 				&syntax.Slice{

@@ -1,6 +1,8 @@
 package syntax
 
 import (
+	"dzc/pkg/pkg/listeners/context"
+	"dzc/pkg/pkg/listeners/ctxlog"
 	"log"
 	"regexp"
 	"strconv"
@@ -107,7 +109,7 @@ func IsSliceType(name string) bool {
 		!strings.Contains(name, ":")
 }
 
-func ParseTypeNameFromRefTypeName(name string) string {
+func ParseValueTypeNameFromRefTypeName(name string) string {
 	return name[1:]
 }
 
@@ -127,6 +129,26 @@ func ParseSizeFromArrayTypeName(name string) interface{} {
 	return size
 }
 
-func ParseTypeNameFromSliceTypeName(name string) string {
+func ParseItemTypeNameFromSliceTypeName(name string) string {
 	return name[1 : len(name)-1]
+}
+
+func CheckRefValueTypeIsAllowed(ctx context.Context, t Type) {
+	if !t.IsBasic() && !t.IsEnum() || !t.IsStruct() {
+		ctxlog.Fatalf(ctx, "ref is not allowed for type %q", t.GetName())
+	}
+}
+
+func CheckArrayValueTypeIsAllowed(ctx context.Context, t Type) {
+	checkArrayValueTypeIsAllowed(ctx, TypeArray, t)
+}
+
+func CheckSliceValueTypeIsAllowed(ctx context.Context, t Type) {
+	checkArrayValueTypeIsAllowed(ctx, TypeSlice, t)
+}
+
+func checkArrayValueTypeIsAllowed(ctx context.Context, arrayType string, t Type) {
+	if t.IsRef() || t.IsArray() || t.IsSlice() {
+		ctxlog.Fatalf(ctx, "%q is not allowed for type %q", arrayType, t.GetName())
+	}
 }

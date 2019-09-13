@@ -103,7 +103,6 @@ decl
     | funcDecl
     ;
 
-
 constDecl
     : KW_CONST name=CONST COLON tName=basicTypeSpec ASGN value=(INT_VALUE | KW_TRUE | KW_FALSE | CONST) SEMICOLON
     ;
@@ -182,7 +181,7 @@ funcArg
     ;
 
 block
-    : statement*;
+    : LEFT_BRC statement* RIGHT_BRC;
 
 statement
     : condition

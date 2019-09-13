@@ -36,3 +36,8 @@ type type13_t = @type11_t;
 type type14_t = [ssize_t];
 type type15_t = [type11_t];
 type type16_t = [type7_t];
+
+proc proc1() {}
+
+proc proc2(x: u8_t) {}
+proc proc3(x: [u8_t]) {}

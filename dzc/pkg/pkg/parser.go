@@ -4,6 +4,7 @@ import (
 	"dzc/pkg/parser"
 	"dzc/pkg/pkg/listeners/consts"
 	"dzc/pkg/pkg/listeners/pkgs"
+	"dzc/pkg/pkg/listeners/subs"
 	"dzc/pkg/pkg/listeners/types"
 	"dzc/pkg/pkg/pkg"
 
@@ -20,6 +21,7 @@ func NewParser() *Parser {
 			pkgs.New(),
 			consts.New(),
 			types.New(),
+			subs.New(),
 		},
 	}
 }
@@ -35,6 +37,16 @@ func (p *Parser) ParseSource(src string) *pkg.Info {
 	lx := parser.NewDZLexer(
 		antlr.NewInputStream(src),
 	)
+
+	//for {
+	//	t := lx.NextToken()
+	//	if t.GetTokenType() == antlr.TokenEOF {
+	//		break
+	//	}
+	//	fmt.Printf("%s (%q)\n",
+	//		lx.SymbolicNames[t.GetTokenType()], t.GetText())
+	//}
+	//os.Exit(1)
 
 	info := &pkg.Info{}
 	ts := antlr.NewCommonTokenStream(lx, antlr.TokenDefaultChannel)
