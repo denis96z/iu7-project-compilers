@@ -1,7 +1,10 @@
 package syntax
 
+//go:generate easyjson
+
+//easyjson:json
 type Const struct {
-	Name  string
-	Type  *BasicType
-	Value interface{}
+	Name  string      `json:"name"`
+	Type  *BasicType  `json:"type"`
+	Value interface{} `json:"value"`
 }

@@ -4,10 +4,11 @@ import (
 	"dzc/pkg/pkg/syntax"
 )
 
+//easyjson:json
 type Info struct {
-	Pkg        *syntax.Pkg
-	Consts     map[string]*syntax.Const
-	Types      map[string]syntax.Type
-	Procedures map[string]*syntax.Procedure
-	Functions  map[string]*syntax.Function
+	Pkg        *syntax.Pkg                  `json:"pkg"`
+	Consts     map[string]*syntax.Const     `json:"consts"`
+	Types      map[string]syntax.Type       `json:"types"`
+	Procedures map[string]*syntax.Procedure `json:"procedures"`
+	Functions  map[string]*syntax.Function  `json:"functions"`
 }

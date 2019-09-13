@@ -27,9 +27,8 @@ func NewParser() *Parser {
 type Listener interface {
 	antlr.ParseTreeListener
 
-	SetPkg(info *pkg.Info)
-	FixIncomplete()
-	UpdatePkg()
+	Initialize(info *pkg.Info)
+	Finalize()
 }
 
 func (p *Parser) ParseSource(src string) *pkg.Info {
@@ -43,13 +42,12 @@ func (p *Parser) ParseSource(src string) *pkg.Info {
 	for _, listener := range p.listeners {
 		ts.Seek(0)
 
-		listener.SetPkg(info)
+		listener.Initialize(info)
 
 		ps := parser.NewDZParser(ts)
 		antlr.ParseTreeWalkerDefault.Walk(listener, ps.Start())
 
-		listener.FixIncomplete()
-		listener.UpdatePkg()
+		listener.Finalize()
 	}
 
 	return info

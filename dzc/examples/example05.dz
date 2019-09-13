@@ -2,3 +2,37 @@ pkg main;
 
 const MY_CONST1: u8_t = 10;
 const MY_CONST2: u8_t = MY_CONST1;
+
+type type1_t = i8_t;
+type type2_t = type1_t;
+
+type type3_t = @u16_t;
+type type4_t = @type1_t;
+
+const MY_SIZE_CONST: size_t = 10;
+const MY_SIZE_CONST2: size_t = MY_SIZE_CONST;
+
+type type5_t = [i16_t:5];
+type type6_t = [u32_t:MY_SIZE_CONST];
+
+enum enum1_t {
+    OPTION1, OPTION2
+}
+
+type type7_t = enum1_t;
+type type8_t = @enum1_t;
+type type9_t = @type7_t;
+
+type type10_t = [enum1_t:MY_SIZE_CONST2];
+
+struct struct1_t {
+    attr1: ssize_t;
+}
+
+type type11_t = struct1_t;
+type type12_t = @struct1_t;
+type type13_t = @type11_t;
+
+type type14_t = [ssize_t];
+type type15_t = [type11_t];
+type type16_t = [type7_t];

@@ -1,13 +1,13 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
 
-	"dzc/pkg/codegen"
 	"dzc/pkg/pkg"
 )
 
@@ -36,13 +36,18 @@ func main() {
 
 	pkgInfo := pkg.NewParser().ParseSource(string(src))
 
-	dst, err := codegen.GenPkgCode(pkgInfo)
+	//dst, err := codegen.GenPkgCode(pkgInfo)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+
+	dst, err := json.Marshal(pkgInfo)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	nameDst := fmt.Sprintf(
-		"%s/%s.c", pathSrc, pkgInfo.Pkg.Name,
+		"%s/%s.json", pathSrc, pkgInfo.Pkg.Name,
 	)
 
 	dSrc, err := os.Create(nameDst)
@@ -55,7 +60,7 @@ func main() {
 		}
 	}()
 
-	_, err = dSrc.WriteString(dst)
+	_, err = dSrc.Write(dst)
 	if err != nil {
 		log.Fatal(err)
 	}

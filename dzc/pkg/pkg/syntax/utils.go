@@ -55,7 +55,7 @@ func init() {
 
 	basicTypes = make(map[string]Type)
 	for _, t := range bTypes {
-		basicTypes[t] = &BasicType{Name: t}
+		basicTypes[t] = NewBasicType(t)
 	}
 }
 

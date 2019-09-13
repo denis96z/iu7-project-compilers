@@ -25,14 +25,15 @@ type Listener struct {
 }
 
 func New() *Listener {
-	return &Listener{
-		types:           make(map[string]syntax.Type),
-		incompleteTypes: make(map[string]syntax.Type),
-	}
+	return &Listener{}
 }
 
-func (v *Listener) SetPkg(info *pkg.Info) {
+func (v *Listener) Initialize(info *pkg.Info) {
 	v.pkg = info
+
+	v.types = make(map[string]syntax.Type)
+	v.incompleteTypes = make(map[string]syntax.Type)
+
 	for tName, t := range syntax.GetBasicTypes() {
 		v.types[tName] = t
 	}
@@ -49,60 +50,48 @@ func (v *Listener) EnterTypeDecl(ctx *parser.TypeDeclContext) {
 		log.Fatalf("type %q is self-defining", name)
 	}
 	if tBase := v.types[tName]; tBase != nil {
-		v.types[name] =
-			&syntax.NamedType{
-				Name: name,
-				Type: tBase,
-			}
+		v.types[name] = syntax.NewNamedType(name, tBase)
 		return
 	}
 
 	if syntax.IsNamedType(tName) {
 		v.incompleteTypes[name] =
 			&syntax.NamedType{
-				Name: tName,
-				Type: nil,
+				Name:     tName,
+				BaseType: nil,
 			}
 	} else if syntax.IsRefType(tName) {
 		bt := v.types[syntax.ParseTypeNameFromRefTypeName(tName)]
 		if bt == nil {
 			v.incompleteTypes[name] =
 				&syntax.Ref{
-					Name: tName,
-					Type: nil,
+					Name:      tName,
+					ValueType: nil,
 				}
 			return
 		}
 
 		if bt.IsBasic() || bt.IsEnum() || bt.IsStruct() {
-			v.types[tName] =
-				&syntax.Ref{
-					Name: tName,
-					Type: syntax.GetBasicType(bt.GetName()),
-				}
-			v.types[name] =
-				&syntax.NamedType{
-					Name: name,
-					Type: v.types[tName],
-				}
+			v.types[tName] = syntax.NewRef(bt)
+			v.types[name] = syntax.NewNamedType(name, v.types[tName])
 			return
 		}
 
-		log.Fatalf("invalid definition [%q] for type %q", tName, name)
+		log.Fatalf("invalid definition %q for type %q", tName, name)
 	} else if syntax.IsArrayType(tName) {
 		var size int
-		switch vSize := syntax.ParseSizeFromArrayTypeName(name).(type) {
+		switch vSize := syntax.ParseSizeFromArrayTypeName(tName).(type) {
 		case int:
 			size = vSize
 		case string:
 			if c := v.pkg.Consts[vSize]; c != nil {
 				if c.Type.GetName() != syntax.BasicTypeSize {
 					log.Fatalf(
-						"const %q in definition of %q has wrong type %q [expected %q]",
-						c.Name, name, c.Type, syntax.BasicTypeSize,
+						"const %q in definition of %q has wrong type %q - expected %q",
+						c.Name, name, c.Type.GetName(), syntax.BasicTypeSize,
 					)
 				}
-				size = c.Value.(int)
+				size = int(c.Value.(uint64))
 			} else {
 				log.Fatalf("const %q in definition of %q is unknown", vSize, name)
 			}
@@ -112,53 +101,36 @@ func (v *Listener) EnterTypeDecl(ctx *parser.TypeDeclContext) {
 		if bt == nil {
 			v.incompleteTypes[name] =
 				&syntax.Array{
-					Name: tName,
-					Type: nil,
-					Size: size,
+					Name:     tName,
+					ItemType: nil,
+					Size:     size,
 				}
 			return
 		}
 
-		if bt.IsArray() || bt.IsSlice() {
-			log.Fatalf("invalid definition [%q] for type %q", tName, name)
+		if bt.IsRef() || bt.IsArray() || bt.IsSlice() {
+			log.Fatalf("invalid definition %q for type %q", tName, name)
 		}
 
-		v.types[tName] =
-			&syntax.Array{
-				Name: tName,
-				Type: bt,
-				Size: size,
-			}
-		v.types[name] =
-			&syntax.NamedType{
-				Name: name,
-				Type: v.types[tName],
-			}
+		v.types[tName] = syntax.NewArray(bt, size)
+		v.types[name] = syntax.NewNamedType(name, v.types[tName])
 	} else if syntax.IsSliceType(tName) {
 		bt := v.types[syntax.ParseTypeNameFromSliceTypeName(tName)]
 		if bt == nil {
 			v.incompleteTypes[name] =
 				&syntax.Slice{
-					Name: tName,
-					Type: nil,
+					Name:     tName,
+					ItemType: nil,
 				}
 			return
 		}
 
-		if bt.IsArray() || bt.IsSlice() {
-			log.Fatalf("invalid definition [%q] for type %q", tName, name)
+		if bt.IsRef() || bt.IsArray() || bt.IsSlice() {
+			log.Fatalf("invalid definition %q for type %q", tName, name)
 		}
 
-		v.types[tName] =
-			&syntax.Slice{
-				Name: tName,
-				Type: bt,
-			}
-		v.types[name] =
-			&syntax.NamedType{
-				Name: name,
-				Type: v.types[tName],
-			}
+		v.types[tName] = syntax.NewSlice(bt)
+		v.types[name] = syntax.NewNamedType(name, v.types[tName])
 	}
 }
 
@@ -174,10 +146,7 @@ func (v *Listener) EnterEnumDecl(ctx *parser.EnumDeclContext) {
 
 func (v *Listener) ExitEnumDecl(ctx *parser.EnumDeclContext) {
 	v.types[v.currentEnumName] =
-		&syntax.Enum{
-			Name:    v.currentEnumName,
-			Options: v.currentEnumOptions,
-		}
+		syntax.NewEnum(v.currentEnumName, v.currentEnumOptions)
 }
 
 func (v *Listener) EnterEnumOption(ctx *parser.EnumOptionContext) {
@@ -185,7 +154,7 @@ func (v *Listener) EnterEnumOption(ctx *parser.EnumOptionContext) {
 	if v.currentEnumOptions[name] != 0 {
 		log.Fatalf("option %q is redeclared for enum type %q", name, v.currentEnumName)
 	}
-	v.currentEnumOptions[name] = 1
+	v.currentEnumOptions[name] = byte(len(v.currentEnumOptions)) + 1
 }
 
 func (v *Listener) EnterStructDecl(ctx *parser.StructDeclContext) {
@@ -200,10 +169,9 @@ func (v *Listener) EnterStructDecl(ctx *parser.StructDeclContext) {
 }
 
 func (v *Listener) ExitStructDecl(ctx *parser.StructDeclContext) {
-	t := &syntax.Struct{
-		Name:  v.currentStructName,
-		Attrs: v.currentStructAttrs,
-	}
+	t := syntax.NewStruct(
+		v.currentStructName, v.currentStructAttrs,
+	)
 
 	if v.currentStructIsComplete {
 		v.types[v.currentStructName] = t
@@ -239,10 +207,10 @@ func (v *Listener) EnterStructAttr(ctx *parser.StructAttrContext) {
 	v.currentStructIsComplete = false
 }
 
-func (v *Listener) FixIncomplete() {
+func (v *Listener) fixIncomplete() {
 	//TODO
 }
 
-func (v *Listener) UpdatePkg() {
+func (v *Listener) Finalize() {
 	v.pkg.Types = v.types
 }

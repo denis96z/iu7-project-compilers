@@ -1,12 +1,28 @@
 package syntax
 
+//go:generate easyjson
+
+//easyjson:json
 type Struct struct {
-	Name  string
-	Attrs map[string]*Attr
+	Name  string           `json:"name"`
+	Type  string           `json:"type"`
+	Attrs map[string]*Attr `json:"attrs"`
+}
+
+func NewStruct(name string, attrs map[string]*Attr) *Struct {
+	return &Struct{
+		Name:  name,
+		Type:  TypeStruct,
+		Attrs: attrs,
+	}
 }
 
 func (v Struct) GetName() string {
 	return v.Name
+}
+
+func (v Struct) GetType() string {
+	return v.Type
 }
 
 func (v Struct) IsBasic() bool {
@@ -37,7 +53,8 @@ func (v Struct) IsStruct() bool {
 	return true
 }
 
+//easyjson:json
 type Attr struct {
-	Name string
-	Type Type
+	Name string `json:"name"`
+	Type Type   `json:"type"`
 }

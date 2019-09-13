@@ -18,7 +18,7 @@ func New() *Listener {
 	return &Listener{}
 }
 
-func (v *Listener) SetPkg(info *pkg.Info) {
+func (v *Listener) Initialize(info *pkg.Info) {
 	v.pkgInfo = info
 }
 
@@ -28,8 +28,6 @@ func (v *Listener) EnterPkg(ctx *parser.PkgContext) {
 	}
 }
 
-func (v *Listener) FixIncomplete() {}
-
-func (v *Listener) UpdatePkg() {
+func (v *Listener) Finalize() {
 	v.pkgInfo.Pkg = v.pkg
 }

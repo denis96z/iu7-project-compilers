@@ -154,7 +154,7 @@ enumDecl
     ;
 
 enumOption
-    : name=CONST COMMA
+    : name=CONST
     ;
 
 structDecl

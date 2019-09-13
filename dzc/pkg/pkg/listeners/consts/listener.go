@@ -22,14 +22,13 @@ type Listener struct {
 }
 
 func New() *Listener {
-	return &Listener{
-		consts:           make(map[string]*syntax.Const),
-		incompleteConsts: make(map[string]*syntax.Const),
-	}
+	return &Listener{}
 }
 
-func (v *Listener) SetPkg(info *pkg.Info) {
+func (v *Listener) Initialize(info *pkg.Info) {
 	v.pkg = info
+	v.consts = make(map[string]*syntax.Const)
+	v.incompleteConsts = make(map[string]*syntax.Const)
 }
 
 func (v *Listener) EnterConstDecl(ctx *parser.ConstDeclContext) {
@@ -113,7 +112,7 @@ func (v *Listener) EnterConstDecl(ctx *parser.ConstDeclContext) {
 	v.incompleteConsts[name] = c
 }
 
-func (v *Listener) FixIncomplete() {
+func (v *Listener) fixIncomplete() {
 	for name, c := range v.incompleteConsts {
 		if v.consts[name] != nil {
 			log.Fatalf("constant %q is redeclared", name)
@@ -134,6 +133,7 @@ func (v *Listener) FixIncomplete() {
 	}
 }
 
-func (v *Listener) UpdatePkg() {
+func (v *Listener) Finalize() {
+	v.fixIncomplete()
 	v.pkg.Consts = v.consts
 }
