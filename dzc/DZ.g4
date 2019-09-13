@@ -198,10 +198,10 @@ condition
     : ifConditionBranch elifConditionBranch* elseConditionBranch?;
 
 ifConditionBranch
-    : KW_IF cond=expression LEFT_BRC body=block RIGHT_BRC;
+    : KW_IF cond=expression body=block;
 
 elifConditionBranch
-    : KW_ELIF cond=expression LEFT_BRC body=block RIGHT_BRC;
+    : KW_ELIF cond=expression body=block;
 
 elseConditionBranch
     : KW_ELSE LEFT_BRC body=block RIGHT_BRC;
