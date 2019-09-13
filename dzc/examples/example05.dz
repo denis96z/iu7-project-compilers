@@ -41,3 +41,5 @@ proc proc1() {}
 
 proc proc2(x: u8_t) {}
 proc proc3(x: [u8_t]) {}
+
+func func1(a: @i16_t): bool_t {}

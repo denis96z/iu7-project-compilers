@@ -53,6 +53,10 @@ func (v *Listener) ExitProcDecl(ctx *parser.ProcDeclContext) {
 		}
 }
 
+func (v *Listener) EnterProcArg(ctx *parser.ProcArgContext) {
+	v.addArg(ctx, ctx.GetName().GetText(), ctx.GetTName().GetText())
+}
+
 func (v *Listener) EnterFuncDecl(ctx *parser.FuncDeclContext) {
 	name := ctx.GetName().GetText()
 	if v.functions[name] != nil {
@@ -64,7 +68,16 @@ func (v *Listener) EnterFuncDecl(ctx *parser.FuncDeclContext) {
 	v.currentRetType = v.parseRetType(ctx, ctx.GetTName().GetText())
 }
 
-func (v *Listener) EnterProcArg(ctx *parser.ProcArgContext) {
+func (v *Listener) ExitFuncDecl(ctx *parser.FuncDeclContext) {
+	v.functions[v.currentName] =
+		&syntax.Function{
+			Name:    v.currentName,
+			Args:    v.currentArgs,
+			RetType: v.currentRetType,
+		}
+}
+
+func (v *Listener) EnterFuncArg(ctx *parser.FuncArgContext) {
 	v.addArg(ctx, ctx.GetName().GetText(), ctx.GetTName().GetText())
 }
 
@@ -82,7 +95,7 @@ func (v *Listener) addArg(ctx context.Context, name string, tName string) {
 func (v *Listener) parseArgType(ctx context.Context, tName string) syntax.Type {
 	t := v.pkg.Types[tName]
 	if t != nil {
-		if !t.IsBasic() && !t.IsEnum() && !t.IsStruct() && !t.IsSlice() {
+		if t.IsArray() {
 			failWithTypeNotAllowed(ctx, tName)
 		}
 	}

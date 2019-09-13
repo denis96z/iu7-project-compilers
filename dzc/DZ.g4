@@ -173,7 +173,7 @@ procArg
     ;
 
 funcDecl
-    : KW_FUNC name=IDENTIFIER LEFT_PRT (funcArg (COMMA funcArg)*)? COLON tName=typeSpec RIGHT_PRT body=block
+    : KW_FUNC name=IDENTIFIER LEFT_PRT (funcArg (COMMA funcArg)*)? RIGHT_PRT COLON tName=typeSpec body=block
     ;
 
 funcArg

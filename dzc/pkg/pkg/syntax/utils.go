@@ -134,7 +134,7 @@ func ParseItemTypeNameFromSliceTypeName(name string) string {
 }
 
 func CheckRefValueTypeIsAllowed(ctx context.Context, t Type) {
-	if !t.IsBasic() && !t.IsEnum() || !t.IsStruct() {
+	if !t.IsBasic() && !t.IsEnum() && !t.IsStruct() {
 		ctxlog.Fatalf(ctx, "ref is not allowed for type %q", t.GetName())
 	}
 }

@@ -112,7 +112,7 @@ var parserATN = []uint16{
 	200, 5, 40, 21, 2, 199, 197, 3, 2, 2, 2, 200, 203, 3, 2, 2, 2, 201, 199,
 	3, 2, 2, 2, 201, 202, 3, 2, 2, 2, 202, 205, 3, 2, 2, 2, 203, 201, 3, 2,
 	2, 2, 204, 196, 3, 2, 2, 2, 204, 205, 3, 2, 2, 2, 205, 206, 3, 2, 2, 2,
-	206, 207, 7, 40, 2, 2, 207, 208, 5, 12, 7, 2, 208, 209, 7, 35, 2, 2, 209,
+	206, 207, 7, 35, 2, 2, 207, 208, 7, 40, 2, 2, 208, 209, 5, 12, 7, 2, 209,
 	210, 5, 42, 22, 2, 210, 39, 3, 2, 2, 2, 211, 212, 7, 75, 2, 2, 212, 213,
 	7, 40, 2, 2, 213, 214, 5, 12, 7, 2, 214, 41, 3, 2, 2, 2, 215, 219, 7, 36,
 	2, 2, 216, 218, 5, 44, 23, 2, 217, 216, 3, 2, 2, 2, 218, 221, 3, 2, 2,
@@ -3163,12 +3163,12 @@ func (s *FuncDeclContext) LEFT_PRT() antlr.TerminalNode {
 	return s.GetToken(DZParserLEFT_PRT, 0)
 }
 
-func (s *FuncDeclContext) COLON() antlr.TerminalNode {
-	return s.GetToken(DZParserCOLON, 0)
-}
-
 func (s *FuncDeclContext) RIGHT_PRT() antlr.TerminalNode {
 	return s.GetToken(DZParserRIGHT_PRT, 0)
+}
+
+func (s *FuncDeclContext) COLON() antlr.TerminalNode {
+	return s.GetToken(DZParserCOLON, 0)
 }
 
 func (s *FuncDeclContext) IDENTIFIER() antlr.TerminalNode {
@@ -3314,18 +3314,18 @@ func (p *DZParser) FuncDecl() (localctx IFuncDeclContext) {
 	}
 	{
 		p.SetState(204)
-		p.Match(DZParserCOLON)
+		p.Match(DZParserRIGHT_PRT)
 	}
 	{
 		p.SetState(205)
+		p.Match(DZParserCOLON)
+	}
+	{
+		p.SetState(206)
 
 		var _x = p.TypeSpec()
 
 		localctx.(*FuncDeclContext).tName = _x
-	}
-	{
-		p.SetState(206)
-		p.Match(DZParserRIGHT_PRT)
 	}
 	{
 		p.SetState(207)
