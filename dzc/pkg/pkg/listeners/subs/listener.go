@@ -13,8 +13,8 @@ type Listener struct {
 
 	pkg *pkg.Info
 
-	functions  map[string]*syntax.Function
-	procedures map[string]*syntax.Procedure
+	functions  map[string]*syntax.Func
+	procedures map[string]*syntax.Proc
 
 	currentName    string
 	currentArgs    map[string]*syntax.Arg
@@ -27,8 +27,8 @@ func New() *Listener {
 
 func (v *Listener) Initialize(info *pkg.Info) {
 	v.pkg = info
-	v.functions = make(map[string]*syntax.Function)
-	v.procedures = make(map[string]*syntax.Procedure)
+	v.functions = make(map[string]*syntax.Func)
+	v.procedures = make(map[string]*syntax.Proc)
 }
 
 func (v *Listener) Finalize() {
@@ -47,7 +47,7 @@ func (v *Listener) EnterProcDecl(ctx *parser.ProcDeclContext) {
 
 func (v *Listener) ExitProcDecl(ctx *parser.ProcDeclContext) {
 	v.procedures[v.currentName] =
-		&syntax.Procedure{
+		&syntax.Proc{
 			Name: v.currentName,
 			Args: v.currentArgs,
 		}
@@ -70,7 +70,7 @@ func (v *Listener) EnterFuncDecl(ctx *parser.FuncDeclContext) {
 
 func (v *Listener) ExitFuncDecl(ctx *parser.FuncDeclContext) {
 	v.functions[v.currentName] =
-		&syntax.Function{
+		&syntax.Func{
 			Name:    v.currentName,
 			Args:    v.currentArgs,
 			RetType: v.currentRetType,

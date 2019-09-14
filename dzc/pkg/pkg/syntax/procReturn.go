@@ -5,7 +5,7 @@ type ProcReturn struct {
 	Type string `json:"type"`
 }
 
-func NewReturn() *ProcReturn {
+func NewProcReturn() *ProcReturn {
 	return &ProcReturn{
 		Type: StatementProcReturn,
 	}

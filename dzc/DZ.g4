@@ -204,27 +204,27 @@ elifConditionBranch
     : KW_ELIF cond=expression body=block;
 
 elseConditionBranch
-    : KW_ELSE LEFT_BRC body=block RIGHT_BRC;
+    : KW_ELSE body=block;
 
 loop
     : trueLoop | whileLoop;
 
 trueLoop
-    : KW_LOOP LEFT_BRC body=block RIGHT_BRC;
+    : KW_LOOP body=block;
 
 whileLoop
-    : KW_WHILE cond=expression LEFT_BRC body=block RIGHT_BRC;
+    : KW_WHILE cond=expression body=block;
 
 breakStatement
-    : KW_BREAK
+    : KW_BREAK SEMICOLON
     ;
 
 continueStatement
-    : KW_CONTINUE
+    : KW_CONTINUE SEMICOLON
     ;
 
 varDecl
-    : KW_LET name=IDENTIFIER ASGN value=expression;
+    : KW_LET name=IDENTIFIER COLON tName=typeSpec ASGN value=expression;
 
 procCall
     : procName=IDENTIFIER LEFT_PRT (procParam (COMMA procParam)*)? RIGHT_PRT SEMICOLON;
@@ -262,5 +262,5 @@ binaryOperator
     ;
 
 returnStatement
-    : KW_RETURN
+    : KW_RETURN SEMICOLON
     | KW_RETURN value=expression SEMICOLON;

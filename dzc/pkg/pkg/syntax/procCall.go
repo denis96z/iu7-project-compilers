@@ -3,11 +3,11 @@ package syntax
 //easyjson:json
 type ProcCall struct {
 	Type   string       `json:"type"`
-	Proc   *Procedure   `json:"proc"`
+	Proc   *Proc        `json:"proc"`
 	Params []Expression `json:"params"`
 }
 
-func NewProcCall(proc *Procedure, params []Expression) *ProcCall {
+func NewProcCall(proc *Proc, params []Expression) *ProcCall {
 	return &ProcCall{
 		Type:   StatementProcCall,
 		Proc:   proc,

@@ -3,14 +3,14 @@ package syntax
 //go:generate easyjson
 
 //easyjson:json
-type Procedure struct {
+type Proc struct {
 	Name string          `json:"name"`
 	Args map[string]*Arg `json:"args"`
 	Body *Block          `json:"body"`
 }
 
 //easyjson:json
-type Function struct {
+type Func struct {
 	Name    string          `json:"name"`
 	Args    map[string]*Arg `json:"args"`
 	Body    *Block          `json:"body"`

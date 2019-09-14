@@ -2,12 +2,12 @@ package pkg
 
 import (
 	"dzc/pkg/parser"
+	"dzc/pkg/pkg/listeners/blocks"
 	"dzc/pkg/pkg/listeners/consts"
 	"dzc/pkg/pkg/listeners/pkgs"
 	"dzc/pkg/pkg/listeners/subs"
 	"dzc/pkg/pkg/listeners/types"
 	"dzc/pkg/pkg/pkg"
-
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
@@ -22,6 +22,7 @@ func NewParser() *Parser {
 			consts.New(),
 			types.New(),
 			subs.New(),
+			blocks.New(),
 		},
 	}
 }

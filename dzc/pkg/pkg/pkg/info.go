@@ -6,9 +6,9 @@ import (
 
 //easyjson:json
 type Info struct {
-	Pkg        *syntax.Pkg                  `json:"pkg"`
-	Consts     map[string]*syntax.Const     `json:"consts"`
-	Types      map[string]syntax.Type       `json:"types"`
-	Procedures map[string]*syntax.Procedure `json:"procedures"`
-	Functions  map[string]*syntax.Function  `json:"functions"`
+	Pkg        *syntax.Pkg              `json:"pkg"`
+	Consts     map[string]*syntax.Const `json:"consts"`
+	Types      map[string]syntax.Type   `json:"types"`
+	Procedures map[string]*syntax.Proc  `json:"procedures"`
+	Functions  map[string]*syntax.Func  `json:"functions"`
 }

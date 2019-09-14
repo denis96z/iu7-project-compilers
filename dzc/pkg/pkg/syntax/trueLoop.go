@@ -2,14 +2,14 @@ package syntax
 
 //easyjson:json
 type TrueLoop struct {
-	Type  string `json:"type"`
-	Block *Block `json:"json"`
+	Type string `json:"type"`
+	Body *Block `json:"body"`
 }
 
 func NewTrueLoop(block *Block) *TrueLoop {
 	return &TrueLoop{
-		Type:  StatementTrueLoop,
-		Block: block,
+		Type: StatementTrueLoop,
+		Body: block,
 	}
 }
 
@@ -54,5 +54,13 @@ func (v TrueLoop) IsExpression() bool {
 }
 
 func (v TrueLoop) IsReturn() bool {
+	return false
+}
+
+func (v TrueLoop) IsProcReturn() bool {
+	return false
+}
+
+func (v TrueLoop) IsFuncReturn() bool {
 	return false
 }
