@@ -1,6 +1,7 @@
 package blocks
 
 import (
+	"fmt"
 	"strconv"
 
 	"dzc/pkg/parser"
@@ -335,6 +336,55 @@ func (v *Listener) EnterExpression(ctx *parser.ExpressionContext) {
 		return
 	}
 
+	if ctx.GetPrtExpr() != nil {
+		v.exprStack.Push(newExprFrame())
+		return
+	}
+
+	if ctx.GetBinOp() != nil {
+		// left operand
+		v.exprStack.Push(newExprFrame())
+
+		//right operand
+		v.exprStack.Push(newExprFrame())
+
+		return
+	}
+}
+
+func (v *Listener) ExitExpression(ctx *parser.ExpressionContext) {
+	if ctx.GetPrtExpr() != nil {
+		val := v.popExpr().value
+		v.peekExpr().value = val
+		return
+	}
+
+	if ctx.GetBinOp() != nil {
+		op := ctx.GetBinOp().GetText()
+
+		rOp := v.popExpr().value
+		lOp := v.popExpr().value
+
+		//TODO always fix const values
+		if rOp.GetValueType() != lOp.GetValueType() {
+			ctxlog.Fatalf(ctx, "operands type mismatch for %q and %q",
+				ctx.GetLBinExpr().GetText(), ctx.GetRBinExpr().GetText())
+		}
+
+		binOp := syntax.GetOperator(op)
+		if binOp == nil {
+			panic(fmt.Sprintf("operator %q is undefined", op))
+		}
+
+		v.peekExpr().value =
+			&syntax.BinOperation{
+				Operator:     binOp,
+				LeftOperand:  lOp,
+				RightOperand: rOp,
+			}
+
+		return
+	}
 }
 
 func (v *Listener) EnterFuncCall(ctx *parser.FuncCallContext) {

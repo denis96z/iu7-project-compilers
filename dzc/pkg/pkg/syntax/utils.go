@@ -35,6 +35,14 @@ const (
 	RefSymbol = "@"
 )
 
+const (
+	OperatorAdd = "+"
+	OperatorSub = "-"
+	OperatorMul = "*"
+	OperatorDiv = "/"
+	OperatorMod = "%"
+)
+
 var (
 	basicTypes map[string]Type
 )
@@ -61,12 +69,37 @@ func init() {
 	}
 }
 
+var (
+	operators map[string]*Operator
+)
+
+func init() {
+	ops := []string{
+		OperatorAdd, OperatorSub, OperatorMul, OperatorDiv, OperatorMod,
+	}
+
+	operators = make(map[string]*Operator)
+	for _, o := range ops {
+		operators[o] = &Operator{
+			Name: o,
+		}
+	}
+}
+
 func GetBasicTypes() map[string]Type {
 	return basicTypes
 }
 
 func GetBasicType(name string) *BasicType {
 	return basicTypes[name].(*BasicType)
+}
+
+func GetOperators() map[string]*Operator {
+	return operators
+}
+
+func GetOperator(name string) *Operator {
+	return operators[name]
 }
 
 func IsConst(name string) bool {

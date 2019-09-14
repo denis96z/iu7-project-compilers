@@ -236,7 +236,6 @@ expression
     : varName=IDENTIFIER
     | constVal=constValue
     | constName=CONST
-    | LEFT_BRK brkExpr=expression RIGHT_BRK
     | LEFT_PRT prtExpr=expression RIGHT_PRT
     | funcCallValue=funcCall
     | lBinExpr=expression binOp=binaryOperator rBinExpr=expression
