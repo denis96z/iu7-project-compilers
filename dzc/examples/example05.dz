@@ -42,7 +42,7 @@ type type16_t = [type7_t];
 proc proc1(a: u8_t, b: u8_t) {
     let x: bool_t = BOOL_CONST;
 
-    if func1(8) {
+    if func1(x=BOOL_CONST) {
         return;
     } elif BOOL_CONST {
         proc3(c=BOOL_CONST);
@@ -61,4 +61,4 @@ proc proc3(c: bool_t) {
     return;
 }
 
-func func1(x: u8_t): bool_t {}
+func func1(x: bool_t): bool_t {}

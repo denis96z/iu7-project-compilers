@@ -116,6 +116,9 @@ type DZListener interface {
 	// EnterConstValue is called when entering the constValue production.
 	EnterConstValue(c *ConstValueContext)
 
+	// EnterFuncCall is called when entering the funcCall production.
+	EnterFuncCall(c *FuncCallContext)
+
 	// EnterFuncParam is called when entering the funcParam production.
 	EnterFuncParam(c *FuncParamContext)
 
@@ -235,6 +238,9 @@ type DZListener interface {
 
 	// ExitConstValue is called when exiting the constValue production.
 	ExitConstValue(c *ConstValueContext)
+
+	// ExitFuncCall is called when exiting the funcCall production.
+	ExitFuncCall(c *FuncCallContext)
 
 	// ExitFuncParam is called when exiting the funcParam production.
 	ExitFuncParam(c *FuncParamContext)

@@ -237,6 +237,12 @@ func (s *BaseDZListener) EnterConstValue(ctx *ConstValueContext) {}
 // ExitConstValue is called when production constValue is exited.
 func (s *BaseDZListener) ExitConstValue(ctx *ConstValueContext) {}
 
+// EnterFuncCall is called when production funcCall is entered.
+func (s *BaseDZListener) EnterFuncCall(ctx *FuncCallContext) {}
+
+// ExitFuncCall is called when production funcCall is exited.
+func (s *BaseDZListener) ExitFuncCall(ctx *FuncCallContext) {}
+
 // EnterFuncParam is called when production funcParam is entered.
 func (s *BaseDZListener) EnterFuncParam(ctx *FuncParamContext) {}
 

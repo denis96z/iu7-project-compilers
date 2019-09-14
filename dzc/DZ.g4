@@ -238,13 +238,17 @@ expression
     | constName=CONST
     | LEFT_BRK brkExpr=expression RIGHT_BRK
     | LEFT_PRT prtExpr=expression RIGHT_PRT
-    | funcName=IDENTIFIER LEFT_PRT (funcParam (COMMA funcParam)*)? RIGHT_PRT
+    | funcCallValue=funcCall
     | lBinExpr=expression binOp=binaryOperator rBinExpr=expression
     | unOp=unaryOperator unExpr=expression
     ;
 
 constValue
     : INT_VALUE | KW_TRUE | KW_FALSE
+    ;
+
+funcCall
+    : funcName=IDENTIFIER LEFT_PRT (funcParam (COMMA funcParam)*)? RIGHT_PRT
     ;
 
 funcParam

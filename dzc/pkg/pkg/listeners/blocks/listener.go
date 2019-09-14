@@ -55,6 +55,7 @@ func (v *Listener) Initialize(info *pkg.Info) {
 
 func (v *Listener) Finalize() {}
 
+//
 //func (v *Listener) EnterEveryRule(ctx antlr.ParserRuleContext) {
 //	log.Println("enter", ctx.GetText())
 //}
@@ -329,21 +330,35 @@ func (v *Listener) EnterExpression(ctx *parser.ExpressionContext) {
 		return
 	}
 
-	if ctx.GetFuncName() != nil {
-		name := ctx.GetFuncName().GetText()
-
-		f := v.pkg.Functions[name]
-		if f == nil {
-			ctxlog.Fatalf(ctx, "func %q is undefined", name)
-		}
-
-		//XXX: num args should be checked on the calling site
-		v.peekExpr().funcCall =
-			&syntax.FuncCall{
-				Func:   f,
-				Params: make(map[string]*syntax.CallParam),
-			}
+	if ctx.GetFuncCallValue() != nil {
+		//XXX: separate handler
+		return
 	}
+
+}
+
+func (v *Listener) EnterFuncCall(ctx *parser.FuncCallContext) {
+	name := ctx.GetFuncName().GetText()
+
+	f := v.pkg.Functions[name]
+	if f == nil {
+		ctxlog.Fatalf(ctx, "func %q is undefined", name)
+	}
+
+	v.peekExpr().funcCall = &syntax.FuncCall{
+		Func:   f,
+		Params: make(map[string]*syntax.CallParam),
+	}
+}
+
+func (v *Listener) ExitFuncCall(ctx *parser.FuncCallContext) {
+	funcCall := v.peekExpr().funcCall
+
+	if len(funcCall.Params) != len(funcCall.Func.Args) {
+		ctxlog.Fatalf(ctx, "wrong number of params in func call")
+	}
+
+	v.peekExpr().value = funcCall
 }
 
 func (v *Listener) EnterFuncParam(ctx *parser.FuncParamContext) {
@@ -351,7 +366,7 @@ func (v *Listener) EnterFuncParam(ctx *parser.FuncParamContext) {
 
 	name := ctx.GetName().GetText()
 	if funcCall.Func.Args[name] == nil {
-		ctxlog.Fatalf(ctx, "unknown func param %q", name)
+		ctxlog.Fatalf(ctx, "func param %q is undefined", name)
 	}
 	if funcCall.Params[name] != nil {
 		ctxlog.Fatalf(ctx, "param %q is specified twice", name)
