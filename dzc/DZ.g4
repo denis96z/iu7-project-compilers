@@ -230,12 +230,11 @@ procCall
     : procName=IDENTIFIER LEFT_PRT (procParam (COMMA procParam)*)? RIGHT_PRT SEMICOLON;
 
 procParam
-    : value = expression;
+    : name=IDENTIFIER ASGN value=expression;
 
 expression
     : varName=IDENTIFIER
-    | intValue=INT_VALUE
-    | boolValue=(KW_TRUE | KW_FALSE)
+    | constVal=constValue
     | constName=CONST
     | LEFT_BRK brkExpr=expression RIGHT_BRK
     | LEFT_PRT prtExpr=expression RIGHT_PRT
@@ -244,8 +243,12 @@ expression
     | unOp=unaryOperator unExpr=expression
     ;
 
+constValue
+    : INT_VALUE | KW_TRUE | KW_FALSE
+    ;
+
 funcParam
-    : value=expression;
+    : name=IDENTIFIER ASGN value=expression;
 
 unaryOperator
     : SUB

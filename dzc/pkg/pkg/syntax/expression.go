@@ -7,5 +7,5 @@ type Expr struct {
 }
 
 type Expression interface {
-	GetType()
+	GetValueType() Type
 }

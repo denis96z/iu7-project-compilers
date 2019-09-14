@@ -22,3 +22,10 @@ type Arg struct {
 	Name string `json:"name"`
 	Type Type   `json:"type"`
 }
+
+func (v Arg) GetValueType() Type {
+	if v.Type.IsRef() {
+		return v.Type.(*Ref).ValueType
+	}
+	return v.Type
+}

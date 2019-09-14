@@ -6,3 +6,7 @@ type Var struct {
 	Type  Type       `json:"type"`
 	Value Expression `json:"value"`
 }
+
+func (v Var) GetValueType() Type {
+	return v.Type
+}

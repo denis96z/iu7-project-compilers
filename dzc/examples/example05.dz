@@ -3,6 +3,8 @@ pkg main;
 const MY_CONST1: u8_t = 10;
 const MY_CONST2: u8_t = MY_CONST1;
 
+const BOOL_CONST: bool_t = true;
+
 type type1_t = i8_t;
 type type2_t = type1_t;
 
@@ -37,15 +39,26 @@ type type14_t = [ssize_t];
 type type15_t = [type11_t];
 type type16_t = [type7_t];
 
-proc proc1() {
-    if a == b {
+proc proc1(a: u8_t, b: u8_t) {
+    let x: bool_t = BOOL_CONST;
+
+    if func1(8) {
         return;
-    } elif a > b {
-        print(a);
-    } else {
-        print(b);
+    } elif BOOL_CONST {
+        proc3(c=BOOL_CONST);
     }
     loop {
-
+        proc2();
+    }
+    while false {
+        return;
     }
 }
+
+proc proc2() {}
+
+proc proc3(c: bool_t) {
+    return;
+}
+
+func func1(x: u8_t): bool_t {}

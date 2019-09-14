@@ -8,3 +8,7 @@ type Const struct {
 	Type  *BasicType  `json:"type"`
 	Value interface{} `json:"value"`
 }
+
+func (v Const) GetValueType() Type {
+	return v.Type
+}

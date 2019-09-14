@@ -4,14 +4,14 @@ package syntax
 type WhileLoop struct {
 	Type      string     `json:"type"`
 	Condition Expression `json:"condition"`
-	Block     *Block
+	Body      *Block     `json:"body"`
 }
 
-func NewWhileLoop(cond Expression, block *Block) *WhileLoop {
+func NewWhileLoop(cond Expression, body *Block) *WhileLoop {
 	return &WhileLoop{
 		Type:      StatementWhileLoop,
 		Condition: cond,
-		Block:     block,
+		Body:      body,
 	}
 }
 
@@ -56,5 +56,13 @@ func (v WhileLoop) IsExpression() bool {
 }
 
 func (v WhileLoop) IsReturn() bool {
+	return false
+}
+
+func (v WhileLoop) IsProcReturn() bool {
+	return false
+}
+
+func (v WhileLoop) IsFuncReturn() bool {
 	return false
 }

@@ -2,16 +2,14 @@ package syntax
 
 //easyjson:json
 type VarDecl struct {
-	Type     string     `json:"type"`
-	Var      *Var       `json:"var"`
-	VarValue Expression `json:"value"`
+	Type string `json:"type"`
+	Var  *Var   `json:"var"`
 }
 
-func NewVarDecl(v *Var, vVal Expression) *VarDecl {
+func NewVarDecl(v *Var) *VarDecl {
 	return &VarDecl{
-		Type:     StatementVarDecl,
-		Var:      v,
-		VarValue: vVal,
+		Type: StatementVarDecl,
+		Var:  v,
 	}
 }
 
@@ -56,5 +54,13 @@ func (v VarDecl) IsExpression() bool {
 }
 
 func (v VarDecl) IsReturn() bool {
+	return false
+}
+
+func (v VarDecl) IsProcReturn() bool {
+	return false
+}
+
+func (v VarDecl) IsFuncReturn() bool {
 	return false
 }

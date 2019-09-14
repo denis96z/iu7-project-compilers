@@ -231,6 +231,12 @@ func (s *BaseDZListener) EnterExpression(ctx *ExpressionContext) {}
 // ExitExpression is called when production expression is exited.
 func (s *BaseDZListener) ExitExpression(ctx *ExpressionContext) {}
 
+// EnterConstValue is called when production constValue is entered.
+func (s *BaseDZListener) EnterConstValue(ctx *ConstValueContext) {}
+
+// ExitConstValue is called when production constValue is exited.
+func (s *BaseDZListener) ExitConstValue(ctx *ConstValueContext) {}
+
 // EnterFuncParam is called when production funcParam is entered.
 func (s *BaseDZListener) EnterFuncParam(ctx *FuncParamContext) {}
 

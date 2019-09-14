@@ -2,12 +2,12 @@ package syntax
 
 //easyjson:json
 type ProcCall struct {
-	Type   string       `json:"type"`
-	Proc   *Proc        `json:"proc"`
-	Params []Expression `json:"params"`
+	Type   string                `json:"type"`
+	Proc   *Proc                 `json:"proc"`
+	Params map[string]*CallParam `json:"params"`
 }
 
-func NewProcCall(proc *Proc, params []Expression) *ProcCall {
+func NewProcCall(proc *Proc, params map[string]*CallParam) *ProcCall {
 	return &ProcCall{
 		Type:   StatementProcCall,
 		Proc:   proc,
@@ -56,5 +56,13 @@ func (v ProcCall) IsExpression() bool {
 }
 
 func (v ProcCall) IsReturn() bool {
+	return false
+}
+
+func (v ProcCall) IsProcReturn() bool {
+	return false
+}
+
+func (v ProcCall) IsFuncReturn() bool {
 	return false
 }
