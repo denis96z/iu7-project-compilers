@@ -3,6 +3,8 @@ pkg main;
 const MY_CONST1: u8_t = 10;
 const MY_CONST2: u8_t = MY_CONST1;
 
+const MY_CONST3: char_t = 0x10;
+
 const BOOL_CONST: bool_t = true;
 
 type type1_t = i8_t;

@@ -78,7 +78,9 @@ func (v *Listener) EnterConstDecl(ctx *parser.ConstDeclContext) {
 		} else {
 			err = errors.Errorf("invalid bool value %q", vText)
 		}
-		//TODO add other types
+	case syntax.BasicTypeChar:
+		constVal := syntax.ParseChar(ctx, vText)
+		value = constVal.Value //TODO fix
 	default:
 		panic("not implemented")
 	}

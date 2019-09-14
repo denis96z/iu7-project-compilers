@@ -37,6 +37,10 @@ const (
 )
 
 const (
+	CharPrefix = "0x"
+)
+
+const (
 	OperatorAdd = "+"
 	OperatorSub = "-"
 	OperatorMul = "*"
@@ -141,6 +145,23 @@ func IsSliceType(name string) bool {
 	//TODO check with regexp
 	return strings.HasPrefix(name, "[") &&
 		!strings.Contains(name, ":")
+}
+
+func ParseChar(ctx context.Context, str string) *ConstVal {
+	if !strings.HasPrefix(str, CharPrefix) {
+		ctxlog.Fatalf(ctx, "%q is not of type %q", str, BasicTypeChar)
+	}
+
+	str = str[len(CharPrefix):]
+	v, err := strconv.ParseUint(str, 16, 32)
+	if err != nil {
+		ctxlog.Fatalf(ctx, "invalid %q value %q", BasicTypeChar, str)
+	}
+
+	return &ConstVal{
+		Type:  GetBasicType(BasicTypeChar),
+		Value: rune(v),
+	}
 }
 
 func ParseValueTypeNameFromRefTypeName(name string) string {

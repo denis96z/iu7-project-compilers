@@ -113,6 +113,9 @@ type DZListener interface {
 	// EnterExpression is called when entering the expression production.
 	EnterExpression(c *ExpressionContext)
 
+	// EnterAttrAsgn is called when entering the attrAsgn production.
+	EnterAttrAsgn(c *AttrAsgnContext)
+
 	// EnterConstValue is called when entering the constValue production.
 	EnterConstValue(c *ConstValueContext)
 
@@ -235,6 +238,9 @@ type DZListener interface {
 
 	// ExitExpression is called when exiting the expression production.
 	ExitExpression(c *ExpressionContext)
+
+	// ExitAttrAsgn is called when exiting the attrAsgn production.
+	ExitAttrAsgn(c *AttrAsgnContext)
 
 	// ExitConstValue is called when exiting the constValue production.
 	ExitConstValue(c *ConstValueContext)

@@ -42,6 +42,7 @@ RIGHT_BRK: ']';
 
 COLON:     ':';
 COMMA:     ',';
+DOT:       '.';
 SEMICOLON: ';';
 
 ADD: '+';
@@ -81,6 +82,7 @@ XOR_ASGN: '^=';
 
 CONST:      [A-Z]([_]?[A-Z0-9])*;
 INT_VALUE:  [-]?[0-9]+;
+CHAR_VALUE: [0][x][0-9]+;
 TYPE:       [a-z]([_]?[a-z0-9])*[_][t];
 IDENTIFIER: [a-z]([_]?[a-z0-9])*;
 
@@ -104,7 +106,7 @@ decl
     ;
 
 constDecl
-    : KW_CONST name=CONST COLON tName=basicTypeSpec ASGN value=(INT_VALUE | KW_TRUE | KW_FALSE | CONST) SEMICOLON
+    : KW_CONST name=CONST COLON tName=basicTypeSpec ASGN value=(INT_VALUE | CHAR_VALUE | KW_TRUE | KW_FALSE | CONST) SEMICOLON
     ;
 
 typeDecl
@@ -237,10 +239,16 @@ expression
     | constVal=constValue
     | constName=CONST
     | LEFT_PRT prtExpr=expression RIGHT_PRT
+    | LEFT_BRK brkExpr=expression RIGHT_BRK
+    | LEFT_BRC brcExpr=attrAsgn* RIGHT_BRC
+    | varExpr=expression DOT attrName=IDENTIFIER
     | funcCallValue=funcCall
     | lBinExpr=expression binOp=binaryOperator rBinExpr=expression
     | unOp=unaryOperator unExpr=expression
     ;
+
+attrAsgn
+    : DOT attrName=IDENTIFIER ASGN value=expression;
 
 constValue
     : INT_VALUE | KW_TRUE | KW_FALSE
