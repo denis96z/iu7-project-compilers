@@ -1,14 +1,15 @@
 package syntax
 
 import (
-	"dzc/pkg/pkg/listeners/context"
-	"dzc/pkg/pkg/listeners/ctxlog"
 	"log"
 	"regexp"
 	"strconv"
 	"strings"
 	"unicode"
 	"unsafe"
+
+	"dzc/pkg/pkg/listeners/context"
+	"dzc/pkg/pkg/listeners/ctxlog"
 )
 
 const (
@@ -43,15 +44,15 @@ const (
 	OperatorMod = "%"
 )
 
-var (
-	basicTypes map[string]Type
-)
-
 var PtrSize int
 
 func init() {
 	PtrSize = int(unsafe.Sizeof(&PtrSize))
 }
+
+var (
+	basicTypes map[string]Type
+)
 
 func init() {
 	bTypes := []string{
