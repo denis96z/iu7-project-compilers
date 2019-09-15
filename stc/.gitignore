@@ -1,0 +1,12 @@
+### IDE ###
+.idea
+.vscode
+
+### build ###
+/build/
+
+### tests ###
+/tests/
+
+### tools ###
+/tools/
